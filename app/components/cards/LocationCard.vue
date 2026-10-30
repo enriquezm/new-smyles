@@ -15,7 +15,7 @@ const bodyClass = computed(() =>
   <ExpandableCard
     id="location"
     :title="cards.location.title"
-    :span="{ base: 1, sm: 1, lg: 1 }"
+    :span="{ base: 1, sm: 2, lg: 2 }"
     variant="map"
     :glyph="false"
     :pad="16"

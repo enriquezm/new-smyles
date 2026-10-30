@@ -14,7 +14,6 @@ export type CardId
     | 'projects'
     | 'contact'
     | 'glance'
-    | 'currently'
     | 'guestbook'
     | 'lookingFor'
     | 'kindWords'
@@ -189,20 +188,6 @@ export interface Glance {
   strengths: Strength[]
 }
 
-export interface CurrentItem {
-  /** Verb shown in the left column: "Building", "Reading", … */
-  label: string
-  title: string
-  note: string
-}
-
-export interface Currently {
-  /** ISO date (YYYY-MM-DD) the list was last refreshed. */
-  updated: string
-  headline: string
-  items: CurrentItem[]
-}
-
 export interface GuestbookEntry {
   id: string
   name: string
@@ -337,7 +322,6 @@ export const cards: Record<CardId, CardMeta> = {
   projects: { label: 'Now building', title: 'Now building' },
   contact: { label: 'Say hello', title: 'Say hello' },
   glance: { label: 'At a glance', title: 'At a glance' },
-  currently: { label: 'Currently', title: 'Currently' },
   guestbook: { label: 'Guestbook', title: 'Guestbook' },
   lookingFor: { label: 'What I\'m looking for', title: 'What I\'m looking for' },
   kindWords: { label: 'Kind words', title: 'Kind words' },
@@ -567,33 +551,6 @@ export const glance: Glance = {
     {
       title: 'Accessible by default',
       text: 'Accessibility is part of my definition of done, from semantic markup and keyboard support to color contrast.',
-    },
-  ],
-}
-
-export const currently: Currently = {
-  updated: '2026-10-30', // PLACEHOLDER
-  headline: 'What has my attention right now.',
-  items: [
-    {
-      label: 'Building',
-      title: 'Job Search CLI',
-      note: 'A terminal tool that finds roles, tailors a resume from a YAML experience file plus the posting, and helps apply.',
-    },
-    {
-      label: 'Making',
-      title: 'Dream Collector',
-      note: 'A Roblox game about stepping into dreams and collecting what you find there.',
-    },
-    {
-      label: 'Learning',
-      title: 'Layout animation in Vue', // PLACEHOLDER
-      note: 'Shared-element and FLIP transitions with Motion for Vue, like the cards on this page.', // PLACEHOLDER
-    },
-    {
-      label: 'Reading',
-      title: 'Refactoring UI', // PLACEHOLDER
-      note: 'A practical guide to design decisions for developers.', // PLACEHOLDER
     },
   ],
 }

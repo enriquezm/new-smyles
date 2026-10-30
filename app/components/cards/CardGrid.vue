@@ -16,10 +16,10 @@ const isOpen = (id: CardId) => openId.value === id
         1. Results and track record  (At a glance, Experience, Toolkit)
         2. Proof from others and fit (Kind words, What I'm looking for)
         3. Proof of craft            (This site, GitHub)
-        4. Personal and contact      (Currently, Location, Say hello)
+        4. Personal and contact      (Location, Say hello)
       Desktop rows: [glance 2][experience 1][toolkit 1]
                     [kind words 2][looking for 2]
-                    [this site 1][github 1][currently 1][location 1]
+                    [this site 1][github 1][location 2]
                     [say hello 4]
 
       FeaturedWorkCard, ProjectsCard and GuestbookCard are kept in the
@@ -54,10 +54,6 @@ const isOpen = (id: CardId) => openId.value === id
       />
       <GithubCard
         :open="isOpen('github')"
-        @toggle="toggle"
-      />
-      <CurrentlyCard
-        :open="isOpen('currently')"
         @toggle="toggle"
       />
       <LocationCard

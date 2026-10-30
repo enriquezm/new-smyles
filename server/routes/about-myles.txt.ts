@@ -2,7 +2,6 @@ import {
   aiPrompt,
   basedIn,
   contact,
-  currently,
   education,
   glance,
   hero,
@@ -50,8 +49,6 @@ function buildPrompt(): string {
     `## Skills and tools\n${toolkit.note}\n${list(toolkit.groups.map(g => `${g.name}: ${g.items.join(', ')}`))}`,
 
     `## What ${first} is looking for\n${list([...lookingFor.facts, ...lookingFor.details].map(f => `${f.label}: ${f.value}`))}`,
-
-    `## Currently\n${list(currently.items.map(i => `${i.label}: ${i.title}. ${i.note}`))}`,
 
     `## This website\n${list(siteStats.stats.map(s => `${s.value} ${s.label}`))}\n${siteStats.method}`,
 
