@@ -32,7 +32,6 @@ import { aiPrompt, hero } from '~/data/site'
     </p>
 
     <div class="flex flex-wrap items-center gap-3">
-      <IntroPlayer />
       <StatusPill :label="hero.status" />
       <PromptLink :link="aiPrompt.link" />
     </div>

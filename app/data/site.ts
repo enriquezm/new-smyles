@@ -55,13 +55,6 @@ export interface Hero {
   status: string
 }
 
-export interface IntroAudio {
-  src: string | null
-  durationSeconds: number
-  playLabel: string
-  pauseLabel: string
-}
-
 export interface CardMeta {
   /** Visible label in the card's pill. */
   label: string
@@ -341,13 +334,6 @@ export const hero: Hero = {
   avatarMonogram: 'ME',
   avatarSrc: null, // PLACEHOLDER
   status: 'Available for work',
-}
-
-export const introAudio: IntroAudio = {
-  src: null, // PLACEHOLDER
-  durationSeconds: 32, // PLACEHOLDER
-  playLabel: 'Play my 30-second intro',
-  pauseLabel: 'Pause intro',
 }
 
 export const cards: Record<CardId, CardMeta> = {
