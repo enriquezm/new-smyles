@@ -65,7 +65,7 @@ function buildPrompt(): string {
 
   // The leading byte-order mark makes browsers read the file as UTF-8 even when
   // a static host serves it without a charset (é, ʻ and dashes stay intact).
-  return `﻿${sections.join('\n\n')}\n`
+  return `\uFEFF${sections.join('\n\n')}\n`
 }
 
 export default defineEventHandler((event) => {
