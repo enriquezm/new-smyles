@@ -26,6 +26,10 @@ export interface SiteMeta {
   description: string
   url: string
   locale: string
+  /** Absolute URL of a 1200×630 social preview image; omitted from meta while null. */
+  ogImage: string | null
+  ogImageAlt: string
+  themeColor: string
 }
 
 export interface Hero {
@@ -194,6 +198,10 @@ export const site: SiteMeta = {
     'Design engineer at Slickdeals working between Figma and production: React, Vue and TypeScript interfaces, design systems and the tooling that keeps design and code in sync.',
   url: 'https://mylesenriquez.dev', // PLACEHOLDER
   locale: 'en_US',
+  ogImage: null, // PLACEHOLDER
+  ogImageAlt: 'Myles Enriquez — Design Engineer',
+  // Matches --color-bg; browser chrome can't read CSS variables.
+  themeColor: '#EDEDEA',
 }
 
 export const resumeHref = '/resume.pdf' // PLACEHOLDER
