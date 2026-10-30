@@ -468,9 +468,9 @@ function sampleWeeks(count: number): ContributionWeek[] {
 }
 
 export const githubStatLabels = {
-  pullRequests: 'Pull requests opened',
-  reviews: 'Code reviews',
+  activeDays: 'Active days',
   streak: 'Longest streak',
+  bestDay: 'Most in one day',
 }
 
 /**
@@ -484,9 +484,9 @@ export const github: Github = {
   weeks: sampleWeeks(52), // PLACEHOLDER (fallback)
   // PLACEHOLDER (fallback)
   stats: [
-    { label: githubStatLabels.pullRequests, value: '312' },
-    { label: githubStatLabels.reviews, value: '540' },
-    { label: githubStatLabels.streak, value: '41 days' },
+    { label: githubStatLabels.activeDays, value: '190' },
+    { label: githubStatLabels.streak, value: '11 days' },
+    { label: githubStatLabels.bestDay, value: '42' },
   ],
   // PLACEHOLDER (fallback)
   repos: [

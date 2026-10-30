@@ -20,8 +20,6 @@ interface ApiResponse {
   data?: {
     user: {
       contributionsCollection: {
-        totalPullRequestContributions: number
-        totalPullRequestReviewContributions: number
         contributionCalendar: {
           totalContributions: number
           weeks: {
@@ -45,8 +43,6 @@ const REPO_FIELDS = 'name description url stargazerCount primaryLanguage { name 
 const query = `query ($login: String!) {
   user(login: $login) {
     contributionsCollection {
-      totalPullRequestContributions
-      totalPullRequestReviewContributions
       contributionCalendar {
         totalContributions
         weeks { contributionDays { weekday contributionCount contributionLevel } }
@@ -91,7 +87,7 @@ export default defineEventHandler(async (event): Promise<GithubLive | null> => {
     const user = res.data?.user
     if (!user) throw new Error(res.errors?.map(e => e.message).join('; ') ?? 'User not found')
 
-    const { contributionCalendar: calendar, ...totals } = user.contributionsCollection
+    const calendar = user.contributionsCollection.contributionCalendar
 
     // GitHub's first and last weeks can be partial; pad missing days with 0.
     const weeks = calendar.weeks.slice(-52).map((week) => {
@@ -100,12 +96,17 @@ export default defineEventHandler(async (event): Promise<GithubLive | null> => {
       return days as ContributionWeek
     })
 
+    // Private PR and review counts aren't broken out without the `repo` scope,
+    // so the stats come from the calendar, which counts everything.
+    const days = calendar.weeks.flatMap(w => w.contributionDays)
     let streak = 0
     let longest = 0
-    for (const day of calendar.weeks.flatMap(w => w.contributionDays)) {
+    for (const day of days) {
       streak = day.contributionCount > 0 ? streak + 1 : 0
       longest = Math.max(longest, streak)
     }
+    const activeDays = days.filter(d => d.contributionCount > 0).length
+    const bestDay = Math.max(0, ...days.map(d => d.contributionCount))
 
     const pinned = user.pinnedItems.nodes.filter(r => 'name' in r)
     const repos = (pinned.length ? pinned : user.repositories.nodes).map(toRepo)
@@ -114,9 +115,9 @@ export default defineEventHandler(async (event): Promise<GithubLive | null> => {
       contributions: calendar.totalContributions,
       weeks,
       stats: [
-        { label: githubStatLabels.pullRequests, value: totals.totalPullRequestContributions.toLocaleString('en-US') },
-        { label: githubStatLabels.reviews, value: totals.totalPullRequestReviewContributions.toLocaleString('en-US') },
+        { label: githubStatLabels.activeDays, value: activeDays.toLocaleString('en-US') },
         { label: githubStatLabels.streak, value: `${longest} ${longest === 1 ? 'day' : 'days'}` },
+        { label: githubStatLabels.bestDay, value: bestDay.toLocaleString('en-US') },
       ],
       repos,
     }
