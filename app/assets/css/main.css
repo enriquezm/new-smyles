@@ -99,7 +99,7 @@
   --container-page-wide: 1840px;
   --container-hero: 440px;
   --container-headline: 1000px;
-  --container-prose: 640px;
+  --container-intro: 640px;
 }
 
 @layer base {

@@ -2,6 +2,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/fonts', 'motion-v/nuxt'],
+
+  components: [{ path: '~/components', pathPrefix: false }],
   devtools: { enabled: true },
 
   app: {
