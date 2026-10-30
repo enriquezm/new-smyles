@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Myles Enriquez — Design Engineer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&amp;family=Geist+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div ref="{{setRoot}}" style="width: 100%; min-height: 100%; background: #EDEDEA; color: #1A1A18; font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; box-sizing: border-box; -webkit-font-smoothing: antialiased">
+<div style="max-width: {{L.max}}; margin: 0 auto; padding: 0 {{L.pad}}px; box-sizing: border-box">
+
+<header style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: {{L.top}}px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; text-decoration: none; color: #1A1A18; font-weight: 500; font-size: 15px"><span aria-hidden="true" style="width: 10px; height: 10px; border-radius: 3px; background: {{accent}}"></span>Myles Enriquez</a>
+<nav aria-label="Primary" style="display: flex; align-items: center; gap: 4px">
+<sc-if value="{{L.showNav}}" hint-placeholder-val="{{ true }}">
+<a href="#work" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #55554F; text-decoration: none; font-size: 14px">Work</a>
+<a href="#toolkit" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #55554F; text-decoration: none; font-size: 14px">Toolkit</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; color: #55554F; text-decoration: none; font-size: 14px">Résumé</a>
+</sc-if>
+<a href="#contact" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; margin-left: 8px; border-radius: 999px; background: #1A1A18; color: #F9F9F7; text-decoration: none; font-size: 14px; font-weight: 500">Get in touch</a>
+</nav>
+</header>
+
+<main style="display: flex; flex-direction: {{L.dir}}; gap: {{L.bodyGap}}px; padding-top: {{L.heroTop}}px">
+
+<section aria-label="Intro" style="width: {{L.heroW}}; flex: none; position: {{L.heroPos}}; top: 40px; align-self: flex-start; display: flex; flex-direction: column; gap: {{L.heroGap}}px">
+<div role="img" aria-label="Photo of Myles Enriquez (placeholder)" style="width: {{L.avatar}}px; height: {{L.avatar}}px; border-radius: 18px; background: {{accent}}; display: flex; align-items: flex-end; padding: 12px; box-sizing: border-box; color: #1A1A18; font-weight: 600; font-size: {{L.mono}}px; letter-spacing: -0.04em; line-height: 1">ME</div>
+<h1 style="margin: 0; font-size: {{L.h1}}px; line-height: 1.08; letter-spacing: -0.028em; font-weight: 500; max-width: {{L.h1Max}}; text-wrap: balance">Hi, I'm Myles Enriquez — a design engineer building at Slickdeals. <span style="color: #85857F">Previously at UNLV.</span></h1>
+<p style="margin: 0; font-size: {{L.sub}}px; line-height: 1.5; color: #55554F; max-width: 640px">I work in the space between Figma and production — crafting React, Vue and TypeScript interfaces, design systems, and the tooling that keeps design and code in sync.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<div style="display: flex; align-items: center; gap: 12px; height: 56px; padding: 0 18px 0 6px; border-radius: 999px; background: #F9F9F7; border: 1px solid #E3E3DF; width: {{L.introW}}; box-sizing: border-box">
+<button type="button" aria-label="{{introLabel}}" onClick="{{toggleIntro}}" style="width: 44px; height: 44px; flex: none; border-radius: 999px; border: 0; background: transparent; color: {{accent}}; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0">
+<sc-if value="{{introPlaying}}" hint-placeholder-val="{{ false }}">
+<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"></rect><rect x="9.5" y="2.5" width="3" height="11" rx="1"></rect></svg>
+</sc-if>
+<sc-if value="{{introPaused}}" hint-placeholder-val="{{ true }}">
+<svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4 2.6v10.8a.8.8 0 0 0 1.2.7l8.6-5.4a.8.8 0 0 0 0-1.4L5.2 1.9A.8.8 0 0 0 4 2.6z"></path></svg>
+</sc-if>
+</button>
+<div aria-hidden="true" style="display: flex; align-items: center; gap: 2px; height: 28px; flex: 1; min-width: 0; overflow: hidden">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="48">
+<span style="width: 2px; flex: none; border-radius: 2px; height: {{b.h}}px; background: {{b.bg}}"></span>
+</sc-for>
+</div>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px; color: #63635E; flex: none">{{introTime}}</span>
+</div>
+<div style="display: inline-flex; align-items: center; gap: 10px; height: 56px; padding: 0 20px; border-radius: 999px; border: 1px solid #DCDCD7; font-size: 15px; color: #3A3A36; box-sizing: border-box"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: #2F9E44; box-shadow: 0 0 0 4px #2F9E4426"></span>Available for work</div>
+</div>
+</section>
+
+<section id="work" aria-label="About me" style="flex: 1; min-width: 0; display: grid; grid-template-columns: repeat({{L.cols}}, minmax(0, 1fr)); gap: {{L.gap}}px; grid-auto-flow: dense; align-content: start">
+
+<!-- EXPERIENCE -->
+<article style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.experience.style}}" onMouseEnter="{{c.experience.enter}}" onMouseLeave="{{c.experience.leave}}">
+<sc-if value="{{c.experience.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Experience" aria-expanded="false" onClick="{{c.experience.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.experience.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4.5" width="12" height="9" rx="1.5"></rect><path d="M5.5 4.5V3a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1.5"></path></svg>Experience</span>
+<sc-if value="{{c.experience.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.experience.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.experience.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Experience" onClick="{{c.experience.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<sc-if value="{{c.experience.collapsed}}" hint-placeholder-val="{{ true }}">
+<div style="position: relative; display: flex; flex-direction: column; gap: 14px; padding-left: 18px">
+<div aria-hidden="true" style="position: absolute; left: 3px; top: 6px; bottom: 6px; width: 1px; background: #D5D5D0"></div>
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="3">
+<div style="position: relative">
+<span aria-hidden="true" style="position: absolute; left: -18px; top: 5px; width: 7px; height: 7px; border-radius: 999px; background: {{r.dot}}"></span>
+<div style="font-size: 14.5px; font-weight: 500; line-height: 1.3">{{r.role}}</div>
+<div style="font-size: 13px; color: #63635E; margin-top: 2px">{{r.org}} · {{r.years}}</div>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{c.experience.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px; padding-top: 4px">
+<h2 style="margin: 0; font-size: 28px; line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; max-width: 720px">Seven years shipping interfaces at Slickdeals, from frontend engineer to senior full stack.</h2>
+<div style="display: grid; grid-template-columns: repeat({{L.wideCols}}, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{roles}}" as="r" hint-placeholder-count="3">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{r.years}}</div>
+<div style="font-size: 17px; font-weight: 500; line-height: 1.25">{{r.role}}</div>
+<div style="font-size: 14px; color: #55554F">{{r.org}}</div>
+<p style="margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: #55554F">{{r.note}}</p>
+</div>
+</sc-for>
+<div style="padding: 18px; border-radius: 12px; border: 1px dashed #CFCFC9; display: flex; flex-direction: column; gap: 6px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">Education</div>
+<div style="font-size: 17px; font-weight: 500; line-height: 1.25">B.A. Computer &amp; Information Sciences</div>
+<div style="font-size: 14px; color: #55554F">University of Hawaiʻi at Mānoa · 2015</div>
+<p style="margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: #55554F">freeCodeCamp Full Stack certification</p>
+</div>
+</div>
+<a href="#" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #1A1A18; color: #F9F9F7; text-decoration: none; font-size: 14px; font-weight: 500">Download résumé<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"></path></svg></a>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- FEATURED -->
+<article style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.featured.style}}" onMouseEnter="{{c.featured.enter}}" onMouseLeave="{{c.featured.leave}}">
+<sc-if value="{{c.featured.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Featured work" aria-expanded="false" onClick="{{c.featured.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.featured.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 1.8l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.6l-3.8 2 .7-4.3-3.1-3 4.3-.6z"></path></svg>Featured work</span>
+<sc-if value="{{c.featured.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.featured.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.featured.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Featured work" onClick="{{c.featured.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<div style="display: flex; gap: 20px; align-items: stretch; flex: none">
+<div style="width: {{L.preview}}px; height: {{L.cover}}px; flex: none; border-radius: 12px; background: #1A1A18; position: relative; overflow: hidden; display: flex; flex-direction: column">
+<div style="display: flex; gap: 2px; padding: 6px; flex: none">
+<button type="button" aria-pressed="{{pv.uiPressed}}" onClick="{{pv.showUi}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; cursor: pointer; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; pointer-events: auto; {{pv.uiStyle}}">UI</button>
+<button type="button" aria-pressed="{{pv.codePressed}}" onClick="{{pv.showCode}}" style="height: 26px; padding: 0 10px; border: 0; border-radius: 6px; cursor: pointer; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11px; pointer-events: auto; {{pv.codeStyle}}">Code</button>
+</div>
+<sc-if value="{{pv.isUi}}" hint-placeholder-val="{{ true }}">
+<div aria-hidden="true" style="flex: 1; margin: 0 8px 8px; border-radius: 8px; background: #F9F9F7; padding: 10px; display: flex; gap: 10px; box-sizing: border-box; min-height: 0">
+<div style="width: 34%; border-radius: 6px; background: {{accentSoft}}; flex: none"></div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; padding-top: 2px">
+<div style="height: 7px; width: 90%; border-radius: 4px; background: #1A1A18"></div>
+<div style="height: 7px; width: 65%; border-radius: 4px; background: #1A1A18"></div>
+<div style="height: 6px; width: 40%; border-radius: 4px; background: #BDBDB7; margin-top: 2px"></div>
+<div style="margin-top: auto; display: flex; gap: 6px; align-items: center">
+<div style="height: 16px; width: 44%; border-radius: 999px; background: {{accent}}"></div>
+<div style="height: 16px; width: 16px; border-radius: 999px; border: 1.5px solid #BDBDB7; box-sizing: border-box"></div>
+</div>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{pv.isCode}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="flex: 1; padding: 6px 12px 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: {{L.codeSize}}px; line-height: 1.6; color: #CFCFC9; white-space: pre; overflow: hidden"><span style="color: #8F8F89">&lt;</span><span style="color: #F4F4F0">DealCard</span>
+  <span style="color: {{accent}}">:deal</span>=<span style="color: #9FD39B">"deal"</span>
+  <span style="color: {{accent}}">variant</span>=<span style="color: #9FD39B">"compact"</span>
+  <span style="color: {{accent}}">@save</span>=<span style="color: #9FD39B">"track"</span>
+<span style="color: #8F8F89">/&gt;</span></div>
+</sc-if>
+</div>
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 12px">
+<div>
+<div style="font-size: 20px; font-weight: 500; letter-spacing: -0.015em; line-height: 1.2">Deal page component system</div>
+<div style="font-size: 14px; color: #63635E; margin-top: 4px">Slickdeals · 2025 · Lead engineer</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px 20px">
+<sc-for list="{{metrics}}" as="m" hint-placeholder-count="3">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-size: 20px; font-weight: 500; letter-spacing: -0.02em">{{m.value}}</span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px; color: #63635E">{{m.label}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</div>
+<sc-if value="{{c.featured.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px; padding-top: 4px">
+<div style="display: grid; grid-template-columns: repeat({{L.triCols}}, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{caseStudy}}" as="cs" hint-placeholder-count="3">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC; display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{cs.label}}</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #3A3A36">{{cs.text}}</p>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<sc-for list="{{caseTags}}" as="t" hint-placeholder-count="5">
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid #DCDCD7; font-size: 13px; color: #3A3A36">{{t.label}}</span>
+</sc-for>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: #1A1A18; color: #F9F9F7; text-decoration: none; font-size: 14px; font-weight: 500">Read the case study<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"></path></svg></a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: 999px; border: 1px solid #CFCFC9; color: #1A1A18; text-decoration: none; font-size: 14px">Component docs</a>
+</div>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- TOOLKIT -->
+<article id="toolkit" style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.stack.style}}" onMouseEnter="{{c.stack.enter}}" onMouseLeave="{{c.stack.leave}}">
+<sc-if value="{{c.stack.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Toolkit" aria-expanded="false" onClick="{{c.stack.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.stack.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2l6 3-6 3-6-3 6-3z"></path><path d="M2 8l6 3 6-3"></path><path d="M2 11l6 3 6-3"></path></svg>Toolkit</span>
+<sc-if value="{{c.stack.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.stack.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.stack.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Toolkit" onClick="{{c.stack.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<sc-if value="{{c.stack.collapsed}}" hint-placeholder-val="{{ true }}">
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 14px">
+<div style="font-size: 22px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15">From Figma file to production code.</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{chips}}" as="t" hint-placeholder-count="6">
+<span style="display: inline-flex; align-items: center; height: 28px; padding: 0 10px; border-radius: 8px; border: 1px solid #DCDCD7; font-size: 13px; color: #3A3A36">{{t.label}}</span>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{c.stack.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px; padding-top: 4px">
+<h2 style="margin: 0; font-size: 28px; line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; max-width: 720px">The tools I reach for, from first sketch to shipped component.</h2>
+<div style="display: grid; grid-template-columns: repeat({{L.wideCols}}, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{stackGroups}}" as="g" hint-placeholder-count="3">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC; display: flex; flex-direction: column; gap: 12px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{g.name}}</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{g.items}}" as="t" hint-placeholder-count="3">
+<span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; background: #F9F9F7; border: 1px solid #DCDCD7; font-size: 14px; color: #1A1A18">{{t.label}}</span>
+</sc-for>
+</div>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- LOCATION -->
+<article style="position: relative; background: #F3F3F0; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.location.style}}" onMouseEnter="{{c.location.enter}}" onMouseLeave="{{c.location.leave}}">
+<svg aria-hidden="true" viewBox="0 0 300 260" preserveAspectRatio="xMidYMid slice" style="position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none" fill="none">
+<g stroke="#DEDED9" stroke-width="1">
+<path d="M0 30H300M0 62H300M0 94H300M0 126H300M0 158H300M0 190H300M0 222H300M0 254H300"></path>
+<path d="M24 0V260M58 0V260M92 0V260M126 0V260M160 0V260M194 0V260M228 0V260M262 0V260M296 0V260"></path>
+</g>
+<g stroke="#D2D2CC" stroke-width="5" stroke-linecap="round">
+<path d="M-10 210C60 180 110 150 150 120S240 40 320 20"></path>
+<path d="M200 -10C190 60 182 120 186 170S196 240 206 280"></path>
+</g>
+<path d="M126 0L150 260" stroke="#D8D8D2" stroke-width="3"></path>
+<circle cx="150" cy="118" r="16" fill="{{accentSoft}}"></circle>
+<circle cx="150" cy="118" r="6" fill="{{accent}}" stroke="#F9F9F7" stroke-width="2"></circle>
+</svg>
+<sc-if value="{{c.location.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Location" aria-expanded="false" onClick="{{c.location.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.location.pe}}; height: 100%; min-height: {{c.location.minH}}; box-sizing: border-box; padding: 16px; display: flex; flex-direction: column; justify-content: space-between; gap: 16px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #F9F9F7; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 14s4.5-4.2 4.5-7.5a4.5 4.5 0 0 0-9 0C3.5 9.8 8 14 8 14z"></path><circle cx="8" cy="6.5" r="1.6"></circle></svg>Based in</span>
+<sc-if value="{{c.location.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Location" onClick="{{c.location.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #F9F9F7; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<div style="align-self: flex-start; background: #F9F9F7; border-radius: 12px; padding: 12px 14px; box-shadow: 0 1px 2px rgba(20,20,18,.06); display: flex; flex-direction: column; gap: 4px; max-width: 360px">
+<div style="font-size: 24px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1">Las Vegas</div>
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{localTime}} PT</div>
+<sc-if value="{{c.location.expanded}}" hint-placeholder-val="{{ false }}">
+<p style="margin: 8px 0 0; font-size: 14px; line-height: 1.5; color: #55554F">Nevada, on Pacific Time. Open to remote roles and comfortable overlapping with teams across US time zones.</p>
+</sc-if>
+</div>
+</div>
+</article>
+
+<!-- GITHUB -->
+<article style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.github.style}}" onMouseEnter="{{c.github.enter}}" onMouseLeave="{{c.github.leave}}">
+<sc-if value="{{c.github.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand GitHub activity" aria-expanded="false" onClick="{{c.github.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.github.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="4.5" cy="3.5" r="1.5"></circle><circle cx="4.5" cy="12.5" r="1.5"></circle><circle cx="11.5" cy="5.5" r="1.5"></circle><path d="M4.5 5v6M11.5 7c0 3-7 2-7 4"></path></svg>GitHub</span>
+<sc-if value="{{c.github.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.github.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.github.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse GitHub activity" onClick="{{c.github.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<div>
+<div style="font-size: 28px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.05">1,284</div>
+<div style="font-size: 13px; color: #63635E; margin-top: 4px">contributions in the last year</div>
+</div>
+<sc-if value="{{c.github.collapsed}}" hint-placeholder-val="{{ true }}">
+<div role="img" aria-label="Contribution heatmap for recent weeks" style="margin-top: auto; display: flex; gap: 3px">
+<sc-for list="{{heatShort}}" as="w" hint-placeholder-count="18">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<sc-for list="{{w.days}}" as="d" hint-placeholder-count="7">
+<span style="width: 9px; height: 9px; border-radius: 2px; background: {{d.bg}}"></span>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{c.github.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<div style="overflow-x: auto; padding-bottom: 4px">
+<div role="img" aria-label="Contribution heatmap for the last 52 weeks" style="display: flex; gap: 3px; width: max-content">
+<sc-for list="{{heatYear}}" as="w" hint-placeholder-count="52">
+<div style="display: flex; flex-direction: column; gap: 3px">
+<sc-for list="{{w.days}}" as="d" hint-placeholder-count="7">
+<span style="width: 12px; height: 12px; border-radius: 3px; background: {{d.bg}}"></span>
+</sc-for>
+</div>
+</sc-for>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat({{L.triCols}}, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{ghStats}}" as="g" hint-placeholder-count="3">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC"><div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{g.label}}</div><div style="font-size: 22px; font-weight: 500; letter-spacing: -0.02em; margin-top: 6px">{{g.value}}</div></div>
+</sc-for>
+</div>
+<div style="display: flex; flex-direction: column">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E; padding-bottom: 8px">Pinned repositories</div>
+<sc-for list="{{repos}}" as="r" hint-placeholder-count="3">
+<a href="#" style="display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 8px 0; border-top: 1px solid #E6E6E2; color: #1A1A18; text-decoration: none; flex-wrap: wrap">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; font-weight: 500">{{r.name}}</span>
+<span style="flex: 1 1 200px; min-width: 0; font-size: 14px; color: #55554F">{{r.desc}}</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: #55554F"><span aria-hidden="true" style="width: 8px; height: 8px; border-radius: 999px; background: {{r.langColor}}"></span>{{r.lang}}</span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">★ {{r.stars}}</span>
+</a>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- PROCESS -->
+<article style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.process.style}}" onMouseEnter="{{c.process.enter}}" onMouseLeave="{{c.process.leave}}">
+<sc-if value="{{c.process.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand How I work" aria-expanded="false" onClick="{{c.process.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.process.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="M3 4h10M3 8h10M3 12h6"></path></svg>How I work</span>
+<sc-if value="{{c.process.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.process.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.process.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse How I work" onClick="{{c.process.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<sc-if value="{{c.process.collapsed}}" hint-placeholder-val="{{ true }}">
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: baseline; gap: 12px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: #6E6E68">{{step.num}}</span>
+<h3 style="margin: 0; font-size: 28px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1">{{step.title}}</h3>
+</div>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #55554F; max-width: 560px">{{step.desc}}</p>
+<div style="display: flex; gap: 4px; padding: 4px; border-radius: 999px; background: #EFEFEB; margin-top: 4px">
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="4">
+<button type="button" aria-pressed="{{st.pressed}}" onClick="{{st.pick}}" style="flex: 1; height: 44px; border: 0; border-radius: 999px; cursor: pointer; font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; font-size: 13px; font-weight: 500; pointer-events: auto; {{st.style}}">{{st.label}}</button>
+</sc-for>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{c.process.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 24px; padding-top: 4px">
+<h2 style="margin: 0; font-size: 28px; line-height: 1.15; font-weight: 500; letter-spacing: -0.02em; max-width: 720px">Four steps, one person holding both the design and the code.</h2>
+<div style="display: grid; grid-template-columns: repeat({{L.wideCols}}, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{steps}}" as="st" hint-placeholder-count="4">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC; display: flex; flex-direction: column; gap: 8px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">Step {{st.num}}</div>
+<div style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">{{st.title}}</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #55554F">{{st.desc}}</p>
+</div>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- PROJECTS -->
+<article style="position: relative; background: #F9F9F7; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.projects.style}}" onMouseEnter="{{c.projects.enter}}" onMouseLeave="{{c.projects.leave}}">
+<sc-if value="{{c.projects.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Now building" aria-expanded="false" onClick="{{c.projects.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.projects.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #EAEAE6; color: #55554F; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5"></path></svg>Now building</span>
+<sc-if value="{{c.projects.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.projects.glyph}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.projects.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Now building" onClick="{{c.projects.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #EAEAE6; color: #1A1A18; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<sc-if value="{{c.projects.collapsed}}" hint-placeholder-val="{{ true }}">
+<div style="margin-top: auto; display: flex; flex-direction: column">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 0; border-top: 1px solid #E6E6E2">
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #6E6E68">{{p.num}}</span>
+<span style="font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.name}}</span>
+</div>
+<span style="flex: none; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px; padding: 4px 9px; border-radius: 999px; white-space: nowrap; background: {{p.chipBg}}; color: {{p.chipFg}}">{{p.status}}</span>
+</div>
+</sc-for>
+</div>
+</sc-if>
+<sc-if value="{{c.projects.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat({{L.triCols}}, minmax(0, 1fr)); gap: 12px; padding-top: 4px">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="3">
+<div style="padding: 18px; border-radius: 12px; background: #F0F0EC; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 10px">
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{p.num}}</span>
+<span style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px; padding: 4px 9px; border-radius: 999px; background: {{p.chipBg}}; color: {{p.chipFg}}">{{p.status}}</span>
+</div>
+<div style="font-size: 18px; font-weight: 500; letter-spacing: -0.01em">{{p.name}}</div>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #55554F; flex: 1">{{p.desc}}</p>
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">{{p.tags}}</div>
+<a href="#" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: #1A1A18; font-size: 14px; font-weight: 500; text-decoration: underline; text-underline-offset: 3px">View on GitHub<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"></path></svg></a>
+</div>
+</sc-for>
+</div>
+</sc-if>
+</div>
+</article>
+
+<!-- CONTACT -->
+<article id="contact" style="position: relative; background: #1A1A18; color: #F4F4F0; border-radius: 18px; box-sizing: border-box; overflow: hidden; transition: transform .2s ease, box-shadow .2s ease; {{c.contact.style}}" onMouseEnter="{{c.contact.enter}}" onMouseLeave="{{c.contact.leave}}">
+<sc-if value="{{c.contact.collapsed}}" hint-placeholder-val="{{ true }}">
+<button type="button" aria-label="Expand Say hello" aria-expanded="false" onClick="{{c.contact.toggle}}" style="position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; padding: 0; border: 0; background: transparent; cursor: pointer; z-index: 1"></button>
+</sc-if>
+<div style="position: relative; z-index: 2; pointer-events: {{c.contact.pe}}; height: 100%; box-sizing: border-box; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 999px; background: #2C2C29; color: #CFCFC9; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 11.5px"><svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3.5" width="12" height="9" rx="1.5"></rect><path d="M2.5 4.5L8 9l5.5-4.5"></path></svg>Say hello</span>
+<sc-if value="{{c.contact.collapsed}}" hint-placeholder-val="{{ true }}">
+<span aria-hidden="true" style="width: 28px; height: 28px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; color: {{c.contact.glyphDark}}"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2.5h4v4M6.5 13.5h-4v-4M13.5 2.5L9 7M2.5 13.5L7 9"></path></svg></span>
+</sc-if>
+<sc-if value="{{c.contact.expanded}}" hint-placeholder-val="{{ false }}">
+<button type="button" aria-label="Collapse Say hello" onClick="{{c.contact.toggle}}" style="width: 44px; height: 44px; margin: -9px -9px 0 0; border-radius: 999px; border: 0; background: #2C2C29; color: #F4F4F0; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; pointer-events: auto"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+</sc-if>
+</div>
+<div style="font-size: 26px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; max-width: 460px">Need design and code in the same head? Let's talk.</div>
+<div style="margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px">
+<a href="#" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 18px; border-radius: 999px; background: {{accent}}; color: #1A1A18; text-decoration: none; font-size: 14px; font-weight: 500; pointer-events: auto">Email me<svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11L11 5M6 5h5v5"></path></svg></a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #3D3D39; color: #F4F4F0; text-decoration: none; font-size: 14px; pointer-events: auto">LinkedIn</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #3D3D39; color: #F4F4F0; text-decoration: none; font-size: 14px; pointer-events: auto">GitHub</a>
+<a href="#" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; border: 1px solid #3D3D39; color: #F4F4F0; text-decoration: none; font-size: 14px; pointer-events: auto">Résumé</a>
+</div>
+<sc-if value="{{c.contact.expanded}}" hint-placeholder-val="{{ false }}">
+<div style="display: grid; grid-template-columns: repeat({{L.duoCols}}, minmax(0, 1fr)); gap: 12px; padding-top: 8px">
+<div style="padding: 18px; border-radius: 12px; background: #252522; display: flex; flex-direction: column; gap: 12px">
+<div style="font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #B4B4AE">Open to</div>
+<div style="display: flex; flex-wrap: wrap; gap: 6px">
+<span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #3D3D39; font-size: 14px">Design engineering</span>
+<span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #3D3D39; font-size: 14px">Design systems</span>
+<span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #3D3D39; font-size: 14px">Frontend platform</span>
+<span style="display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: 8px; border: 1px solid #3D3D39; font-size: 14px">Prototyping &amp; tooling</span>
+</div>
+</div>
+<div style="padding: 18px; border-radius: 12px; background: #252522; display: flex; flex-direction: column; gap: 10px; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 13px">
+<div style="font-size: 12px; color: #B4B4AE">Reach me</div>
+<div>hello@mylesenriquez.dev</div>
+<div>linkedin.com/in/mylesenriquez</div>
+<div>github.com/mylesenriquez</div>
+</div>
+</div>
+</sc-if>
+</div>
+</article>
+
+</section>
+</main>
+
+<footer style="display: flex; flex-direction: {{L.footDir}}; justify-content: space-between; gap: 8px; padding: 48px 0 40px; margin-top: 24px; border-top: 1px solid #DCDCD7; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 12px; color: #63635E">
+<span>© 2026 Myles Enriquez</span>
+<span>Las Vegas, NV · {{localTime}}</span>
+</footer>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#F2541B","options":["#F2541B","#2B59FF","#12A150"]},"layout":{"editor":"enum","default":"auto","options":["auto","mobile","tablet","desktop","wide"]},"openCard":{"editor":"enum","default":"none","options":["none","experience","featured","stack","location","github","process","projects","contact"]},"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    this._minute = -1;
+    this._tick = setInterval(() => {
+      const s = this.state || {};
+      const next = {};
+      let dirty = false;
+      if (s.introPlaying) {
+        let p = (s.introP || 0) + 0.25 / 32;
+        if (p >= 1) { p = 0; next.introPlaying = false; }
+        next.introP = p; dirty = true;
+      }
+      const m = new Date().getMinutes();
+      if (m !== this._minute) { this._minute = m; next.now = Date.now(); dirty = true; }
+      if (dirty) this.setState(next);
+    }, 250);
+  }
+  componentWillUnmount() {
+    clearInterval(this._tick);
+    if (this._ro) this._ro.disconnect();
+  }
+  renderVals() {
+    const s = this.state || {};
+    const accent = this.props.accent ?? '#F2541B';
+    const propLayout = this.props.layout ?? 'auto';
+    const layout = propLayout === 'auto' ? (s.autoLayout || 'desktop') : propLayout;
+
+    if (!this._setRoot) {
+      this._setRoot = (el) => {
+        if (!el || this._ro || typeof ResizeObserver === 'undefined') return;
+        try {
+          this._ro = new ResizeObserver((entries) => {
+            const w = entries[0].contentRect.width;
+            const lay = w < 640 ? 'mobile' : w < 1100 ? 'tablet' : w < 1700 ? 'desktop' : 'wide';
+            if (lay !== (this.state || {}).autoLayout) this.setState({ autoLayout: lay });
+          });
+          this._ro.observe(el);
+        } catch (e) {}
+      };
+    }
+
+    const LAYOUTS = {
+      mobile:  { cols: 2, gap: 12, pad: 20, max: '100%',   rowH: 240, h1: 30, h1Max: '100%',  sub: 16, avatar: 80,  mono: 24, top: 16, heroTop: 24, heroGap: 20, dir: 'column', bodyGap: 40, heroW: 'auto',  heroPos: 'static', introW: '100%', showNav: false, cover: 120, preview: 130, codeSize: 9.5, weeks: 10, wideCols: 1, triCols: 1, duoCols: 1, footDir: 'column', bars: 34 },
+      tablet:  { cols: 2, gap: 16, pad: 40, max: '100%',   rowH: 250, h1: 44, h1Max: '100%',  sub: 18, avatar: 104, mono: 30, top: 24, heroTop: 40, heroGap: 24, dir: 'column', bodyGap: 56, heroW: 'auto',  heroPos: 'static', introW: 'auto', showNav: true,  cover: 160, preview: 260, codeSize: 12, weeks: 26, wideCols: 2, triCols: 3, duoCols: 2, footDir: 'row',    bars: 48 },
+      desktop: { cols: 4, gap: 16, pad: 64, max: '1376px', rowH: 260, h1: 56, h1Max: '1000px', sub: 20, avatar: 128, mono: 36, top: 28, heroTop: 64, heroGap: 28, dir: 'column', bodyGap: 72, heroW: 'auto',  heroPos: 'static', introW: 'auto', showNav: true,  cover: 170, preview: 280, codeSize: 12, weeks: 19, wideCols: 4, triCols: 3, duoCols: 2, footDir: 'row',    bars: 64 },
+      wide:    { cols: 4, gap: 20, pad: 80, max: '1840px', rowH: 280, h1: 44, h1Max: '100%',  sub: 18, avatar: 120, mono: 34, top: 32, heroTop: 72, heroGap: 28, dir: 'row',    bodyGap: 72, heroW: '440px', heroPos: 'sticky', introW: 'auto', showNav: true,  cover: 188, preview: 290, codeSize: 12.5, weeks: 20, wideCols: 4, triCols: 3, duoCols: 2, footDir: 'row',    bars: 56 },
+    };
+    const L = LAYOUTS[layout] || LAYOUTS.desktop;
+
+    const SPANS = {
+      experience: { mobile: 2, tablet: 1, desktop: 1, wide: 1 },
+      featured:   { mobile: 2, tablet: 2, desktop: 2, wide: 2 },
+      stack:      { mobile: 2, tablet: 1, desktop: 1, wide: 1 },
+      location:   { mobile: 1, tablet: 1, desktop: 1, wide: 1 },
+      github:     { mobile: 1, tablet: 1, desktop: 1, wide: 1 },
+      process:    { mobile: 2, tablet: 2, desktop: 2, wide: 2 },
+      projects:   { mobile: 2, tablet: 2, desktop: 2, wide: 2 },
+      contact:    { mobile: 2, tablet: 2, desktop: 2, wide: 2 },
+    };
+    const HEIGHTS = { featured: { mobile: 280 }, process: { mobile: 290 }, contact: { mobile: 280 } };
+
+    const propOpen = this.props.openCard && this.props.openCard !== 'none' ? this.props.openCard : null;
+    const open = s.open !== undefined ? s.open : propOpen;
+
+    const c = {};
+    Object.keys(SPANS).forEach((id) => {
+      const ex = open === id;
+      const hov = s.hover === id && !ex;
+      const dark = id === 'contact';
+      const h = (HEIGHTS[id] && HEIGHTS[id][layout]) || L.rowH;
+      const border = dark ? '#1A1A18' : ex ? '#CFCFC9' : '#E3E3DF';
+      const shadow = hov || ex
+        ? '0 1px 2px rgba(20,20,18,.06), 0 14px 36px rgba(20,20,18,.12)'
+        : '0 1px 2px rgba(20,20,18,.04)';
+      c[id] = {
+        expanded: ex,
+        collapsed: !ex,
+        style: 'grid-column: ' + (ex ? '1 / -1' : 'span ' + SPANS[id][layout]) +
+          '; height: ' + (ex ? 'auto' : h + 'px') +
+          '; min-height: ' + h + 'px' +
+          '; border: 1px solid ' + border +
+          '; box-shadow: ' + shadow +
+          '; transform: ' + (hov ? 'translateY(-3px)' : 'none'),
+        pe: ex ? 'auto' : 'none',
+        minH: ex ? '360px' : '0px',
+        glyph: hov ? '#1A1A18' : '#85857F',
+        glyphDark: hov ? '#F4F4F0' : '#8F8F89',
+        toggle: () => this.setState({ open: ex ? null : id, hover: null }),
+        enter: () => { if ((this.state || {}).hover !== id) this.setState({ hover: id }); },
+        leave: () => { if ((this.state || {}).hover === id) this.setState({ hover: null }); },
+      };
+    });
+
+    const fmt = (sec) => { const t = Math.max(0, Math.round(sec)); return Math.floor(t / 60) + ':' + String(t % 60).padStart(2, '0'); };
+
+    const introP = s.introP || 0;
+    const bars = [];
+    for (let i = 0; i < L.bars; i++) {
+      const h = Math.round(4 + Math.abs(Math.sin(i * 1.31) * Math.cos(i * 0.47 + 1)) * 22);
+      bars.push({ h, bg: i / L.bars < introP ? '#1A1A18' : '#BDBDB7' });
+    }
+
+    let localTime = '';
+    try {
+      localTime = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+    } catch (e) { localTime = ''; }
+
+    // Featured work preview toggle
+    const mode = s.preview || 'ui';
+    const on = 'background: #F9F9F7; color: #1A1A18';
+    const off = 'background: transparent; color: #B4B4AE';
+    const pv = {
+      isUi: mode === 'ui', isCode: mode === 'code',
+      uiPressed: mode === 'ui' ? 'true' : 'false', codePressed: mode === 'code' ? 'true' : 'false',
+      uiStyle: mode === 'ui' ? on : off, codeStyle: mode === 'code' ? on : off,
+      showUi: () => this.setState({ preview: 'ui' }),
+      showCode: () => this.setState({ preview: 'code' }),
+    };
+    const metrics = [
+      { value: '−32%', label: 'LCP on deal pages' },
+      { value: '48', label: 'shared components' },
+      { value: '6', label: 'teams adopting' },
+    ];
+    const caseStudy = [
+      { label: 'Problem', text: 'Deal pages had drifted into a dozen one-off card variants. Every design tweak meant touching several codebases, and page speed was suffering.' },
+      { label: 'Approach', text: 'Audited every variant in Figma, defined tokens and a single typed DealCard API, then shipped it in Vue with Storybook docs and visual regression tests.' },
+      { label: 'Outcome', text: 'One source of truth for design and code. Faster pages, quicker design iterations, and new card layouts shipped in days instead of sprints.' },
+    ];
+    const caseTags = ['Vue 3', 'TypeScript', 'Design tokens', 'Storybook', 'Playwright'].map((label) => ({ label }));
+
+    // GitHub heatmap (sample data, deterministic)
+    const levels = ['#E6E6E2', accent + '4D', accent + '8C', accent + 'CC', accent];
+    const makeWeeks = (n) => {
+      const weeks = [];
+      for (let w = 52 - n; w < 52; w++) {
+        const days = [];
+        for (let d = 0; d < 7; d++) {
+          const v = Math.abs(Math.sin(w * 12.9898 + d * 78.233) * 43758.5453) % 1;
+          const weekend = d === 0 || d === 6;
+          let lvl = v < 0.18 ? 0 : v < 0.45 ? 1 : v < 0.7 ? 2 : v < 0.9 ? 3 : 4;
+          if (weekend && lvl > 1) lvl -= 2;
+          days.push({ bg: levels[Math.max(0, lvl)] });
+        }
+        weeks.push({ days });
+      }
+      return weeks;
+    };
+    const heatShort = makeWeeks(L.weeks);
+    const heatYear = makeWeeks(52);
+    const ghStats = [
+      { label: 'Pull requests merged', value: '312' },
+      { label: 'Code reviews', value: '540' },
+      { label: 'Longest streak', value: '41 days' },
+    ];
+    const repos = [
+      { name: 'deal-card-kit', desc: 'Typed Vue component kit with tokens and Storybook docs', lang: 'Vue', langColor: '#41B883', stars: '128' },
+      { name: 'figma-tokens-sync', desc: 'Syncs Figma variables to CSS and TypeScript tokens', lang: 'TypeScript', langColor: '#3178C6', stars: '86' },
+      { name: 'job-cli', desc: 'Find roles and tailor resumes from the terminal', lang: 'TypeScript', langColor: '#3178C6', stars: '23' },
+    ];
+
+    const STEPS = [
+      { num: '01', title: 'Discovery', desc: 'A 30-minute call to understand the problem, the people using it and what "done" looks like.' },
+      { num: '02', title: 'Design in Figma', desc: 'Explore flows and components in Figma, pressure-tested against real constraints from day one.' },
+      { num: '03', title: 'Prototype in code', desc: 'Interactive React or Vue prototypes so we can feel the details, not just look at them.' },
+      { num: '04', title: 'Ship & systematize', desc: 'Harden it into production code, plus the components and tokens the team keeps building on.' },
+    ];
+    const stepIdx = s.step || 0;
+    const steps = STEPS.map((st, i) => ({
+      ...st,
+      label: layout === 'mobile' ? st.num : 'Step ' + st.num,
+      pressed: i === stepIdx ? 'true' : 'false',
+      style: i === stepIdx ? 'background: #1A1A18; color: #F9F9F7' : 'background: transparent; color: #55554F',
+      pick: () => this.setState({ step: i }),
+    }));
+
+    const roles = [
+      { role: 'Senior Full Stack Engineer', org: 'Slickdeals', years: '2024 — now', dot: accent, note: 'Lead the deal page component system across Vue and Node services; cut LCP 32% and mentor three engineers.' },
+      { role: 'Frontend Engineer', org: 'Slickdeals', years: '2019 — 2024', dot: '#1A1A18', note: 'Built 40+ reusable UI components, shipped the redesigned deal feed and moved key pages to TypeScript.' },
+      { role: 'Web Specialist', org: 'UNLV', years: '2017 — 2019', dot: '#1A1A18', note: 'Rebuilt department sites on an accessible, WCAG-compliant template used by 20+ colleges and offices.' },
+    ];
+
+    const chips = ['React', 'Vue', 'TypeScript', 'Node.js', 'Figma', 'Storybook'].map((label) => ({ label }));
+    const stackGroups = [
+      { name: 'Design', items: ['Figma', 'Design tokens', 'Storybook', 'Prototyping'].map((label) => ({ label })) },
+      { name: 'Frontend', items: ['React', 'Vue', 'TypeScript', 'Next.js', 'Nuxt', 'Tailwind'].map((label) => ({ label })) },
+      { name: 'Backend & data', items: ['Node.js', 'GraphQL', 'PostgreSQL', 'Redis'].map((label) => ({ label })) },
+      { name: 'Tooling', items: ['Vite', 'Playwright', 'GitHub Actions', 'MCP servers'].map((label) => ({ label })) },
+    ];
+
+    const projects = [
+      { num: '01', name: 'Job Search CLI', status: 'In progress', chipBg: accent + '2E', chipFg: '#1A1A18', desc: 'A terminal tool that finds roles, tailors a resume from a YAML experience file plus the posting, and helps apply.', tags: 'TypeScript · Zod · Node.js' },
+      { num: '02', name: 'Figma → code MCP server', status: 'Exploring', chipBg: '#E3E9F5', chipFg: '#24406E', desc: 'An MCP server that reads Figma components and variables and generates typed, token-aware React and Vue components.', tags: 'TypeScript · Figma API · MCP' },
+      { num: '03', name: 'Dream Collector', status: 'Concept', chipBg: '#EAEAE6', chipFg: '#55554F', desc: 'A Roblox game about stepping into dreams and collecting what you find there.', tags: 'Luau · Roblox Studio' },
+    ];
+
+    return {
+      L, accent, accentSoft: accent + '33', setRoot: this._setRoot, c,
+      bars,
+      introPlaying: !!s.introPlaying,
+      introPaused: !s.introPlaying,
+      introLabel: s.introPlaying ? 'Pause intro' : 'Play my 30-second intro',
+      introTime: s.introPlaying || introP > 0 ? fmt(32 * (1 - introP)) : '0:32',
+      toggleIntro: () => this.setState({ introPlaying: !(this.state || {}).introPlaying }),
+      localTime,
+      pv, metrics, caseStudy, caseTags,
+      heatShort, heatYear, ghStats, repos,
+      steps, step: steps[stepIdx],
+      roles, chips, stackGroups, projects,
+    };
+  }
+}
+</script>
+</body>
+</html>

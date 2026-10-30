@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Design tokens are filled in during step 3. */
+@theme {
+  --breakpoint-*: initial;
+  --breakpoint-sm: 640px;
+  --breakpoint-lg: 1100px;
+  --breakpoint-2xl: 1700px;
+}
