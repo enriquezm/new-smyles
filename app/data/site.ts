@@ -431,7 +431,7 @@ export const toolkit: Toolkit = {
   groups: [
     { name: 'Design', items: ['Figma', 'Design tokens', 'Storybook', 'Prototyping'] },
     { name: 'Frontend', items: ['Vue', 'TypeScript', 'Nuxt', 'Tailwind'] },
-    { name: 'Backend & data', items: ['Node.js', 'GraphQL', 'PostgreSQL', 'Redis'] },
+    { name: 'Backend & data', items: ['Node.js', 'PHP', 'GraphQL', 'PostgreSQL', 'Redis', 'AWS'] },
     { name: 'Tooling', items: ['Vite', 'Playwright', 'GitHub Actions', 'MCP servers'] },
   ],
 }
