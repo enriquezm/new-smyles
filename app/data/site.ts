@@ -147,6 +147,8 @@ export interface Github {
   username: string
   contributions: number
   contributionsCaption: string
+  /** Shown in the open card: why the public repos are only part of the story. */
+  privateNote: string
   weeks: ContributionWeek[]
   stats: GithubStat[]
   repos: Repo[]
@@ -481,6 +483,7 @@ export const github: Github = {
   username: 'enriquezm',
   contributions: 1284, // PLACEHOLDER (fallback)
   contributionsCaption: 'contributions in the last year',
+  privateNote: 'Most of my work happens in private repos at Slickdeals, so it counts toward the activity above but the code isn\'t public. The repos below are side projects.',
   weeks: sampleWeeks(52), // PLACEHOLDER (fallback)
   // PLACEHOLDER (fallback)
   stats: [

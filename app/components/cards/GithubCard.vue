@@ -70,6 +70,10 @@ const languageDot: Record<string, string> = {
           </CardTile>
         </dl>
 
+        <p class="max-w-[520px] text-[15px] leading-normal text-ink-3">
+          {{ github.privateNote }}
+        </p>
+
         <div class="flex flex-col">
           <h4 class="pb-2 font-mono text-meta font-normal text-ink-4">
             Pinned repositories
