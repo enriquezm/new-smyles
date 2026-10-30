@@ -2,8 +2,15 @@
 import { cards, featured } from '~/data/site'
 import type { CardId } from '~/data/site'
 
-defineProps<{ open: boolean }>()
+const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
+
+// The collapsed card has a fixed height, so the narrow text column fits one
+// metric on mobile and two on wide; tablet and desktop fit all three.
+function metricClass(index: number): string {
+  if (props.open || index === 0) return 'flex'
+  return index === 1 ? 'hidden sm:flex' : 'hidden sm:flex 2xl:hidden'
+}
 </script>
 
 <template>
@@ -32,9 +39,10 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
         </div>
         <dl class="flex flex-wrap gap-x-5 gap-y-2">
           <div
-            v-for="metric in featured.metrics"
+            v-for="(metric, i) in featured.metrics"
             :key="metric.label"
-            class="flex flex-col-reverse gap-0.5"
+            class="flex-col-reverse gap-0.5"
+            :class="metricClass(i)"
           >
             <dt class="font-mono text-label text-ink-4">
               {{ metric.label }}
