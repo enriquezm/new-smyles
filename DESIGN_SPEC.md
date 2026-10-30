@@ -94,5 +94,5 @@ Column spans are listed as mobile / tablet / desktop / wide.
 
 The content is a mix of real and **placeholder sample** text. Keep it all in one typed content file (`app/data/site.ts`) so it can be edited without touching components.
 
-- **Real**: name; Slickdeals roles and dates (Frontend Engineer 2019–2024, Senior Full Stack Engineer 2024–now); UNLV Web Specialist 2017–2019; B.A. Computer & Information Sciences, University of Hawaiʻi at Mānoa, 2015; freeCodeCamp Full Stack certification; Las Vegas; React / Vue / TypeScript; the Job Search CLI and Dream Collector projects.
+- **Real**: name; Slickdeals roles and dates (Frontend Engineer 2019–2024, Senior Full Stack Engineer 2024–now); UNLV Web Specialist 2017–2019; B.A. Computer & Information Sciences, University of Hawaiʻi at Mānoa, 2015; freeCodeCamp Full Stack certification; Las Vegas; Vue / TypeScript; the Job Search CLI and Dream Collector projects.
 - **Placeholder (replace before launch)**: role impact lines, the featured case study and its metrics, GitHub numbers, heatmap and repos, extra toolkit items, the remote-work line, the email and social handles, the intro audio, the avatar photo.

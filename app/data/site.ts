@@ -289,7 +289,7 @@ export const site: SiteMeta = {
   name: 'Myles Enriquez',
   title: 'Myles Enriquez — Design Engineer',
   description:
-    'Design engineer at Slickdeals working between Figma and production: React, Vue and TypeScript interfaces, design systems and the tooling that keeps design and code in sync.',
+    'Design engineer at Slickdeals working between Figma and production: Vue and TypeScript interfaces, design systems and the tooling that keeps design and code in sync.',
   url: 'https://mylesenriquez.dev', // PLACEHOLDER
   locale: 'en_US',
   ogImage: null, // PLACEHOLDER
@@ -327,7 +327,7 @@ export const themes: Theme[] = [
 export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',
   intro:
-    'I work in the space between Figma and production — crafting React, Vue and TypeScript interfaces, design systems, and the tooling that keeps design and code in sync.',
+    'I work in the space between Figma and production — crafting Vue and TypeScript interfaces, design systems, and the tooling that keeps design and code in sync.',
   avatarAlt: 'Photo of Myles Enriquez',
   avatarMonogram: 'ME',
   avatarSrc: null, // PLACEHOLDER
@@ -424,11 +424,11 @@ export const featured: FeaturedProject = {
 export const toolkit: Toolkit = {
   tagline: 'From Figma file to production code.',
   headline: 'The tools I reach for, from first sketch to shipped component.',
-  highlights: ['React', 'Vue', 'TypeScript', 'Node.js', 'Figma', 'Storybook'],
-  // PLACEHOLDER: items beyond React / Vue / TypeScript.
+  highlights: ['Vue', 'Nuxt', 'TypeScript', 'Node.js', 'Figma', 'Storybook'],
+  // PLACEHOLDER: items beyond Vue / TypeScript.
   groups: [
     { name: 'Design', items: ['Figma', 'Design tokens', 'Storybook', 'Prototyping'] },
-    { name: 'Frontend', items: ['React', 'Vue', 'TypeScript', 'Next.js', 'Nuxt', 'Tailwind'] },
+    { name: 'Frontend', items: ['Vue', 'TypeScript', 'Nuxt', 'Tailwind'] },
     { name: 'Backend & data', items: ['Node.js', 'GraphQL', 'PostgreSQL', 'Redis'] },
     { name: 'Tooling', items: ['Vite', 'Playwright', 'GitHub Actions', 'MCP servers'] },
   ],
@@ -515,7 +515,7 @@ export const workProcess: Process = {
     {
       num: '03',
       title: 'Prototype in code',
-      description: 'Interactive React or Vue prototypes so we can feel the details, not just look at them.',
+      description: 'Interactive Vue prototypes so we can feel the details, not just look at them.',
     },
     {
       num: '04',
@@ -540,7 +540,7 @@ export const projects: Project[] = [
     name: 'Figma → code MCP server',
     status: 'Exploring',
     statusTone: 'info',
-    description: 'An MCP server that reads Figma components and variables and generates typed, token-aware React and Vue components.', // PLACEHOLDER
+    description: 'An MCP server that reads Figma components and variables and generates typed, token-aware Vue components.', // PLACEHOLDER
     tags: ['TypeScript', 'Figma API', 'MCP'], // PLACEHOLDER
     href: '#', // PLACEHOLDER
   },
@@ -571,7 +571,7 @@ export const glance: Glance = {
   yearsLabel: 'years building for the web',
   stats: [
     { value: 'Millions', label: 'of shoppers use what I ship at Slickdeals' },
-    { value: 'Vue + React', label: 'both shipped to production' },
+    { value: 'Vue + TypeScript', label: 'shipped to production every day' }, // PLACEHOLDER
   ],
   headline: 'What you get when you hire me.',
   // PLACEHOLDER: reword in your own voice.
