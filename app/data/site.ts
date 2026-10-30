@@ -47,7 +47,6 @@ export interface Theme {
 
 export interface Hero {
   headline: string
-  headlineMuted: string
   intro: string
   avatarAlt: string
   avatarMonogram: string
@@ -327,7 +326,6 @@ export const themes: Theme[] = [
 
 export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',
-  headlineMuted: 'Previously at UNLV.',
   intro:
     'I work in the space between Figma and production — crafting React, Vue and TypeScript interfaces, design systems, and the tooling that keeps design and code in sync.',
   avatarAlt: 'Photo of Myles Enriquez',

@@ -24,7 +24,7 @@ import { aiPrompt, hero } from '~/data/site'
     </div>
 
     <h1 class="text-[30px] leading-headline font-medium tracking-headline text-balance sm:text-[44px] lg:max-w-headline lg:text-[56px] 2xl:max-w-none 2xl:text-[44px]">
-      {{ hero.headline }} <span class="text-ink-muted-lg">{{ hero.headlineMuted }}</span>
+      {{ hero.headline }}
     </h1>
 
     <p class="max-w-intro text-base leading-normal text-ink-3 sm:text-lg lg:text-xl 2xl:text-lg">

@@ -35,7 +35,7 @@ function buildPrompt(): string {
 
     `You are answering questions about ${site.name} for someone who is considering working with or hiring ${first}. Use only the facts in this document; lines written in the first person are ${first}'s own words. If something is not covered here, say that you don't know and suggest contacting ${first} directly${email ? ` at ${email}` : ''}. Keep answers short and specific, and quote titles, dates and numbers exactly as written.`,
 
-    `## Summary\n${hero.headline} ${hero.headlineMuted}\n${hero.intro}\nStatus: ${hero.status}. Based in ${basedIn.city}, ${basedIn.region} (${basedIn.timeZoneAbbr}).`,
+    `## Summary\n${hero.headline}\n${hero.intro}\nStatus: ${hero.status}. Based in ${basedIn.city}, ${basedIn.region} (${basedIn.timeZoneAbbr}).`,
 
     `## At a glance\n${list([
       `${years}+ ${glance.yearsLabel}`,
