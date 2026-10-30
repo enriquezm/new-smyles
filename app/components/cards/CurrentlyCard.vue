@@ -16,7 +16,7 @@ const updatedLabel = new Intl.DateTimeFormat('en-US', {
   <ExpandableCard
     id="currently"
     :title="cards.currently.title"
-    :span="{ base: 2, sm: 2, lg: 2 }"
+    :span="{ base: 2, sm: 1, lg: 1 }"
     :mobile-height="290"
     body-class="gap-3.5"
     :open="open"

@@ -17,6 +17,9 @@ export type CardId
     | 'glance'
     | 'currently'
     | 'guestbook'
+    | 'lookingFor'
+    | 'kindWords'
+    | 'siteStats'
 
 export interface Link {
   label: string
@@ -238,6 +241,43 @@ export interface Guestbook {
   seed: GuestbookEntry[]
 }
 
+export interface Fact {
+  label: string
+  value: string
+}
+
+export interface LookingFor {
+  headline: string
+  /** Shown on the collapsed card. */
+  facts: Fact[]
+  /** Added when the card is open. */
+  details: Fact[]
+}
+
+export interface Recommendation {
+  quote: string
+  name: string
+  role: string
+  /** The recommender's LinkedIn profile. */
+  href: string
+}
+
+export interface KindWords {
+  headline: string
+  items: Recommendation[]
+  source: Link
+}
+
+export interface SiteStats {
+  /** ISO date (YYYY-MM-DD) the numbers were measured. */
+  measuredOn: string
+  method: string
+  stats: Metric[]
+  headline: string
+  builtWith: Strength[]
+  source: Link
+}
+
 export interface Footer {
   name: string
   place: string
@@ -306,6 +346,9 @@ export const cards: Record<CardId, CardMeta> = {
   glance: { label: 'At a glance', title: 'At a glance' },
   currently: { label: 'Currently', title: 'Currently' },
   guestbook: { label: 'Guestbook', title: 'Guestbook' },
+  lookingFor: { label: 'What I\'m looking for', title: 'What I\'m looking for' },
+  kindWords: { label: 'Kind words', title: 'Kind words' },
+  siteStats: { label: 'This site', title: 'This site, by the numbers' },
 }
 
 export const experienceHeadline
@@ -590,6 +633,82 @@ export const guestbook: Guestbook = {
       createdAt: '2026-10-30T12:00:00-07:00',
     },
   ],
+}
+
+// PLACEHOLDER: confirm every value; these are starting points.
+export const lookingFor: LookingFor = {
+  headline: 'The role I\'m after.',
+  facts: [
+    { label: 'Role', value: 'Senior frontend or design engineer' },
+    { label: 'Setup', value: 'Remote, or hybrid in Las Vegas' },
+    { label: 'Start', value: 'Available now' },
+  ],
+  details: [
+    { label: 'Team', value: 'Product teams where designers and engineers work side by side' },
+    { label: 'Work', value: 'Consumer web apps, design systems and frontend platform' },
+    { label: 'Time zone', value: 'Pacific Time; happy to overlap with any US time zone' },
+    { label: 'Work authorization', value: 'Add before launch' },
+  ],
+}
+
+// PLACEHOLDER: replace with real recommendations (with permission), e.g.
+// from LinkedIn. Never ship invented quotes.
+export const kindWords: KindWords = {
+  headline: 'What people I\'ve worked with say.',
+  items: [
+    {
+      quote: 'Placeholder: paste a recommendation from a manager here. Two or three sentences about the impact Myles had read best.',
+      name: 'Manager name',
+      role: 'Engineering Manager, Slickdeals',
+      href: '#',
+    },
+    {
+      quote: 'Placeholder: paste a recommendation from a designer here, ideally about turning designs into polished, working UI.',
+      name: 'Designer name',
+      role: 'Product Designer, Slickdeals',
+      href: '#',
+    },
+    {
+      quote: 'Placeholder: paste a recommendation from a fellow engineer here, about code quality, reviews or mentoring.',
+      name: 'Engineer name',
+      role: 'Senior Engineer, Slickdeals',
+      href: '#',
+    },
+  ],
+  source: { label: 'More on LinkedIn', href: 'https://linkedin.com/in/mylesenriquez' }, // PLACEHOLDER
+}
+
+// Re-measure after big changes and once deployed (numbers here are from a
+// local production build: median of 5 runs, Lighthouse-like mobile throttling).
+export const siteStats: SiteStats = {
+  measuredOn: '2026-10-30',
+  method: 'Measured on the production build in Chrome at phone size, with network and CPU throttled to a slow 4G phone.',
+  stats: [
+    { value: '1.2 s', label: 'largest paint on slow 4G' },
+    { value: '0', label: 'layout shift (CLS)' },
+    { value: '203 KB', label: 'page weight, gzipped' },
+    { value: 'AA', label: 'contrast in all 3 themes' },
+  ],
+  headline: 'Built with the same care I bring to work.',
+  builtWith: [
+    {
+      title: 'Static and fast',
+      text: 'Nuxt 4 pre-renders every page, and the Geist fonts are self-hosted so nothing shifts as they load.',
+    },
+    {
+      title: 'One set of tokens',
+      text: 'Every color, radius and shadow is a Tailwind v4 token. Light, dark and retro just swap the values.',
+    },
+    {
+      title: 'Motion with restraint',
+      text: 'Cards open with a FLIP layout animation that switches off when you ask your device for reduced motion.',
+    },
+    {
+      title: 'Accessible by default',
+      text: 'Real buttons and links, 44px targets, full keyboard support and AA contrast in every theme.',
+    },
+  ],
+  source: { label: 'View the source', href: '#' }, // PLACEHOLDER
 }
 
 export const footer: Footer = {
