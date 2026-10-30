@@ -48,7 +48,7 @@ function buildPrompt(): string {
 
     `## Education\n${list([`${education.degree}, ${education.school}, ${education.year}`, education.note])}`,
 
-    `## Skills and tools\n${list(toolkit.groups.map(g => `${g.name}: ${g.items.join(', ')}`))}`,
+    `## Skills and tools\n${toolkit.note}\n${list(toolkit.groups.map(g => `${g.name}: ${g.items.join(', ')}`))}`,
 
     `## How ${first} works\n${workProcess.steps.map(s => `${s.num}. ${s.title}: ${s.description}`).join('\n')}`,
 

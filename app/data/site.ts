@@ -110,6 +110,7 @@ export interface ToolkitGroup {
 export interface Toolkit {
   tagline: string
   headline: string
+  note: string
   highlights: string[]
   groups: ToolkitGroup[]
 }
@@ -289,7 +290,7 @@ export const site: SiteMeta = {
   name: 'Myles Enriquez',
   title: 'Myles Enriquez — Design Engineer',
   description:
-    'Design engineer at Slickdeals working between Figma and production: Vue and TypeScript interfaces, design systems and the tooling that keeps design and code in sync.',
+    'Design engineer at Slickdeals working between Figma and production: Vue and Nuxt interfaces, design systems and the tooling that keeps design and code in sync.',
   url: 'https://mylesenriquez.dev', // PLACEHOLDER
   locale: 'en_US',
   ogImage: null, // PLACEHOLDER
@@ -327,7 +328,7 @@ export const themes: Theme[] = [
 export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',
   intro:
-    'I work in the space between Figma and production — crafting Vue and TypeScript interfaces, design systems, and the tooling that keeps design and code in sync.',
+    'I work in the space between Figma and production — crafting TypeScript interfaces, design systems, and the tooling that keeps design and code in sync. Vue and Nuxt are my primary stack, and I\'m comfortable in any component-based framework.',
   avatarAlt: 'Photo of Myles Enriquez',
   avatarMonogram: 'ME',
   avatarSrc: null, // PLACEHOLDER
@@ -424,6 +425,7 @@ export const featured: FeaturedProject = {
 export const toolkit: Toolkit = {
   tagline: 'From Figma file to production code.',
   headline: 'The tools I reach for, from first sketch to shipped component.',
+  note: 'Vue and Nuxt are my primary stack, and I\'m comfortable working in any component-based framework.',
   highlights: ['Vue', 'Nuxt', 'TypeScript', 'Node.js', 'Figma', 'Storybook'],
   // PLACEHOLDER: items beyond Vue / TypeScript.
   groups: [
