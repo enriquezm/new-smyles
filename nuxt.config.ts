@@ -14,12 +14,19 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  runtimeConfig: {
+    // Server-only, set with NUXT_GITHUB_TOKEN in .env or the host's env vars.
+    // Used when building /github.json and never sent to the browser.
+    githubToken: '',
+  },
   compatibilityDate: '2026-10-01',
 
   nitro: {
     prerender: {
-      // Plain-text "ask an AI about me" prompt, built from app/data/site.ts.
-      routes: ['/about-myles.txt'],
+      // Plain-text "ask an AI about me" prompt, built from app/data/site.ts,
+      // and the GitHub card's data, fetched from the GitHub API at build time.
+      routes: ['/about-myles.txt', '/github.json'],
     },
   },
 

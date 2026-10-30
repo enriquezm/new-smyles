@@ -1,0 +1,128 @@
+import { github, githubStatLabels } from '../../app/data/site'
+import type { ContributionWeek, GithubLive, HeatLevel, Repo } from '../../app/data/site'
+
+// Prerendered to /github.json by `nuxi generate` (see nitro.prerender in
+// nuxt.config.ts), so the token is only used at build time and never ships.
+// Returns null without a token or on any API error; the card then falls back
+// to the placeholders in app/data/site.ts.
+
+type ContributionLevel = 'NONE' | 'FIRST_QUARTILE' | 'SECOND_QUARTILE' | 'THIRD_QUARTILE' | 'FOURTH_QUARTILE'
+
+interface ApiRepo {
+  name: string
+  description: string | null
+  url: string
+  stargazerCount: number
+  primaryLanguage: { name: string } | null
+}
+
+interface ApiResponse {
+  data?: {
+    user: {
+      contributionsCollection: {
+        totalPullRequestContributions: number
+        totalPullRequestReviewContributions: number
+        contributionCalendar: {
+          totalContributions: number
+          weeks: {
+            contributionDays: {
+              weekday: number
+              contributionCount: number
+              contributionLevel: ContributionLevel
+            }[]
+          }[]
+        }
+      }
+      pinnedItems: { nodes: ApiRepo[] }
+      repositories: { nodes: ApiRepo[] }
+    } | null
+  }
+  errors?: { message: string }[]
+}
+
+const REPO_FIELDS = 'name description url stargazerCount primaryLanguage { name }'
+
+const query = `query ($login: String!) {
+  user(login: $login) {
+    contributionsCollection {
+      totalPullRequestContributions
+      totalPullRequestReviewContributions
+      contributionCalendar {
+        totalContributions
+        weeks { contributionDays { weekday contributionCount contributionLevel } }
+      }
+    }
+    pinnedItems(first: 3, types: REPOSITORY) { nodes { ... on Repository { ${REPO_FIELDS} } } }
+    repositories(first: 3, ownerAffiliations: OWNER, privacy: PUBLIC, isFork: false, orderBy: { field: STARGAZERS, direction: DESC }) {
+      nodes { ${REPO_FIELDS} }
+    }
+  }
+}`
+
+const levels: Record<ContributionLevel, HeatLevel> = {
+  NONE: 0,
+  FIRST_QUARTILE: 1,
+  SECOND_QUARTILE: 2,
+  THIRD_QUARTILE: 3,
+  FOURTH_QUARTILE: 4,
+}
+
+const toRepo = (r: ApiRepo): Repo => ({
+  name: r.name,
+  description: r.description ?? '',
+  language: r.primaryLanguage?.name ?? null,
+  stars: r.stargazerCount,
+  href: r.url,
+})
+
+export default defineEventHandler(async (event): Promise<GithubLive | null> => {
+  const token = useRuntimeConfig(event).githubToken
+  if (!token) {
+    console.warn('[github.json] NUXT_GITHUB_TOKEN is not set; the GitHub card will show placeholder data.')
+    return null
+  }
+
+  try {
+    const res = await $fetch<ApiResponse>('https://api.github.com/graphql', {
+      method: 'POST',
+      headers: { 'Authorization': `bearer ${token}`, 'User-Agent': github.username },
+      body: { query, variables: { login: github.username } },
+    })
+    const user = res.data?.user
+    if (!user) throw new Error(res.errors?.map(e => e.message).join('; ') ?? 'User not found')
+
+    const { contributionCalendar: calendar, ...totals } = user.contributionsCollection
+
+    // GitHub's first and last weeks can be partial; pad missing days with 0.
+    const weeks = calendar.weeks.slice(-52).map((week) => {
+      const days: HeatLevel[] = [0, 0, 0, 0, 0, 0, 0]
+      for (const day of week.contributionDays) days[day.weekday] = levels[day.contributionLevel]
+      return days as ContributionWeek
+    })
+
+    let streak = 0
+    let longest = 0
+    for (const day of calendar.weeks.flatMap(w => w.contributionDays)) {
+      streak = day.contributionCount > 0 ? streak + 1 : 0
+      longest = Math.max(longest, streak)
+    }
+
+    const pinned = user.pinnedItems.nodes.filter(r => 'name' in r)
+    const repos = (pinned.length ? pinned : user.repositories.nodes).map(toRepo)
+
+    return {
+      contributions: calendar.totalContributions,
+      weeks,
+      stats: [
+        { label: githubStatLabels.pullRequests, value: totals.totalPullRequestContributions.toLocaleString('en-US') },
+        { label: githubStatLabels.reviews, value: totals.totalPullRequestReviewContributions.toLocaleString('en-US') },
+        { label: githubStatLabels.streak, value: `${longest} ${longest === 1 ? 'day' : 'days'}` },
+      ],
+      repos,
+    }
+  }
+  catch (error) {
+    console.warn('[github.json] GitHub API request failed; using placeholder data.', error)
+    return null
+  }
+})

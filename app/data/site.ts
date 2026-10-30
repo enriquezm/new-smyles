@@ -123,12 +123,11 @@ export interface Location {
   availability: string
 }
 
-export type Language = 'Vue' | 'TypeScript'
-
 export interface Repo {
   name: string
   description: string
-  language: Language
+  /** GitHub's primary language for the repo; null when it has none. */
+  language: string | null
   stars: number
   href: string
 }
@@ -145,6 +144,7 @@ export type HeatLevel = 0 | 1 | 2 | 3 | 4
 export type ContributionWeek = [HeatLevel, HeatLevel, HeatLevel, HeatLevel, HeatLevel, HeatLevel, HeatLevel]
 
 export interface Github {
+  username: string
   contributions: number
   contributionsCaption: string
   weeks: ContributionWeek[]
@@ -152,6 +152,9 @@ export interface Github {
   repos: Repo[]
   profile: Link
 }
+
+/** The parts of the GitHub card that /github.json fills in from the API. */
+export type GithubLive = Pick<Github, 'contributions' | 'weeks' | 'stats' | 'repos'>
 
 export interface Step {
   num: string
@@ -464,17 +467,28 @@ function sampleWeeks(count: number): ContributionWeek[] {
   return weeks
 }
 
+export const githubStatLabels = {
+  pullRequests: 'Pull requests opened',
+  reviews: 'Code reviews',
+  streak: 'Longest streak',
+}
+
+/**
+ * Real numbers come from server/routes/github.json.ts at build time (needs
+ * NUXT_GITHUB_TOKEN). The placeholder values below only show if that fails.
+ */
 export const github: Github = {
-  contributions: 1284, // PLACEHOLDER
+  username: 'enriquezm',
+  contributions: 1284, // PLACEHOLDER (fallback)
   contributionsCaption: 'contributions in the last year',
-  weeks: sampleWeeks(52), // PLACEHOLDER
-  // PLACEHOLDER
+  weeks: sampleWeeks(52), // PLACEHOLDER (fallback)
+  // PLACEHOLDER (fallback)
   stats: [
-    { label: 'Pull requests merged', value: '312' },
-    { label: 'Code reviews', value: '540' },
-    { label: 'Longest streak', value: '41 days' },
+    { label: githubStatLabels.pullRequests, value: '312' },
+    { label: githubStatLabels.reviews, value: '540' },
+    { label: githubStatLabels.streak, value: '41 days' },
   ],
-  // PLACEHOLDER
+  // PLACEHOLDER (fallback)
   repos: [
     {
       name: 'deal-card-kit',
@@ -498,7 +512,7 @@ export const github: Github = {
       href: '#',
     },
   ],
-  profile: { label: 'GitHub', href: '#' }, // PLACEHOLDER
+  profile: { label: 'GitHub', href: 'https://github.com/enriquezm' },
 }
 
 export const workProcess: Process = {
@@ -562,7 +576,7 @@ export const contact: Contact = {
   links: [
     { kind: 'email', label: 'Email me', href: 'mailto:hello@mylesenriquez.dev', display: 'hello@mylesenriquez.dev' }, // PLACEHOLDER
     { kind: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/mylesenriquez', display: 'linkedin.com/in/mylesenriquez' }, // PLACEHOLDER
-    { kind: 'github', label: 'GitHub', href: 'https://github.com/mylesenriquez', display: 'github.com/mylesenriquez' }, // PLACEHOLDER
+    { kind: 'github', label: 'GitHub', href: 'https://github.com/enriquezm', display: 'github.com/enriquezm' },
     { kind: 'resume', label: 'Résumé', href: resumeHref, display: '' },
   ],
   openTo: ['Design engineering', 'Design systems', 'Frontend platform', 'Prototyping & tooling'],

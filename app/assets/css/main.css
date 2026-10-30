@@ -77,6 +77,8 @@
   /* GitHub language dots */
   --color-lang-vue: #41B883;
   --color-lang-typescript: #3178C6;
+  --color-lang-javascript: #F1E05A;
+  --color-lang-php: #4F5D95;
 
   /* Radius */
   --radius-mini: 6px;

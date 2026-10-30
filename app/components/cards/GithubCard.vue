@@ -1,14 +1,17 @@
 <script setup lang="ts">
-import { cards, github } from '~/data/site'
-import type { CardId, Language } from '~/data/site'
+import { cards } from '~/data/site'
+import type { CardId } from '~/data/site'
 
 defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
 
-const contributions = github.contributions.toLocaleString('en-US')
-const languageDot: Record<Language, string> = {
+const github = await useGithub()
+const contributions = computed(() => github.value.contributions.toLocaleString('en-US'))
+const languageDot: Record<string, string> = {
   Vue: 'bg-lang-vue',
   TypeScript: 'bg-lang-typescript',
+  JavaScript: 'bg-lang-javascript',
+  PHP: 'bg-lang-php',
 }
 </script>
 
@@ -82,11 +85,14 @@ const languageDot: Record<Language, string> = {
               >
                 <span class="font-mono text-sm font-medium">{{ repo.name }}</span>
                 <span class="min-w-0 flex-[1_1_200px] text-sm text-ink-3">{{ repo.description }}</span>
-                <span class="inline-flex items-center gap-1.5 text-[13px] text-ink-3">
+                <span
+                  v-if="repo.language"
+                  class="inline-flex items-center gap-1.5 text-[13px] text-ink-3"
+                >
                   <span
                     aria-hidden="true"
                     class="size-2 rounded-full"
-                    :class="languageDot[repo.language]"
+                    :class="languageDot[repo.language] ?? 'bg-ink-5'"
                   />{{ repo.language }}
                 </span>
                 <span class="font-mono text-meta text-ink-4">
