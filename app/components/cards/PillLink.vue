@@ -9,7 +9,7 @@ withDefaults(defineProps<{ href: string, variant?: Variant, arrow?: boolean }>()
 const variants: Record<Variant, string> = {
   'dark': 'bg-ink px-[18px] font-medium text-surface',
   'outline': 'border border-border-open px-[18px] text-ink',
-  'accent': 'bg-accent px-[18px] font-medium text-ink',
+  'accent': 'bg-accent px-[18px] font-medium text-on-accent',
   'dark-outline': 'border border-contact-border px-4 text-contact-text',
 }
 </script>
@@ -17,7 +17,8 @@ const variants: Record<Variant, string> = {
 <template>
   <a
     :href="href"
-    class="inline-flex min-h-11 items-center gap-2 rounded-full text-sm"
+    data-retro="button"
+    class="inline-flex min-h-11 items-center gap-2 rounded-pill text-sm"
     :class="variants[variant]"
   >
     <slot />

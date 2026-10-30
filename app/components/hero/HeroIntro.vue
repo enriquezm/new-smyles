@@ -5,6 +5,7 @@ import { hero } from '~/data/site'
 <template>
   <section
     aria-label="Intro"
+    data-retro="window"
     class="flex flex-none flex-col gap-5 self-start sm:gap-6 lg:gap-7 2xl:sticky 2xl:top-10 2xl:w-hero"
   >
     <img
@@ -17,7 +18,7 @@ import { hero } from '~/data/site'
       v-else
       role="img"
       :aria-label="`${hero.avatarAlt} (placeholder)`"
-      class="flex size-20 items-end rounded-card bg-accent p-3 text-2xl leading-none font-semibold tracking-[-0.04em] text-ink sm:size-[104px] sm:text-[30px] lg:size-32 lg:text-4xl 2xl:size-[120px] 2xl:text-[34px]"
+      class="flex size-20 items-end rounded-card bg-accent p-3 text-2xl leading-none font-semibold tracking-[-0.04em] text-on-accent sm:size-[104px] sm:text-[30px] lg:size-32 lg:text-4xl 2xl:size-[120px] 2xl:text-[34px]"
     >
       {{ hero.avatarMonogram }}
     </div>

@@ -12,7 +12,7 @@ const { component, props } = featured.codePreview
 </script>
 
 <template>
-  <div class="relative flex h-[120px] w-[130px] flex-none flex-col overflow-hidden rounded-tile bg-ink sm:h-[160px] sm:w-[260px] lg:h-[170px] lg:w-[280px] 2xl:h-[188px] 2xl:w-[290px]">
+  <div class="relative flex h-[120px] w-[130px] flex-none flex-col overflow-hidden rounded-tile bg-contact-bg sm:h-[160px] sm:w-[260px] lg:h-[170px] lg:w-[280px] 2xl:h-[188px] 2xl:w-[290px]">
     <div
       role="group"
       aria-label="Preview"
@@ -23,6 +23,7 @@ const { component, props } = featured.codePreview
         v-for="m in modes"
         :key="m.id"
         type="button"
+        data-retro="button"
         :aria-pressed="mode === m.id"
         class="pointer-events-auto relative h-[26px] cursor-pointer rounded-mini px-2.5 font-mono text-[11px] after:absolute after:inset-x-0 after:-inset-y-[9px]"
         :class="mode === m.id ? 'bg-surface text-ink' : 'bg-transparent text-code-toggle-off'"

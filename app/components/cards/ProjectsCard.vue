@@ -11,7 +11,7 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
     id="projects"
     :title="cards.projects.title"
     :span="{ base: 2, sm: 2, lg: 2 }"
-    body-class="gap-3.5 p-5"
+    body-class="gap-3.5"
     :open="open"
     @toggle="emit('toggle', $event)"
   >

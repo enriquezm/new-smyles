@@ -30,6 +30,7 @@
   --color-ink-5: #6E6E68;
   --color-ink-muted-lg: #85857F;
   --color-accent: #F2541B;
+  --color-on-accent: #1A1A18;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 20%, transparent);
   --color-success: #2F9E44;
   --color-success-halo: color-mix(in srgb, var(--color-success) 15%, transparent);
@@ -65,6 +66,7 @@
   --color-contact-muted: #B4B4AE;
   --color-contact-label: #CFCFC9;
   --color-contact-glyph: #8F8F89;
+  --color-contact-edge: #1A1A18;
 
   /* Featured work preview (dark panel) */
   --color-code-text: #CFCFC9;
@@ -81,6 +83,7 @@
   --radius-chip: 8px;
   --radius-tile: 12px;
   --radius-card: 18px;
+  --radius-pill: 9999px;
 
   /* Shadow */
   --shadow-card: 0 1px 2px rgba(20, 20, 18, 0.04);
@@ -119,5 +122,229 @@
   :focus-visible {
     outline: 2px solid var(--color-ink);
     outline-offset: 2px;
+  }
+}
+
+/*
+ * Themes. <html data-theme> is set before first paint by themeInitScript
+ * (app/composables/useTheme.ts). Light is the default in @theme above; these
+ * blocks only override tokens, so components stay theme-agnostic. They sit
+ * outside any layer so they win over Tailwind's theme layer.
+ */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #121211;
+  --color-surface: #1B1B19;
+  --color-surface-sunken: #232320;
+  --color-chip: #2A2A27;
+  --color-border: #2A2A27;
+  --color-border-open: #4A4A45;
+  --color-border-strong: #3A3A36;
+  --color-ink: #F2F2EE;
+  --color-ink-2: #DADAD4;
+  --color-ink-3: #B2B2AB;
+  --color-ink-4: #A0A099;
+  --color-ink-5: #96968F;
+  --color-ink-muted-lg: #85857F;
+  --color-success: #3FB950;
+
+  --color-surface-map: #171715;
+  --color-rule: #2E2E2B;
+  --color-timeline: #3A3A36;
+  --color-track: #232320;
+  --color-wave: #4A4A45;
+  --color-map-grid: #252522;
+  --color-map-road: #33332F;
+  --color-map-road-2: #2C2C29;
+
+  --color-info-bg: #1E2A3D;
+  --color-info-fg: #A9C4F0;
+
+  --color-contact-bg: #0A0A09;
+  --color-contact-tile: #181816;
+  --color-contact-pill: #232320;
+  --color-contact-edge: #33332F;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-card-hover: 0 1px 2px rgba(0, 0, 0, 0.5), 0 14px 36px rgba(0, 0, 0, 0.55);
+  --shadow-float: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Retro: Windows 95. Teal desktop, silver beveled windows, navy title bars. */
+:root[data-theme="retro"] {
+  color-scheme: light;
+
+  --font-sans: "Microsoft Sans Serif", "MS Sans Serif", Tahoma, Geneva, sans-serif;
+  --font-mono: "Courier New", Courier, monospace;
+  --font-weight-medium: 700;
+  --font-weight-semibold: 700;
+  --tracking-headline: 0;
+  --tracking-title: 0;
+
+  --color-bg: #008080;
+  --color-surface: #C0C0C0;
+  --color-surface-sunken: #FFFFFF;
+  --color-chip: #C0C0C0;
+  --color-border: #808080;
+  --color-border-open: #000000;
+  --color-border-strong: #808080;
+  --color-ink: #000000;
+  --color-ink-2: #000000;
+  --color-ink-3: #222222;
+  --color-ink-4: #333333;
+  --color-ink-5: #404040;
+  --color-ink-muted-lg: #505050;
+  --color-accent: #000080;
+  --color-on-accent: #FFFFFF;
+  --color-success: #008000;
+
+  --color-surface-map: #FFFFFF;
+  --color-rule: #808080;
+  --color-timeline: #808080;
+  --color-track: #C0C0C0;
+  --color-wave: #808080;
+  --color-map-grid: #C0C0C0;
+  --color-map-road: #808080;
+  --color-map-road-2: #A0A0A0;
+
+  --color-info-bg: #FFFFE1;
+  --color-info-fg: #000000;
+
+  /* The dark card becomes an MS-DOS Prompt window. */
+  --color-contact-bg: #000000;
+  --color-contact-tile: #0000AA;
+  --color-contact-pill: #000000;
+  --color-contact-border: #C0C0C0;
+  --color-contact-text: #C0C0C0;
+  --color-contact-muted: #A8A8A8;
+  --color-contact-label: #FFFFFF;
+  --color-contact-glyph: #C0C0C0;
+  --color-contact-edge: #000000;
+
+  --radius-mini: 0;
+  --radius-chip: 0;
+  --radius-tile: 0;
+  --radius-card: 0;
+  --radius-pill: 0;
+
+  --shadow-card: none;
+  --shadow-card-hover: none;
+  --shadow-float: none;
+
+  /* Classic two-tone bevels. */
+  --retro-raised: inset 1px 1px #FFFFFF, inset -1px -1px #808080;
+  --retro-sunken: inset 1px 1px #000000, inset -1px -1px #DFDFDF;
+  --retro-light: #DFDFDF;
+  --retro-dark: #0A0A0A;
+  --retro-shade: #808080;
+  --retro-title: linear-gradient(90deg, #000080, #1084D0);
+}
+
+:root[data-theme="retro"] {
+  /* Windows (cards, hero, map label) */
+  & [data-card],
+  & [data-retro="window"],
+  & [data-retro="panel"] {
+    border: 1px solid;
+    border-color: var(--retro-light) var(--retro-dark) var(--retro-dark) var(--retro-light);
+    box-shadow: var(--retro-raised);
+    translate: none;
+  }
+
+  & [data-retro="window"] {
+    background: var(--color-surface);
+    padding: 16px;
+  }
+
+  & [data-card][data-variant="dark"] {
+    font-family: var(--font-mono);
+  }
+
+  /* The card's label row becomes a title bar. */
+  & [data-card-header] {
+    align-items: center;
+    margin: calc(3px - var(--card-pad)) calc(3px - var(--card-pad)) 0;
+    padding: 3px 3px 3px 4px;
+    background: var(--retro-title);
+  }
+
+  & [data-card-header] h2 {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    color: #FFFFFF;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* Title-bar buttons; ::after keeps a 44px hit area. */
+  & [data-card-control] {
+    position: relative;
+    width: 18px;
+    height: 16px;
+    margin: 0;
+    border: 1px solid;
+    border-color: var(--retro-light) var(--retro-dark) var(--retro-dark) var(--retro-light);
+    background: var(--color-surface);
+    box-shadow: var(--retro-raised);
+    color: #000000;
+
+    &::after {
+      content: "";
+      position: absolute;
+      inset: -14px -13px;
+    }
+
+    & svg {
+      width: 10px;
+      height: 10px;
+    }
+  }
+
+  & [data-retro="button"] {
+    border: 1px solid;
+    border-color: var(--retro-light) var(--retro-dark) var(--retro-dark) var(--retro-light);
+    background: var(--color-surface);
+    box-shadow: var(--retro-raised);
+    color: #000000;
+    font-weight: 400;
+
+    &:active,
+    &[aria-pressed="true"],
+    &[aria-checked="true"] {
+      border-color: var(--retro-dark) var(--retro-light) var(--retro-light) var(--retro-dark);
+      background: var(--retro-light);
+      box-shadow: inset 1px 1px var(--retro-shade);
+    }
+  }
+
+  & [data-retro="group"] {
+    gap: 2px;
+    border: 0;
+  }
+
+  & [data-retro="field"] {
+    border: 1px solid;
+    border-color: var(--retro-shade) #FFFFFF #FFFFFF var(--retro-shade);
+    background: #FFFFFF;
+    box-shadow: var(--retro-sunken);
+  }
+
+  /* Text that sits directly on the teal desktop. */
+  & header [data-retro="on-desktop"],
+  & footer {
+    color: #FFFFFF;
+  }
+
+  & footer {
+    border-color: #FFFFFF;
+  }
+
+  & :focus-visible {
+    outline: 2px dotted currentColor;
+    outline-offset: -5px;
   }
 }

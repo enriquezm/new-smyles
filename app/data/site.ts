@@ -32,6 +32,13 @@ export interface SiteMeta {
   themeColor: string
 }
 
+export type ThemeId = 'light' | 'dark' | 'retro'
+
+export interface Theme {
+  id: ThemeId
+  label: string
+}
+
 export interface Hero {
   headline: string
   headlineMuted: string
@@ -206,13 +213,13 @@ export const site: SiteMeta = {
 
 export const resumeHref = '/resume.pdf' // PLACEHOLDER
 
-export const nav: Link[] = [
-  { label: 'Work', href: '#work' },
-  { label: 'Toolkit', href: '#toolkit' },
-  { label: 'Résumé', href: resumeHref },
-]
-
 export const navCta: Link = { label: 'Get in touch', href: '#contact' }
+
+export const themes: Theme[] = [
+  { id: 'light', label: 'Light' },
+  { id: 'dark', label: 'Dark' },
+  { id: 'retro', label: 'Retro' },
+]
 
 export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',

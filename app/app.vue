@@ -23,6 +23,7 @@ useSeoMeta({
 
 useHead({
   link: [{ rel: 'canonical', href: site.url }],
+  script: [{ key: 'theme-init', innerHTML: themeInitScript, tagPosition: 'head' }],
 })
 </script>
 

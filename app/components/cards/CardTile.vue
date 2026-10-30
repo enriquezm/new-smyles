@@ -12,6 +12,7 @@ const tones: Record<Tone, string> = {
 
 <template>
   <div
+    :data-retro="tone === 'sunken' ? 'field' : undefined"
     class="flex flex-col rounded-tile p-[18px]"
     :class="tones[tone]"
   >

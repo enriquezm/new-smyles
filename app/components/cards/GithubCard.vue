@@ -17,7 +17,7 @@ const languageDot: Record<Language, string> = {
     id="github"
     :title="cards.github.title"
     :span="{ base: 1, sm: 1, lg: 1 }"
-    body-class="gap-3.5 p-5"
+    body-class="gap-3.5"
     :open="open"
     @toggle="emit('toggle', $event)"
   >

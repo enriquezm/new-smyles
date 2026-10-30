@@ -19,11 +19,15 @@ const fillClip = computed(() => `inset(0 ${(1 - progress.value) * 100}% 0 0)`)
 </script>
 
 <template>
-  <div class="flex h-14 w-full items-center gap-3 rounded-full border border-border bg-surface pr-[18px] pl-1.5 sm:w-auto">
+  <div
+    data-retro="field"
+    class="flex h-14 w-full items-center gap-3 rounded-pill border border-border bg-surface pr-[18px] pl-1.5 sm:w-auto"
+  >
     <button
       type="button"
+      data-retro="button"
       :aria-label="playing ? introAudio.pauseLabel : introAudio.playLabel"
-      class="inline-flex size-11 flex-none cursor-pointer items-center justify-center rounded-full text-accent"
+      class="inline-flex size-11 flex-none cursor-pointer items-center justify-center rounded-pill text-accent"
       @click="toggle"
     >
       <IconPause v-if="playing" />

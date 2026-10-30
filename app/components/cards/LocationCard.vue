@@ -7,7 +7,7 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
 
 const time = useLocalTime()
 const bodyClass = computed(() =>
-  props.open ? 'min-h-[360px] justify-between gap-4 p-4' : 'justify-between gap-4 p-4',
+  props.open ? 'min-h-[360px] justify-between gap-4' : 'justify-between gap-4',
 )
 </script>
 
@@ -18,6 +18,7 @@ const bodyClass = computed(() =>
     :span="{ base: 1, sm: 1, lg: 1 }"
     variant="map"
     :glyph="false"
+    :pad="16"
     :body-class="bodyClass"
     :open="open"
     @toggle="emit('toggle', $event)"
@@ -30,7 +31,10 @@ const bodyClass = computed(() =>
       <IconPin />{{ cards.location.label }}
     </template>
 
-    <div class="flex max-w-[360px] flex-col gap-1 self-start rounded-tile bg-surface px-3.5 py-3 shadow-float">
+    <div
+      data-retro="panel"
+      class="flex max-w-[360px] flex-col gap-1 self-start rounded-tile bg-surface px-3.5 py-3 shadow-float"
+    >
       <p class="text-2xl leading-[1.1] font-medium tracking-title">
         {{ basedIn.city }}
       </p>

@@ -13,7 +13,7 @@ const variants: Record<CardVariant, string> = {
 <template>
   <h2
     :id="id"
-    class="inline-flex h-[26px] items-center gap-1.5 rounded-full px-2.5 font-mono text-label font-normal"
+    class="inline-flex h-[26px] items-center gap-1.5 rounded-pill px-2.5 font-mono text-label font-normal"
     :class="variants[variant]"
   >
     <slot />

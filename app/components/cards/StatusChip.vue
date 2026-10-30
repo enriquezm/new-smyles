@@ -12,7 +12,7 @@ const tones: Record<ProjectStatusTone, string> = {
 
 <template>
   <span
-    class="flex-none rounded-full px-[9px] py-1 font-mono text-label whitespace-nowrap"
+    class="flex-none rounded-pill px-[9px] py-1 font-mono text-label whitespace-nowrap"
     :class="tones[tone]"
   >
     <slot />

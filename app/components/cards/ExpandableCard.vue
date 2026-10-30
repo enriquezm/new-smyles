@@ -15,14 +15,17 @@ const props = withDefaults(defineProps<{
   anchor?: string
   /** Show the corner expand glyph while collapsed. */
   glyph?: boolean
-  /** Padding and gap of the content column. */
+  /** Inner padding in px; exposed as --card-pad so the retro title bar can bleed to the edges. */
+  pad?: 16 | 20
+  /** Gap and alignment of the content column. */
   bodyClass?: string
 }>(), {
   variant: 'light',
   mobileHeight: 240,
   anchor: undefined,
   glyph: true,
-  bodyClass: 'gap-4 p-5',
+  pad: 20,
+  bodyClass: 'gap-4',
 })
 
 const emit = defineEmits<{ toggle: [id: CardId] }>()
@@ -75,7 +78,7 @@ const surfaces: Record<CardVariant, { base: string, border: string, glyph: strin
   },
   dark: {
     base: 'bg-contact-bg text-contact-text [&_:focus-visible]:outline-contact-text',
-    border: 'border-contact-bg',
+    border: 'border-contact-edge',
     glyph: 'text-contact-glyph group-hover:text-contact-text',
     close: 'bg-contact-pill text-contact-text',
   },
@@ -127,6 +130,8 @@ watch(() => props.open, async (isOpen) => {
     layout
     :transition="transition"
     :aria-labelledby="labelId"
+    data-card
+    :data-variant="variant"
     class="group relative scroll-mt-6 overflow-hidden rounded-card border motion-safe:transition-[translate,box-shadow] motion-safe:duration-200 motion-safe:ease-out"
     :class="cardClass"
   >
@@ -143,10 +148,14 @@ watch(() => props.open, async (isOpen) => {
     />
 
     <div
-      class="relative z-[2] flex h-full flex-col"
+      class="relative z-[2] flex h-full flex-col p-(--card-pad)"
       :class="[bodyClass, open ? '' : 'pointer-events-none']"
+      :style="{ '--card-pad': `${pad}px` }"
     >
-      <div class="flex items-start justify-between gap-3">
+      <div
+        data-card-header
+        class="flex items-start justify-between gap-3"
+      >
         <CardLabel
           :id="labelId"
           :variant="variant"
@@ -159,7 +168,8 @@ watch(() => props.open, async (isOpen) => {
           type="button"
           :aria-label="`Collapse ${title}`"
           aria-expanded="true"
-          class="-mt-[9px] -mr-[9px] inline-flex size-11 cursor-pointer items-center justify-center rounded-full"
+          data-card-control
+          class="-mt-[9px] -mr-[9px] inline-flex size-11 cursor-pointer items-center justify-center rounded-pill"
           :class="surface.close"
           @click="emit('toggle', id)"
         >
@@ -168,7 +178,8 @@ watch(() => props.open, async (isOpen) => {
         <span
           v-else-if="glyph"
           aria-hidden="true"
-          class="inline-flex size-7 items-center justify-center rounded-full transition-colors"
+          data-card-control
+          class="inline-flex size-7 items-center justify-center rounded-pill transition-colors"
           :class="surface.glyph"
         >
           <IconExpand />
