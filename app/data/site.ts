@@ -569,7 +569,7 @@ export const contact: Contact = {
 }
 
 export const glance: Glance = {
-  careerStartYear: 2017,
+  careerStartYear: 2019, // Slickdeals start; shows 7+ in 2026 and counts up each year
   yearsLabel: 'years building for the web',
   stats: [
     { value: 'Millions', label: 'of shoppers use what I ship at Slickdeals' },
