@@ -13,7 +13,7 @@ const reachMe = contact.links.filter(link => link.display)
     id="contact"
     anchor="contact"
     :title="cards.contact.title"
-    :span="{ base: 2, sm: 2, lg: 2 }"
+    :span="{ base: 2, sm: 2, lg: 4 }"
     :mobile-height="280"
     variant="dark"
     :open="open"

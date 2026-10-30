@@ -11,7 +11,6 @@ export type CardId
     | 'toolkit'
     | 'location'
     | 'github'
-    | 'process'
     | 'projects'
     | 'contact'
     | 'glance'
@@ -157,17 +156,6 @@ export interface Github {
 
 /** The parts of the GitHub card that /github.json fills in from the API. */
 export type GithubLive = Pick<Github, 'contributions' | 'weeks' | 'stats' | 'repos'>
-
-export interface Step {
-  num: string
-  title: string
-  description: string
-}
-
-export interface Process {
-  headline: string
-  steps: Step[]
-}
 
 export type ProjectStatusTone = 'accent' | 'info' | 'neutral'
 
@@ -346,7 +334,6 @@ export const cards: Record<CardId, CardMeta> = {
   toolkit: { label: 'Toolkit', title: 'Toolkit' },
   location: { label: 'Based in', title: 'Location' },
   github: { label: 'GitHub', title: 'GitHub activity' },
-  process: { label: 'How I work', title: 'How I work' },
   projects: { label: 'Now building', title: 'Now building' },
   contact: { label: 'Say hello', title: 'Say hello' },
   glance: { label: 'At a glance', title: 'At a glance' },
@@ -516,32 +503,6 @@ export const github: Github = {
     },
   ],
   profile: { label: 'GitHub', href: 'https://github.com/enriquezm' },
-}
-
-export const workProcess: Process = {
-  headline: 'Four steps, one person holding both the design and the code.',
-  steps: [
-    {
-      num: '01',
-      title: 'Discovery',
-      description: 'A 30-minute call to understand the problem, the people using it and what "done" looks like.',
-    },
-    {
-      num: '02',
-      title: 'Design in Figma',
-      description: 'Explore flows and components in Figma, pressure-tested against real constraints from day one.',
-    },
-    {
-      num: '03',
-      title: 'Prototype in code',
-      description: 'Interactive Vue prototypes so we can feel the details, not just look at them.',
-    },
-    {
-      num: '04',
-      title: 'Ship & systematize',
-      description: 'Harden it into production code, plus the components and tokens the team keeps building on.',
-    },
-  ],
 }
 
 export const projects: Project[] = [

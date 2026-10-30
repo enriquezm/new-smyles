@@ -11,7 +11,6 @@ import {
   site,
   siteStats,
   toolkit,
-  workProcess,
 } from '../../app/data/site'
 
 // Prerendered to /about-myles.txt by `nuxi generate` (see nitro.prerender in
@@ -49,8 +48,6 @@ function buildPrompt(): string {
     `## Education\n${list([`${education.degree}, ${education.school}, ${education.year}`, education.note])}`,
 
     `## Skills and tools\n${toolkit.note}\n${list(toolkit.groups.map(g => `${g.name}: ${g.items.join(', ')}`))}`,
-
-    `## How ${first} works\n${workProcess.steps.map(s => `${s.num}. ${s.title}: ${s.description}`).join('\n')}`,
 
     `## What ${first} is looking for\n${list([...lookingFor.facts, ...lookingFor.details].map(f => `${f.label}: ${f.value}`))}`,
 

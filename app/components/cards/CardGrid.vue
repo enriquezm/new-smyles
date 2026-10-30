@@ -15,12 +15,12 @@ const isOpen = (id: CardId) => openId.value === id
       Ordered by impact for recruiters, reading from the top left:
         1. Results and track record  (At a glance, Experience, Toolkit)
         2. Proof from others and fit (Kind words, What I'm looking for)
-        3. Proof of craft            (This site, GitHub, How I work)
+        3. Proof of craft            (This site, GitHub)
         4. Personal and contact      (Currently, Location, Say hello)
       Desktop rows: [glance 2][experience 1][toolkit 1]
                     [kind words 2][looking for 2]
-                    [this site 1][github 1][how I work 2]
-                    [currently 1][location 1][say hello 2]
+                    [this site 1][github 1][currently 1][location 1]
+                    [say hello 4]
 
       FeaturedWorkCard, ProjectsCard and GuestbookCard are kept in the
       codebase but not rendered for now. To bring one back, add it here, e.g.
@@ -54,10 +54,6 @@ const isOpen = (id: CardId) => openId.value === id
       />
       <GithubCard
         :open="isOpen('github')"
-        @toggle="toggle"
-      />
-      <ProcessCard
-        :open="isOpen('process')"
         @toggle="toggle"
       />
       <CurrentlyCard
