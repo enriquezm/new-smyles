@@ -312,7 +312,7 @@ export const aiPrompt = {
   link: { label: 'Ask an AI about me', href: '/about-myles.txt' } satisfies Link,
   questions: [
     'What has Myles built at Slickdeals, and what was the impact?',
-    'Would Myles be a good fit for a senior frontend role on a design systems team?',
+    'Would Myles be a good fit for a software engineer or design engineer role on our team?',
     'How much experience does Myles have with Vue, Nuxt and TypeScript?',
     'How does Myles work with designers?',
     'Is Myles open to remote work, and when could Myles start?',
@@ -442,7 +442,7 @@ export const basedIn: Location = {
   timeZone: 'America/Los_Angeles',
   timeZoneAbbr: 'PT',
   availability:
-    'Nevada, on Pacific Time. Open to remote roles and comfortable overlapping with teams across US time zones.', // PLACEHOLDER
+    'Nevada, on Pacific Time. Looking for remote roles and comfortable overlapping with teams across US time zones.', // PLACEHOLDER
 }
 
 /**
@@ -641,8 +641,8 @@ export const guestbook: Guestbook = {
 export const lookingFor: LookingFor = {
   headline: 'The role I\'m after.',
   facts: [
-    { label: 'Role', value: 'Senior frontend or design engineer' },
-    { label: 'Setup', value: 'Remote, or hybrid in Las Vegas' },
+    { label: 'Role', value: 'Software engineer or design engineer' },
+    { label: 'Setup', value: 'Remote' },
     { label: 'Start', value: 'Available now' },
   ],
   details: [
