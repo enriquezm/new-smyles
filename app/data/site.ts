@@ -310,6 +310,22 @@ export const resumeHref = '/resume.pdf' // PLACEHOLDER
 
 export const navCta: Link = { label: 'Get in touch', href: '#contact' }
 
+/**
+ * A plain-text prompt visitors can paste into an AI assistant to ask about
+ * Myles. Built from the content in this file at build time
+ * (server/routes/about-myles.txt.ts), so it never drifts from the site.
+ */
+export const aiPrompt = {
+  link: { label: 'Ask an AI about me', href: '/about-myles.txt' } satisfies Link,
+  questions: [
+    'What has Myles built at Slickdeals, and what was the impact?',
+    'Would Myles be a good fit for a senior frontend role on a design systems team?',
+    'How much experience does Myles have with Vue, Nuxt and TypeScript?',
+    'How does Myles work with designers?',
+    'Is Myles open to remote work, and when could Myles start?',
+  ],
+}
+
 export const themes: Theme[] = [
   { id: 'light', label: 'Light' },
   { id: 'dark', label: 'Dark' },

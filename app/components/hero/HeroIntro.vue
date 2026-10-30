@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { hero } from '~/data/site'
+import { aiPrompt, hero } from '~/data/site'
 </script>
 
 <template>
@@ -34,6 +34,7 @@ import { hero } from '~/data/site'
     <div class="flex flex-wrap items-center gap-3">
       <IntroPlayer />
       <StatusPill :label="hero.status" />
+      <PromptLink :link="aiPrompt.link" />
     </div>
   </section>
 </template>

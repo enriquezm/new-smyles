@@ -16,6 +16,13 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2026-10-01',
 
+  nitro: {
+    prerender: {
+      // Plain-text "ask an AI about me" prompt, built from app/data/site.ts.
+      routes: ['/about-myles.txt'],
+    },
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },
