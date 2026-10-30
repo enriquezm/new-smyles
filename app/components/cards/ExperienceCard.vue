@@ -89,7 +89,7 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
           arrow
           class="self-start"
         >
-          Download résumé
+          Download resume
         </PillLink>
       </div>
     </template>

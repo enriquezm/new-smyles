@@ -525,7 +525,7 @@ export const contact: Contact = {
     { kind: 'email', label: 'Email me', href: 'mailto:hello@mylesenriquez.dev', display: 'hello@mylesenriquez.dev' }, // PLACEHOLDER
     { kind: 'linkedin', label: 'LinkedIn', href: 'https://linkedin.com/in/mylesenriquez', display: 'linkedin.com/in/mylesenriquez' }, // PLACEHOLDER
     { kind: 'github', label: 'GitHub', href: 'https://github.com/enriquezm', display: 'github.com/enriquezm' },
-    { kind: 'resume', label: 'Résumé', href: resumeHref, display: '' },
+    { kind: 'resume', label: 'Resume', href: resumeHref, display: '' },
   ],
   openTo: ['Design engineering', 'Design systems', 'Frontend platform', 'Prototyping & tooling'],
 }
