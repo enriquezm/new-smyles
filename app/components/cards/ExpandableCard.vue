@@ -48,7 +48,7 @@ const labelId = computed(() => `card-${props.id}-label`)
 
 const spanBase = { 1: 'col-span-1', 2: 'col-span-2' } as const
 const spanSm = { 1: 'sm:col-span-1', 2: 'sm:col-span-2' } as const
-const spanLg = { 1: 'lg:col-span-1', 2: 'lg:col-span-2' } as const
+const spanLg = { 1: 'lg:col-span-1', 2: 'lg:col-span-2', 4: 'lg:col-span-4' } as const
 // Collapsed cards have a fixed height; open cards grow but never shrink below it.
 const heightBase: Record<CardMobileHeight, string> = {
   240: 'h-[240px]',

@@ -4,7 +4,7 @@ export type CardSpanValue = 1 | 2
 export interface CardSpan {
   base: CardSpanValue
   sm: CardSpanValue
-  lg: CardSpanValue
+  lg: CardSpanValue | 4
 }
 
 export type CardVariant = 'light' | 'dark' | 'map'

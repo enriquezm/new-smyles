@@ -14,6 +14,9 @@ export type CardId
     | 'process'
     | 'projects'
     | 'contact'
+    | 'glance'
+    | 'currently'
+    | 'guestbook'
 
 export interface Link {
   label: string
@@ -183,6 +186,58 @@ export interface ContactLink extends Link {
   display: string
 }
 
+export interface Strength {
+  title: string
+  text: string
+}
+
+export interface Glance {
+  /** First year of web work; the card shows the years since as a live stat. */
+  careerStartYear: number
+  yearsLabel: string
+  stats: Metric[]
+  headline: string
+  strengths: Strength[]
+}
+
+export interface CurrentItem {
+  /** Verb shown in the left column: "Building", "Reading", … */
+  label: string
+  title: string
+  note: string
+}
+
+export interface Currently {
+  /** ISO date (YYYY-MM-DD) the list was last refreshed. */
+  updated: string
+  headline: string
+  items: CurrentItem[]
+}
+
+export interface GuestbookEntry {
+  id: string
+  name: string
+  message: string
+  /** ISO 8601 timestamp. */
+  createdAt: string
+}
+
+export interface Guestbook {
+  headline: string
+  intro: string
+  /**
+   * Guestbook API base URL. While null the list shows `seed` and the form is
+   * disabled. The API must answer:
+   *   GET  <endpoint>  → GuestbookEntry[]
+   *   POST <endpoint>  { name, message } → GuestbookEntry
+   */
+  endpoint: string | null
+  closedNote: string
+  maxNameLength: number
+  maxMessageLength: number
+  seed: GuestbookEntry[]
+}
+
 export interface Footer {
   name: string
   place: string
@@ -248,6 +303,9 @@ export const cards: Record<CardId, CardMeta> = {
   process: { label: 'How I work', title: 'How I work' },
   projects: { label: 'Now building', title: 'Now building' },
   contact: { label: 'Say hello', title: 'Say hello' },
+  glance: { label: 'At a glance', title: 'At a glance' },
+  currently: { label: 'Currently', title: 'Currently' },
+  guestbook: { label: 'Guestbook', title: 'Guestbook' },
 }
 
 export const experienceHeadline
@@ -463,6 +521,75 @@ export const contact: Contact = {
     { kind: 'resume', label: 'Résumé', href: resumeHref, display: '' },
   ],
   openTo: ['Design engineering', 'Design systems', 'Frontend platform', 'Prototyping & tooling'],
+}
+
+export const glance: Glance = {
+  careerStartYear: 2017,
+  yearsLabel: 'years building for the web',
+  stats: [
+    { value: 'Millions', label: 'of shoppers use what I ship at Slickdeals' },
+    { value: 'Vue + React', label: 'both shipped to production' },
+  ],
+  headline: 'What you get when you hire me.',
+  // PLACEHOLDER: reword in your own voice.
+  strengths: [
+    {
+      title: 'Design and code in one head',
+      text: 'I move between Figma and the codebase, so designs ship the way they were meant to without a long handoff.',
+    },
+    {
+      title: 'Performance at scale',
+      text: 'Pages I build serve millions of Slickdeals shoppers, so speed and resilience are part of the job, not an afterthought.',
+    },
+    {
+      title: 'Accessible by default',
+      text: 'Accessibility is part of my definition of done, from semantic markup and keyboard support to color contrast.',
+    },
+  ],
+}
+
+export const currently: Currently = {
+  updated: '2026-10-30', // PLACEHOLDER
+  headline: 'What has my attention right now.',
+  items: [
+    {
+      label: 'Building',
+      title: 'Job Search CLI',
+      note: 'A terminal tool that finds roles, tailors a resume from a YAML experience file plus the posting, and helps apply.',
+    },
+    {
+      label: 'Making',
+      title: 'Dream Collector',
+      note: 'A Roblox game about stepping into dreams and collecting what you find there.',
+    },
+    {
+      label: 'Learning',
+      title: 'Layout animation in Vue', // PLACEHOLDER
+      note: 'Shared-element and FLIP transitions with Motion for Vue, like the cards on this page.', // PLACEHOLDER
+    },
+    {
+      label: 'Reading',
+      title: 'Refactoring UI', // PLACEHOLDER
+      note: 'A practical guide to design decisions for developers.', // PLACEHOLDER
+    },
+  ],
+}
+
+export const guestbook: Guestbook = {
+  headline: 'Sign the guestbook.',
+  intro: 'Say hi, leave a tip, or tell me what brought you here. Every message shows up for everyone who visits.',
+  endpoint: null, // PLACEHOLDER: set once the guestbook API exists.
+  closedNote: 'Signing opens soon. Check back to leave a note.',
+  maxNameLength: 40,
+  maxMessageLength: 280,
+  seed: [
+    {
+      id: 'welcome',
+      name: 'Myles',
+      message: 'Welcome! Thanks for stopping by. Leave a hello, a tip, or your favorite spot in Vegas.', // PLACEHOLDER
+      createdAt: '2026-10-30T12:00:00-07:00',
+    },
+  ],
 }
 
 export const footer: Footer = {
