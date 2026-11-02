@@ -276,7 +276,7 @@ export const site: SiteMeta = {
   themeColor: '#EDEDEA',
 }
 
-export const resumeHref = '/resume.pdf' // PLACEHOLDER
+export const resumeHref = '/resume.pdf'
 
 export const navCta: Link = { label: 'Get in touch', href: '#contact' }
 

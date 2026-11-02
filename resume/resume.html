@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<!--
+  Source for public/resume.pdf, which every "Resume" button on the site opens.
+  Content comes from the "Career Work History — Slickdeals" Google Doc.
+  To regenerate after editing, run from the project root:
+
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+    --no-pdf-header-footer --print-to-pdf=public/resume.pdf resume/resume.html
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Myles Enriquez — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=block" rel="stylesheet">
+<style>
+  @page { size: letter; margin: 0.6in 0.65in; }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: #1A1A18;
+  }
+  a { color: inherit; text-decoration: none; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; }
+  h1 { margin: 0; font-size: 24pt; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
+  .role-title { margin: 3px 0 0; font-size: 11pt; color: #55554F; font-weight: 500; }
+  .contact { margin: 0; padding: 0; list-style: none; text-align: right; font-size: 9pt; color: #55554F; line-height: 1.55; }
+  .summary { margin: 14px 0 0; color: #3A3A36; }
+  h2 {
+    margin: 18px 0 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #E6E6E2;
+    font-family: "Geist Mono", ui-monospace, monospace;
+    font-size: 8.5pt;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #63635E;
+  }
+  .job + .job { margin-top: 12px; }
+  .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+  .job-head h3 { margin: 0; font-size: 10.5pt; font-weight: 600; }
+  .job-head h3 span { font-weight: 400; color: #55554F; }
+  .dates { font-size: 9pt; color: #63635E; white-space: nowrap; }
+  ul.points { margin: 5px 0 0; padding-left: 15px; }
+  ul.points li { margin-top: 2px; padding-left: 2px; }
+  ul.points li::marker { color: #9A9A94; }
+  .skills { margin: 0; display: grid; grid-template-columns: 105px 1fr; row-gap: 3px; }
+  .skills dt { color: #63635E; }
+  .skills dd { margin: 0; }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Myles Enriquez</h1>
+      <p class="role-title">Design Engineer</p>
+    </div>
+    <ul class="contact">
+      <li>Las Vegas, NV · Open to remote</li>
+      <li><a href="mailto:hello@mylesenriquez.dev">hello@mylesenriquez.dev</a></li>
+      <li><a href="https://mylesenriquez.dev">mylesenriquez.dev</a> · <a href="https://github.com/enriquezm">github.com/enriquezm</a></li>
+    </ul>
+  </header>
+
+  <p class="summary">
+    Design engineer working between Figma and production, building TypeScript interfaces, design systems
+    and the tooling that keeps design and code in sync. Seven years shipping UI at Slickdeals. Vue and Nuxt
+    are my primary stack, and I'm comfortable in any component-based framework.
+  </p>
+
+  <h2>Experience</h2>
+
+  <section class="job">
+    <div class="job-head">
+      <h3>Senior Full Stack Engineer <span>· Slickdeals</span></h3>
+      <span class="dates">2024 — Present</span>
+    </div>
+    <ul class="points">
+      <li>Added a semantic color layer to the design tokens.</li>
+      <li>Built the new Nuxt search page: filters, filter pills, sorting, pagination and the Price Intelligence widget.</li>
+      <li>Built the homefeed UI, including the feed tab bar, sticky feed bar, an in-house pill carousel that replaced a third-party library, and the opt-in flow's popups, toasts and modals.</li>
+      <li>Built real-time deal-score voting and the community voting bar, with skeleton loading states.</li>
+      <li>Built CMS modular page blocks end to end: search results, deal collections, filter suggestions and category circles.</li>
+      <li>Built and ran the A/B tests for the standardized deal card and deal card grid.</li>
+      <li>Built the Giveaways (Daily Draw) experience, including carousels and past winners.</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3>Frontend Engineer <span>· Slickdeals</span></h3>
+      <span class="dates">2019 — 2024</span>
+    </div>
+    <ul class="points">
+      <li>Core contributor to Blueprint, the Slickdeals design system and pattern library, with 2,000+ file changes across its SCSS, Twig and JavaScript.</li>
+      <li>Built Blueprint patterns including the CSS grid deal card, expired-deal variants, product page header and an animated hero banner, and rolled them out to category, store and landing pages.</li>
+      <li>Built Vue components for the vuerango component library with Storybook stories, fixtures and tests.</li>
+      <li>Led the front end of the Loyalty and Cashback program: the cashback page, rewards panel, redemption portal and onboarding flow.</li>
+      <li>Built store pages and coupon tiles with responsive layouts and an accessible verified-coupon logo.</li>
+    </ul>
+  </section>
+
+  <section class="job">
+    <div class="job-head">
+      <h3>Web Specialist <span>· UNLV</span></h3>
+      <span class="dates">2017 — 2019</span>
+    </div>
+  </section>
+
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Design</dt><dd>Figma, design tokens, design systems, Storybook, prototyping</dd>
+    <dt>Frontend</dt><dd>Vue, Nuxt, TypeScript, JavaScript, SCSS, Tailwind</dd>
+    <dt>Backend</dt><dd>Node.js, PHP, Twig, GraphQL, AWS</dd>
+    <dt>Practices</dt><dd>A/B testing and feature flags (LaunchDarkly), accessibility, code review</dd>
+  </dl>
+
+  <h2>Education</h2>
+  <div class="job-head">
+    <h3>B.A. Computer &amp; Information Sciences <span>· University of Hawaiʻi at Mānoa</span></h3>
+    <span class="dates">2015</span>
+  </div>
+</body>
+</html>
