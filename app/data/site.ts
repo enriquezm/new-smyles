@@ -290,7 +290,7 @@ export const aiPrompt = {
   link: { label: 'Ask an AI about me', href: '/about-myles.txt' } satisfies Link,
   questions: [
     'What has Myles built at Slickdeals, and what was the impact?',
-    'Would Myles be a good fit for a software engineer or design engineer role on our team?',
+    'Would Myles be a good fit for a Design Engineer or Software Engineer role on our team?',
     'How much experience does Myles have with Vue, Nuxt and TypeScript?',
     'How does Myles work with designers?',
     'Is Myles open to remote work, and when could Myles start?',
