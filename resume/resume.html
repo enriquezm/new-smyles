@@ -15,13 +15,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=block" rel="stylesheet">
 <style>
-  @page { size: letter; margin: 0.6in 0.65in; }
+  @page { size: letter; margin: 0.45in 0.55in; }
   * { box-sizing: border-box; }
   body {
     margin: 0;
     font-family: Geist, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 10pt;
-    line-height: 1.45;
+    font-size: 9.25pt;
+    line-height: 1.38;
     color: #1A1A18;
   }
   a { color: inherit; text-decoration: none; }
@@ -29,9 +29,9 @@
   h1 { margin: 0; font-size: 24pt; font-weight: 500; letter-spacing: -0.02em; line-height: 1.1; }
   .role-title { margin: 3px 0 0; font-size: 11pt; color: #55554F; font-weight: 500; }
   .contact { margin: 0; padding: 0; list-style: none; text-align: right; font-size: 9pt; color: #55554F; line-height: 1.55; }
-  .summary { margin: 14px 0 0; color: #3A3A36; }
+  .summary { margin: 10px 0 0; color: #3A3A36; }
   h2 {
-    margin: 18px 0 8px;
+    margin: 13px 0 6px;
     padding-bottom: 4px;
     border-bottom: 1px solid #E6E6E2;
     font-family: "Geist Mono", ui-monospace, monospace;
@@ -41,15 +41,17 @@
     letter-spacing: 0.06em;
     color: #63635E;
   }
-  .job + .job { margin-top: 12px; }
+  .job + .job { margin-top: 9px; }
   .job-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
   .job-head h3 { margin: 0; font-size: 10.5pt; font-weight: 600; }
   .job-head h3 span { font-weight: 400; color: #55554F; }
   .dates { font-size: 9pt; color: #63635E; white-space: nowrap; }
-  ul.points { margin: 5px 0 0; padding-left: 15px; }
-  ul.points li { margin-top: 2px; padding-left: 2px; }
+  ul.points { margin: 3px 0 0; padding-left: 15px; }
+  ul.points li { margin-top: 2px; padding-left: 2px; break-inside: avoid; }
+  ul.points b { font-weight: 600; }
+  h2, .job-head { break-after: avoid; }
   ul.points li::marker { color: #9A9A94; }
-  .skills { margin: 0; display: grid; grid-template-columns: 105px 1fr; row-gap: 3px; }
+  .skills { margin: 0; display: grid; grid-template-columns: 100px 1fr; row-gap: 1px; }
   .skills dt { color: #63635E; }
   .skills dd { margin: 0; }
 </style>
@@ -58,7 +60,7 @@
   <header>
     <div>
       <h1>Myles Enriquez</h1>
-      <p class="role-title">Design Engineer</p>
+      <p class="role-title">Full Stack Engineer · Design &amp; Frontend</p>
     </div>
     <ul class="contact">
       <li>Las Vegas, NV · Open to remote</li>
@@ -68,10 +70,20 @@
   </header>
 
   <p class="summary">
-    Design engineer working between Figma and production, building TypeScript interfaces, design systems
-    and the tooling that keeps design and code in sync. Seven years shipping UI at Slickdeals. Vue and Nuxt
-    are my primary stack, and I'm comfortable in any component-based framework.
+    Full stack engineer focused on design and frontend, with seven years at Slickdeals shipping UI to millions
+    of shoppers. I build design systems and Vue and Nuxt interfaces, I'm comfortable in any component-based
+    framework, and I'm just as comfortable owning the PHP and Node services, CMS, analytics and infrastructure
+    behind them.
   </p>
+
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Frontend</dt><dd>Vue, Nuxt, TypeScript, JavaScript, SCSS, Tailwind, Storybook</dd>
+    <dt>Design</dt><dd>Figma, design tokens, design systems, prototyping, accessibility</dd>
+    <dt>Backend</dt><dd>PHP, Twig, Node.js, GraphQL, CMS and admin tooling</dd>
+    <dt>Infrastructure</dt><dd>AWS, Helm, Sentry, alarms and monitoring</dd>
+    <dt>Experiments</dt><dd>A/B testing, LaunchDarkly feature flags, Heap and Hotjar analytics</dd>
+  </dl>
 
   <h2>Experience</h2>
 
@@ -81,13 +93,15 @@
       <span class="dates">2024 — Present</span>
     </div>
     <ul class="points">
-      <li>Added a semantic color layer to the design tokens.</li>
-      <li>Built the new Nuxt search page: filters, filter pills, sorting, pagination and the Price Intelligence widget.</li>
-      <li>Built the homefeed UI, including the feed tab bar, sticky feed bar, an in-house pill carousel that replaced a third-party library, and the opt-in flow's popups, toasts and modals.</li>
-      <li>Built real-time deal-score voting and the community voting bar, with skeleton loading states.</li>
-      <li>Built CMS modular page blocks end to end: search results, deal collections, filter suggestions and category circles.</li>
-      <li>Built and ran the A/B tests for the standardized deal card and deal card grid.</li>
-      <li>Built the Giveaways (Daily Draw) experience, including carousels and past winners.</li>
+      <li><b>Search on Nuxt:</b> built the new search page end to end, from the query and data layer to filters, sorting, pagination, the Price Intelligence widget and ad placements.</li>
+      <li><b>CMS modular pages:</b> built them end to end, from the controller, feed interface and CMS feed types to the page blocks and CMS image uploads.</li>
+      <li><b>Homefeed:</b> built the feed UI (tab bar, sticky feed bar, an in-house pill carousel that replaced a third-party library) and dynamic feed routes on web-api, plus a LaunchDarkly-gated opt-in flow with Heap tracking.</li>
+      <li><b>Giveaways (Daily Draw):</b> launched it with admin tooling, then Phase 2 with carousels, past winners and email reminders.</li>
+      <li><b>Auth:</b> built an A/B-tested login and registration flow with magic links, email verification and password reset, then the Unified Auth Form and behavior-driven sign-up nudges.</li>
+      <li><b>Experimentation:</b> built a frontpage experiment framework with holdout groups, then ran tests for the standardized deal card, personalized deals, Comment Summaries, Fire Deals, Deal Spotlight and ads.</li>
+      <li><b>Design system and community:</b> added a semantic color layer to the design tokens, and built real-time deal-score voting and the community voting bar.</li>
+      <li><b>Platform:</b> analytics schema and instrumentation, infrastructure alarms, Sentry cleanup, share-link shortening, sitemap canonical fixes and internal admin tools.</li>
+      <li>Authored about 530 pull requests and reviewed about 820 since code review moved to GitHub in 2024.</li>
     </ul>
   </section>
 
@@ -97,11 +111,12 @@
       <span class="dates">2019 — 2024</span>
     </div>
     <ul class="points">
-      <li>Core contributor to Blueprint, the Slickdeals design system and pattern library, with 2,000+ file changes across its SCSS, Twig and JavaScript.</li>
-      <li>Built Blueprint patterns including the CSS grid deal card, expired-deal variants, product page header and an animated hero banner, and rolled them out to category, store and landing pages.</li>
-      <li>Built Vue components for the vuerango component library with Storybook stories, fixtures and tests.</li>
-      <li>Led the front end of the Loyalty and Cashback program: the cashback page, rewards panel, redemption portal and onboarding flow.</li>
-      <li>Built store pages and coupon tiles with responsive layouts and an accessible verified-coupon logo.</li>
+      <li><b>Blueprint design system:</b> core contributor (2,000+ file changes). Built patterns like the CSS grid deal card and animated hero banner, and rolled them out to category, store and landing pages.</li>
+      <li><b>vuerango component library:</b> built Vue components with Storybook stories, fixtures and tests (about 330 commits), including the login password step, skeleton loaders and deal card slots.</li>
+      <li><b>Loyalty and Cashback:</b> led the front end and worked across its PHP controllers and services: the cashback page and activator, outclick registry, rewards panel, redemption portal and onboarding.</li>
+      <li><b>SMS deal alerts:</b> added the SMS notification type, phone-number checks, a deal alerts management page and a marketing modal for users who aren't subscribed.</li>
+      <li><b>Browser extension:</b> shipped the site side of extension features, including install states, adblock detection and links to the extension web store.</li>
+      <li><b>Legacy modernization:</b> migrated legacy templates to Twig (1,000+ files) and built store pages, coupon tiles, the coupon submission workflow, deal page widgets and comment reactions with emoji animation.</li>
     </ul>
   </section>
 
@@ -111,14 +126,6 @@
       <span class="dates">2017 — 2019</span>
     </div>
   </section>
-
-  <h2>Skills</h2>
-  <dl class="skills">
-    <dt>Design</dt><dd>Figma, design tokens, design systems, Storybook, prototyping</dd>
-    <dt>Frontend</dt><dd>Vue, Nuxt, TypeScript, JavaScript, SCSS, Tailwind</dd>
-    <dt>Backend</dt><dd>Node.js, PHP, Twig, GraphQL, AWS</dd>
-    <dt>Practices</dt><dd>A/B testing and feature flags (LaunchDarkly), accessibility, code review</dd>
-  </dl>
 
   <h2>Education</h2>
   <div class="job-head">
