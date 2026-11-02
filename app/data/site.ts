@@ -576,7 +576,7 @@ export const guestbook: Guestbook = {
 export const lookingFor: LookingFor = {
   headline: 'The role I\'m after.',
   facts: [
-    { label: 'Role', value: 'Software engineer or design engineer' },
+    { label: 'Role', value: 'Design Engineer or Software Engineer' },
     { label: 'Setup', value: 'Remote' },
     { label: 'Start', value: 'Available now' },
   ],
