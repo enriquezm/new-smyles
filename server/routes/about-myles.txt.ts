@@ -44,7 +44,7 @@ function buildPrompt(): string {
 
     `## Experience\n${list(roles.map(r => `${r.title}, ${r.org} (${r.years}). ${r.impact}`))}`,
 
-    `## Education\n${list([`${education.degree}, ${education.school}, ${education.year}`, education.note])}`,
+    `## Education\n${list([`${education.degree}, ${education.school}, ${education.year}`])}`,
 
     `## Skills and tools\n${toolkit.note}\n${list(toolkit.groups.map(g => `${g.name}: ${g.items.join(', ')}`))}`,
 

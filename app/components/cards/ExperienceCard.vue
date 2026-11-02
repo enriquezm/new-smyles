@@ -79,9 +79,6 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
             <p class="text-sm text-ink-3">
               {{ education.school }} · {{ education.year }}
             </p>
-            <p class="mt-2 text-sm leading-normal text-ink-3">
-              {{ education.note }}
-            </p>
           </CardTile>
         </div>
         <PillLink

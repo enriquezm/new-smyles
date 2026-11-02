@@ -71,7 +71,6 @@ export interface Education {
   degree: string
   school: string
   year: string
-  note: string
 }
 
 export interface Metric {
@@ -359,7 +358,6 @@ export const education: Education = {
   degree: 'B.A. Computer & Information Sciences',
   school: 'University of Hawaiʻi at Mānoa',
   year: '2015',
-  note: 'freeCodeCamp Full Stack certification',
 }
 
 // PLACEHOLDER: the whole featured case study, its metrics and links.
