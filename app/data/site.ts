@@ -337,14 +337,14 @@ export const roles: Role[] = [
     org: 'Slickdeals',
     years: '2024 — now',
     current: true,
-    impact: 'Lead the deal page component system across Vue and Node services; cut LCP 32% and mentor three engineers.', // PLACEHOLDER
+    impact: 'Added a semantic color layer to our design tokens and built new Vue and Nuxt UI for search, the homefeed and CMS modular pages. Ran the A/B tests behind the standardized deal card.',
   },
   {
     title: 'Frontend Engineer',
     org: 'Slickdeals',
     years: '2019 — 2024',
     current: false,
-    impact: 'Built 40+ reusable UI components, shipped the redesigned deal feed and moved key pages to TypeScript.', // PLACEHOLDER
+    impact: 'Core contributor to Blueprint, the Slickdeals design system: built its pattern library, from deal cards to page headers, then Vue components with Storybook stories for vuerango.',
   },
   {
     title: 'Web Specialist',
