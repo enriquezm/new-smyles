@@ -14,15 +14,14 @@ const isOpen = (id: CardId) => openId.value === id
     <!--
       Ordered by impact for recruiters, reading from the top left:
         1. Results and track record  (At a glance, Experience, Toolkit)
-        2. Proof from others and fit (Kind words, What I'm looking for)
+        2. Fit                       (What I'm looking for)
         3. Proof of craft            (This site, GitHub)
         4. Personal and contact      (Location, Say hello)
       Desktop rows: [glance 2][experience 1][toolkit 1]
-                    [kind words 2][looking for 2]
-                    [this site 1][github 1][location 2]
-                    [say hello 4]
+                    [looking for 2][this site 1][github 1]
+                    [location 2][say hello 2]
 
-      FeaturedWorkCard, ProjectsCard and GuestbookCard are kept in the
+      FeaturedWorkCard, ProjectsCard, KindWordsCard and GuestbookCard are kept in the
       codebase but not rendered for now. To bring one back, add it here, e.g.
       <FeaturedWorkCard :open="isOpen('featured')" @toggle="toggle" />
       GuestbookCard goes last; it spans the full row on desktop.
@@ -38,10 +37,6 @@ const isOpen = (id: CardId) => openId.value === id
       />
       <ToolkitCard
         :open="isOpen('toolkit')"
-        @toggle="toggle"
-      />
-      <KindWordsCard
-        :open="isOpen('kindWords')"
         @toggle="toggle"
       />
       <LookingForCard
