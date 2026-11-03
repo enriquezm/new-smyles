@@ -585,7 +585,6 @@ export const lookingFor: LookingFor = {
     { label: 'Team', value: 'Product teams where designers and engineers work side by side' },
     { label: 'Work', value: 'Consumer web apps, design systems and frontend platform' },
     { label: 'Time zone', value: 'Pacific Time; happy to overlap with any US time zone' },
-    { label: 'Work authorization', value: 'Add before launch' },
   ],
 }
 
