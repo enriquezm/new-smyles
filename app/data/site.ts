@@ -645,7 +645,7 @@ export const siteStats: SiteStats = {
       text: 'Real buttons and links, 44px targets, full keyboard support and AA contrast in every theme.',
     },
   ],
-  source: { label: 'View the source', href: '#' }, // PLACEHOLDER
+  source: { label: 'View the source', href: 'https://github.com/enriquezm/new-smyles' },
 }
 
 export const footer: Footer = {
