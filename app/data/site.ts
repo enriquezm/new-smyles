@@ -45,6 +45,8 @@ export interface Theme {
 
 export interface Hero {
   headline: string
+  /** Word in `headline` rendered as a link; must appear in it verbatim. */
+  headlineLink: Link
   intro: string
   avatarAlt: string
   avatarMonogram: string
@@ -304,11 +306,12 @@ export const themes: Theme[] = [
 
 export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',
+  headlineLink: { label: 'Slickdeals', href: 'https://slickdeals.net' },
   intro:
     'I work in the space between Figma and production — crafting TypeScript interfaces, design systems, and the tooling that keeps design and code in sync. Vue and Nuxt are my primary stack, and I\'m comfortable in any component-based framework.',
-  avatarAlt: 'Photo of Myles Enriquez',
+  avatarAlt: 'Portrait of Myles Enriquez in glitchy, thermal-camera colors',
   avatarMonogram: 'ME',
-  avatarSrc: null, // PLACEHOLDER
+  avatarSrc: '/avatar.jpg',
   status: 'Available for work',
 }
 

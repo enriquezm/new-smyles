@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { aiPrompt, hero } from '~/data/site'
+
+const [headlineBefore = '', headlineAfter = ''] = hero.headline.split(hero.headlineLink.label)
 </script>
 
 <template>
@@ -24,7 +26,10 @@ import { aiPrompt, hero } from '~/data/site'
     </div>
 
     <h1 class="text-[30px] leading-headline font-medium tracking-headline text-balance sm:text-[44px] lg:max-w-headline lg:text-[56px] 2xl:max-w-none 2xl:text-[44px]">
-      {{ hero.headline }}
+      {{ headlineBefore }}<a
+        :href="hero.headlineLink.href"
+        class="underline decoration-1 underline-offset-[0.12em] transition-colors hover:decoration-accent"
+      >{{ hero.headlineLink.label }}</a>{{ headlineAfter }}
     </h1>
 
     <p class="max-w-intro text-base leading-normal text-ink-3 sm:text-lg lg:text-xl 2xl:text-lg">
