@@ -308,7 +308,7 @@ export const hero: Hero = {
   headline: 'Hi, I\'m Myles Enriquez — a design engineer building at Slickdeals.',
   headlineLink: { label: 'Slickdeals', href: 'https://slickdeals.net' },
   intro:
-    'I work in the space between Figma and production — crafting TypeScript interfaces, design systems, and the tooling that keeps design and code in sync. Vue and Nuxt are my primary stack, and I\'m comfortable in any component-based framework.',
+    'I work in the space between Figma and production — crafting TypeScript interfaces, design systems, and the tooling that keeps design and code in sync. AI agents and workflows are part of how I build every day, from first prototype to shipped code. Vue and Nuxt are my primary stack, and I\'m comfortable in any component-based framework.',
   avatarAlt: 'Portrait of Myles Enriquez in glitchy, thermal-camera colors',
   avatarMonogram: 'ME',
   avatarSrc: '/avatar.jpg',
