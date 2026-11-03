@@ -1,4 +1,5 @@
 import { github, githubStatLabels } from '../../app/data/site'
+import type { H3Event } from 'h3'
 import type { ContributionWeek, GithubLive, HeatLevel, Repo } from '../../app/data/site'
 
 // Prerendered to /github.json by `nuxi generate` (see nitro.prerender in
@@ -71,11 +72,18 @@ const toRepo = (r: ApiRepo): Repo => ({
   href: r.url,
 })
 
-export default defineEventHandler(async (event): Promise<GithubLive | null> => {
+// h3 turns a bare `null` into an empty 204, which fails prerendering, so send
+// a JSON `null` body with a 200 instead. The client parses it back to null.
+const noData = (event: H3Event): string => {
+  setResponseHeader(event, 'Content-Type', 'application/json')
+  return 'null'
+}
+
+export default defineEventHandler(async (event): Promise<GithubLive | string> => {
   const token = useRuntimeConfig(event).githubToken
   if (!token) {
     console.warn('[github.json] NUXT_GITHUB_TOKEN is not set; the GitHub card will show placeholder data.')
-    return null
+    return noData(event)
   }
 
   try {
@@ -124,6 +132,6 @@ export default defineEventHandler(async (event): Promise<GithubLive | null> => {
   }
   catch (error) {
     console.warn('[github.json] GitHub API request failed; using placeholder data.', error)
-    return null
+    return noData(event)
   }
 })
