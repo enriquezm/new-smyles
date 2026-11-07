@@ -280,7 +280,7 @@ export const site: SiteMeta = {
 
 export const resumeHref = '/resume.pdf'
 
-export const navCta: Link = { label: 'Get in touch', href: '#contact' }
+export const navCta: Link = { label: 'Get in touch', href: 'mailto:enri.myles@gmail.com' }
 
 /**
  * A plain-text prompt visitors can paste into an AI assistant to ask about
