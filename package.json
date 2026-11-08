@@ -8,9 +8,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "typecheck": "nuxt typecheck",
+    "typecheck": "nuxt typecheck && tsc -p tests/ui",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "test:ui": "nuxt generate && playwright test"
   },
   "engines": {
     "node": ">=20.19"
@@ -28,6 +29,7 @@
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.17.0",
+    "@playwright/test": "^1.65.0",
     "@types/node": "^24.19.2",
     "eslint": "^10.14.0",
     "typescript": "~6.0.3",

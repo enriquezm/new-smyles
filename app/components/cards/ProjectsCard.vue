@@ -30,6 +30,7 @@ const hiddenCount = computed(() => projects.value.length - latest.value.length)
           <li
             v-for="project in latest"
             :key="project.name"
+            data-project-row
             class="flex items-center justify-between gap-3 border-t border-rule py-2 sm:py-2.5"
           >
             <!-- The summary gives up its space first (basis 0); a long name then truncates before the chip. -->
@@ -37,6 +38,7 @@ const hiddenCount = computed(() => projects.value.length - latest.value.length)
               <span class="flex-none font-mono text-meta text-ink-5">{{ project.num }}</span>
               <span
                 class="min-w-0 truncate text-base font-medium"
+                data-project-name
                 :title="project.name"
               >{{ project.name }}</span>
               <span class="hidden min-w-0 flex-1 basis-0 truncate text-sm text-ink-3 sm:inline">{{ project.summary }}</span>
