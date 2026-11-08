@@ -1,6 +1,6 @@
 # Build: Myles Enriquez personal site
 
-You are building my personal website from a finished design. Read `DESIGN_SPEC.md` first, then `design/Main.dc.html`, which holds the exact markup, inline styles and content. Match the design closely. Don't redesign it.
+You are building my personal website from a finished design. Read `DESIGN_SPEC.md` first; it holds the design tokens, layout and card specs. Match the design closely. Don't redesign it.
 
 ## Stack
 - **Nuxt 4** (the `app/` directory structure) + **Vue 3** with `<script setup lang="ts">` single-file components
@@ -28,7 +28,7 @@ You are building my personal website from a finished design. Read `DESIGN_SPEC.m
 6. **Responsive.** Implement the four breakpoints from the spec with Tailwind's responsive prefixes. Use CSS rather than JS for layout, so there's no hydration flash. On wide screens the hero becomes a sticky 440px left column.
 7. **Interaction.** One card open at a time; the open card spans every column (`col-span-full`). Animate it with `motion-v`'s `layout`, scroll it into view, close it on Escape, move focus to the close button on open and back to the card on close, and honor `prefers-reduced-motion`. Nested controls (UI/Code toggle, step tabs, intro play, links) must not toggle the card (`@click.stop` where needed).
 8. **SEO and meta.** Use `useSeoMeta` for the title, description and Open Graph tags; add a favicon and `lang="en"`.
-9. **Verify.** Run `npm run build`, `npx nuxi typecheck` and `npm run lint` and fix everything. Then check each breakpoint (390, 834, 1440, 1920) with Playwright screenshots, including one card open on desktop and on mobile. Compare them against the design files and list any differences you couldn't resolve.
+9. **Verify.** Run `npm run build`, `npx nuxi typecheck` and `npm run lint` and fix everything. Then check each breakpoint (390, 834, 1440, 1920) with Playwright screenshots, including one card open on desktop and on mobile. Compare them against `DESIGN_SPEC.md` and list any differences you couldn't resolve.
 
 ## Rules
 - Use the Composition API only. No Options API, no `any`, and type props and emits with `defineProps<…>()` / `defineEmits<…>()`.

@@ -1,17 +1,6 @@
 # Personal site — design spec
 
-Source of truth: `design/Main.dc.html`. It is one responsive component whose layout switches on a `layout` value (`mobile | tablet | desktop | wide`). The other `design/*.dc.html` files only render Main at a fixed breakpoint, or with one card open:
-
-| File | Shows |
-|---|---|
-| `Main.dc.html` | Desktop at 1440 (switches layout automatically when resized) |
-| `Wide.dc.html` | 1920 |
-| `Tablet.dc.html` | 834 |
-| `Mobile.dc.html` | 390 |
-| `DesktopExpanded.dc.html` | Desktop with the Experience card open |
-| `MobileExpanded.dc.html` | Mobile with the Featured work card open |
-
-All styling is inline in the markup. All list content (roles, projects, repos, steps, metrics) is in the `renderVals()` script at the bottom of `Main.dc.html`. `{{hole}}` values come from that script. `<sc-if>` / `<sc-for>` are conditionals and loops.
+Source of truth: the built site. Tokens live in `app/assets/css/main.css` and all content lives in `app/data/site.ts`. The layout switches across four breakpoints (`mobile | tablet | desktop | wide`).
 
 ## Design tokens
 
@@ -88,7 +77,7 @@ Column spans are listed as mobile / tablet / desktop / wide.
 - **Expand**: clicking anywhere on a collapsed card opens it. The card spans the full row (`grid-column: 1 / -1`), its height grows to fit, and the border and shadow strengthen. Only one card is open at a time. A 44px × button closes it. Build the click target as a real `<button>` (an `aria-label` like "Expand Experience", plus `aria-expanded`), never a click handler on a div.
 - **Nested controls** (preview toggle, step tabs, intro play, contact links) work without opening the card and must not trigger it.
 - **Hover**: collapsed cards lift 3px, the shadow deepens and the corner expand icon darkens.
-- **Production improvements beyond the mock**: animate the open/close (FLIP layout animation), scroll the opened card into view, close on Escape, move focus to the close button on open and back to the card on close, respect `prefers-reduced-motion`.
+- **Production improvements**: animate the open/close (FLIP layout animation), scroll the opened card into view, close on Escape, move focus to the close button on open and back to the card on close, respect `prefers-reduced-motion`.
 
 ## Content
 
