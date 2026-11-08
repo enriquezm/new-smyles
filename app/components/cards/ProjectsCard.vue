@@ -6,13 +6,15 @@ defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
 
 const projects = await useProjects()
+// The collapsed card fits three rows; the open card lists every project.
+const latest = computed(() => projects.value.slice(0, 3))
 </script>
 
 <template>
   <ExpandableCard
     id="projects"
     :title="cards.projects.title"
-    :span="{ base: 2, sm: 2, lg: 2 }"
+    :span="{ base: 2, sm: 2, lg: 4 }"
     body-class="gap-3.5"
     :open="open"
     @toggle="emit('toggle', $event)"
@@ -24,7 +26,7 @@ const projects = await useProjects()
     <template #collapsed>
       <ul class="mt-auto flex flex-col">
         <li
-          v-for="project in projects"
+          v-for="project in latest"
           :key="project.name"
           class="flex items-center justify-between gap-3 border-t border-rule py-3"
         >
