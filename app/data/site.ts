@@ -124,7 +124,6 @@ export interface Location {
 
 export interface Repo {
   name: string
-  description: string
   /** GitHub's primary language for the repo; null when it has none. */
   language: string | null
   stars: number
@@ -153,7 +152,7 @@ export interface Github {
   repos: Repo[]
   /**
    * Repo names always listed first in the card, before pinned or top-starred
-   * repos. Their entries in `repos` supply a description when GitHub has none.
+   * repos.
    */
   featuredRepos: string[]
   profile: Link
@@ -174,6 +173,9 @@ export interface Project {
   repo?: string
   status: string
   statusTone: ProjectStatusTone
+  /** One short line, shown under the name in the collapsed card. */
+  summary: string
+  /** Longer text for the open card. */
   description: string
   tags: string[]
   href: string
@@ -334,7 +336,7 @@ export const cards: Record<CardId, CardMeta> = {
   toolkit: { label: 'Toolkit', title: 'Toolkit' },
   location: { label: 'Based in', title: 'Location' },
   github: { label: 'GitHub', title: 'GitHub activity' },
-  projects: { label: 'Now building', title: 'Now building' },
+  projects: { label: 'Currently working on', title: 'Currently working on' },
   contact: { label: 'Say hello', title: 'Say hello' },
   glance: { label: 'At a glance', title: 'At a glance' },
   guestbook: { label: 'Guestbook', title: 'Guestbook' },
@@ -481,7 +483,6 @@ export const github: Github = {
   repos: [
     {
       name: 'site-text-bot',
-      description: 'Text a change to a phone number; Claude Code edits this site and deploys it',
       language: 'TypeScript',
       stars: 0,
       href: 'https://github.com/enriquezm/site-text-bot',
@@ -496,9 +497,20 @@ export const projects: Project[] = [
     repo: 'enriquezm/site-text-bot',
     status: 'In progress',
     statusTone: 'accent',
+    summary: 'Edit and deploy this site by text message.',
     description: 'Text a change to a phone number and Claude Code edits this site, texts back a preview link, and deploys when you reply "ship it".',
     tags: ['TypeScript', 'Claude Agent SDK', 'Twilio'],
     href: 'https://github.com/enriquezm/site-text-bot',
+  },
+  {
+    name: 'Dungeon Map Builder',
+    repo: 'enriquezm/dungeon-map-builder',
+    status: 'In progress',
+    statusTone: 'accent',
+    summary: 'Grid-based floor plans for Roblox dungeons.',
+    description: 'A browser tool for laying out rooms and hallways on a grid, used to plan Roblox dungeon levels before building them in 3D.',
+    tags: ['TypeScript', 'HTML Canvas', 'Vite'],
+    href: 'https://github.com/enriquezm/dungeon-map-builder',
   },
 ]
 

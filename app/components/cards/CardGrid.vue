@@ -15,11 +15,11 @@ const isOpen = (id: CardId) => openId.value === id
       Ordered by impact for recruiters, reading from the top left:
         1. Results and track record  (At a glance, Experience, Toolkit)
         2. Fit                       (What I'm looking for)
-        3. Proof of craft            (This site, GitHub, Now building)
+        3. Proof of craft            (This site, GitHub, Currently working on)
         4. Personal and contact      (Location, Say hello)
       Desktop rows: [glance 2][experience 1][toolkit 1]
                     [looking for 2][this site 1][github 1]
-                    [now building 4]
+                    [currently working on 4]
                     [location 2][say hello 2]
 
       FeaturedWorkCard, KindWordsCard and GuestbookCard are kept in the

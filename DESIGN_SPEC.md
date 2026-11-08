@@ -69,7 +69,7 @@ Column spans are listed as mobile / tablet / desktop / wide.
 | 4 | Location | 1/1/1/1 | Stylized street-grid SVG, accent pin, label card "Las Vegas" plus live PT time | Same, with an availability / time-zone sentence |
 | 5 | GitHub | 1/1/1/1 | "1,284 contributions in the last year" plus a heatmap of recent weeks (10/26/19/20) | Full 52-week heatmap (scrolls sideways), 3 stats, pinned repos |
 | 6 | How I work | 2/2/2/2 | Selected step (number, title, description) plus a **step tab bar** | All 4 steps as tiles |
-| 7 | Now building | 2/2/2/2 | 3 rows: number, name, status chip | Tiles with description, tags, "View on GitHub" |
+| 7 | Currently working on | 2/2/2/4 | 2 most recently pushed: number, name, one-line summary, status chip | Tiles with description, tags, "View on GitHub" |
 | 8 | Contact (dark) | 2/2/2/2 | Headline plus Email (accent), LinkedIn, GitHub, Résumé buttons | Adds "Open to" chips and contact details |
 
 ## Interaction

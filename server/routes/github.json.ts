@@ -11,7 +11,6 @@ type ContributionLevel = 'NONE' | 'FIRST_QUARTILE' | 'SECOND_QUARTILE' | 'THIRD_
 
 interface ApiRepo {
   name: string
-  description: string | null
   url: string
   stargazerCount: number
   primaryLanguage: { name: string } | null
@@ -39,7 +38,7 @@ interface ApiResponse {
   errors?: { message: string }[]
 }
 
-const REPO_FIELDS = 'name description url stargazerCount primaryLanguage { name }'
+const REPO_FIELDS = 'name url stargazerCount primaryLanguage { name }'
 
 // Featured repos are fetched by name with aliases (featured0, featured1, …).
 const featuredQuery = github.featuredRepos
@@ -72,7 +71,6 @@ const levels: Record<ContributionLevel, HeatLevel> = {
 
 const toRepo = (r: ApiRepo): Repo => ({
   name: r.name,
-  description: r.description ?? '',
   language: r.primaryLanguage?.name ?? null,
   stars: r.stargazerCount,
   href: r.url,
@@ -123,11 +121,9 @@ export default defineEventHandler(async (event): Promise<GithubLive | string> =>
     const bestDay = Math.max(0, ...days.map(d => d.contributionCount))
 
     // Featured repos first, then pinned (or top-starred), three in all.
-    const featured = github.featuredRepos.flatMap((name, i) => {
+    const featured = github.featuredRepos.flatMap((_, i) => {
       const repo = res.data?.[`featured${i}`]
-      if (!repo) return []
-      const fallback = github.repos.find(r => r.name === name)
-      return [{ ...toRepo(repo), description: repo.description ?? fallback?.description ?? '' }]
+      return repo ? [toRepo(repo)] : []
     })
     const pinned = user.pinnedItems.nodes.filter(r => 'name' in r)
     const rest = (pinned.length ? pinned : user.repositories.nodes)

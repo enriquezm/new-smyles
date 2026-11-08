@@ -88,7 +88,7 @@ const languageDot: Record<string, string> = {
                 class="flex min-h-[52px] flex-wrap items-center gap-3.5 border-t border-rule py-2 text-ink"
               >
                 <span class="font-mono text-sm font-medium">{{ repo.name }}</span>
-                <span class="min-w-0 flex-[1_1_200px] text-sm text-ink-3">{{ repo.description }}</span>
+                <span class="flex-1" />
                 <span
                   v-if="repo.language"
                   class="inline-flex items-center gap-1.5 text-[13px] text-ink-3"
