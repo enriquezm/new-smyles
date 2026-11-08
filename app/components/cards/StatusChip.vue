@@ -7,6 +7,7 @@ const tones: Record<ProjectStatusTone, string> = {
   accent: 'bg-accent-tint text-ink',
   info: 'bg-info-bg text-info-fg',
   neutral: 'bg-chip text-ink-3',
+  success: 'bg-success-bg text-success-fg',
 }
 </script>
 

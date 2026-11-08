@@ -56,6 +56,8 @@
   /* Status chips (Currently working on) */
   --color-info-bg: #E3E9F5;
   --color-info-fg: #24406E;
+  --color-success-bg: #E4F5C4;
+  --color-success-fg: #3A5A0A;
 
   /* Contact card (dark) */
   --color-contact-bg: #1A1A18;
@@ -164,6 +166,8 @@
 
   --color-info-bg: #1E2A3D;
   --color-info-fg: #A9C4F0;
+  --color-success-bg: #26331A;
+  --color-success-fg: #C5EB7F;
 
   --color-contact-bg: #0A0A09;
   --color-contact-tile: #181816;
@@ -214,6 +218,8 @@
 
   --color-info-bg: #FFFFE1;
   --color-info-fg: #000000;
+  --color-success-bg: #CCFF99;
+  --color-success-fg: #000000;
 
   /* The dark card becomes an MS-DOS Prompt window. */
   --color-contact-bg: #000000;

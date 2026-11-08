@@ -161,7 +161,7 @@ export interface Github {
 /** The parts of the GitHub card that /github.json fills in from the API. */
 export type GithubLive = Pick<Github, 'contributions' | 'weeks' | 'stats' | 'repos'>
 
-export type ProjectStatusTone = 'accent' | 'info' | 'neutral'
+export type ProjectStatusTone = 'accent' | 'info' | 'neutral' | 'success'
 
 export interface Project {
   name: string
@@ -505,8 +505,8 @@ export const projects: Project[] = [
   {
     name: 'Dungeon Map Builder',
     repo: 'enriquezm/dungeon-map-builder',
-    status: 'In progress',
-    statusTone: 'accent',
+    status: 'Finished',
+    statusTone: 'success',
     summary: 'Grid-based floor plans for Roblox dungeons.',
     description: 'A browser tool for laying out rooms and hallways on a grid, used to plan Roblox dungeon levels before building them in 3D.',
     tags: ['TypeScript', 'HTML Canvas', 'Vite'],
