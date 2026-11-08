@@ -500,30 +500,6 @@ export const github: Github = {
 
 export const projects: Project[] = [
   {
-    name: 'Job Search CLI',
-    status: 'In progress',
-    statusTone: 'accent',
-    description: 'A terminal tool that finds roles, tailors a resume from a YAML experience file plus the posting, and helps apply.',
-    tags: ['TypeScript', 'Zod', 'Node.js'],
-    href: '#', // PLACEHOLDER
-  },
-  {
-    name: 'Figma → code MCP server',
-    status: 'Exploring',
-    statusTone: 'info',
-    description: 'An MCP server that reads Figma components and variables and generates typed, token-aware Vue components.', // PLACEHOLDER
-    tags: ['TypeScript', 'Figma API', 'MCP'], // PLACEHOLDER
-    href: '#', // PLACEHOLDER
-  },
-  {
-    name: 'Dream Collector',
-    status: 'Concept',
-    statusTone: 'neutral',
-    description: 'A Roblox game about stepping into dreams and collecting what you find there.',
-    tags: ['Luau', 'Roblox Studio'],
-    href: '#', // PLACEHOLDER
-  },
-  {
     name: 'Site Text Bot',
     repo: 'enriquezm/site-text-bot',
     status: 'In progress',
