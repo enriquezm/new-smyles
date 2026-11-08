@@ -35,13 +35,19 @@ interface ApiResponse {
       pinnedItems: { nodes: ApiRepo[] }
       repositories: { nodes: ApiRepo[] }
     } | null
-  }
+  } & Record<`featured${number}`, ApiRepo | null>
   errors?: { message: string }[]
 }
 
 const REPO_FIELDS = 'name description url stargazerCount primaryLanguage { name }'
 
+// Featured repos are fetched by name with aliases (featured0, featured1, …).
+const featuredQuery = github.featuredRepos
+  .map((name, i) => `featured${i}: repository(owner: $login, name: ${JSON.stringify(name)}) { ${REPO_FIELDS} }`)
+  .join('\n  ')
+
 const query = `query ($login: String!) {
+  ${featuredQuery}
   user(login: $login) {
     contributionsCollection {
       contributionCalendar {
@@ -116,8 +122,18 @@ export default defineEventHandler(async (event): Promise<GithubLive | string> =>
     const activeDays = days.filter(d => d.contributionCount > 0).length
     const bestDay = Math.max(0, ...days.map(d => d.contributionCount))
 
+    // Featured repos first, then pinned (or top-starred), three in all.
+    const featured = github.featuredRepos.flatMap((name, i) => {
+      const repo = res.data?.[`featured${i}`]
+      if (!repo) return []
+      const fallback = github.repos.find(r => r.name === name)
+      return [{ ...toRepo(repo), description: repo.description ?? fallback?.description ?? '' }]
+    })
     const pinned = user.pinnedItems.nodes.filter(r => 'name' in r)
-    const repos = (pinned.length ? pinned : user.repositories.nodes).map(toRepo)
+    const rest = (pinned.length ? pinned : user.repositories.nodes)
+      .map(toRepo)
+      .filter(r => !featured.some(f => f.name === r.name))
+    const repos = [...featured, ...rest].slice(0, 3)
 
     return {
       contributions: calendar.totalContributions,

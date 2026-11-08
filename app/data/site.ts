@@ -151,6 +151,11 @@ export interface Github {
   weeks: ContributionWeek[]
   stats: GithubStat[]
   repos: Repo[]
+  /**
+   * Repo names always listed first in the card, before pinned or top-starred
+   * repos. Their entries in `repos` supply a description when GitHub has none.
+   */
+  featuredRepos: string[]
   profile: Link
 }
 
@@ -471,28 +476,15 @@ export const github: Github = {
     { label: githubStatLabels.streak, value: '11 days' },
     { label: githubStatLabels.bestDay, value: '42' },
   ],
-  // PLACEHOLDER (fallback)
+  featuredRepos: ['site-text-bot'],
+  // Fallback when the API is unavailable. Live data replaces language and stars.
   repos: [
     {
-      name: 'deal-card-kit',
-      description: 'Typed Vue component kit with tokens and Storybook docs',
-      language: 'Vue',
-      stars: 128,
-      href: '#',
-    },
-    {
-      name: 'figma-tokens-sync',
-      description: 'Syncs Figma variables to CSS and TypeScript tokens',
+      name: 'site-text-bot',
+      description: 'Text a change to a phone number; Claude Code edits this site and deploys it',
       language: 'TypeScript',
-      stars: 86,
-      href: '#',
-    },
-    {
-      name: 'job-cli',
-      description: 'Find roles and tailor resumes from the terminal',
-      language: 'TypeScript',
-      stars: 23,
-      href: '#',
+      stars: 0,
+      href: 'https://github.com/enriquezm/site-text-bot',
     },
   ],
   profile: { label: 'GitHub', href: 'https://github.com/enriquezm' },
