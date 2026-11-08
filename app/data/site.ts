@@ -184,6 +184,30 @@ export interface Project {
 /** /projects.json: repo (`owner/name`) → ISO date of its latest default-branch commit. */
 export type ProjectActivity = Record<string, string>
 
+/**
+ * Kinds of markdown post in content/posts/. Every post shares PostLayout; the
+ * type sets its badge, its status chip in the "Currently working on" card and
+ * the note shown above the body. Add a key here to add a type.
+ */
+export type PostType = 'concept'
+
+export interface PostTypeMeta {
+  /** Badge above the post title, e.g. "Concept". */
+  label: string
+  status: string
+  statusTone: ProjectStatusTone
+  /** Link text in the open "Currently working on" card. */
+  linkLabel: string
+  /** Short note shown above the post body. */
+  note: string
+}
+
+export interface PostPage {
+  backLabel: string
+  publishedLabel: string
+  updatedLabel: string
+}
+
 export interface ContactLink extends Link {
   kind: 'email' | 'linkedin' | 'github' | 'resume'
   /** Shown in the expanded card's "Reach me" tile; omitted when empty. */
@@ -513,6 +537,25 @@ export const projects: Project[] = [
     href: 'https://github.com/enriquezm/dungeon-map-builder',
   },
 ]
+
+/** Link text for projects in the open "Currently working on" card. */
+export const projectLinkLabel = 'View on GitHub'
+
+export const postTypes: Record<PostType, PostTypeMeta> = {
+  concept: {
+    label: 'Concept',
+    status: 'Concept',
+    statusTone: 'info',
+    linkLabel: 'Read the concept',
+    note: 'This is a concept: an idea I\'m still playing with. Nothing is built yet, so all of it may change.',
+  },
+}
+
+export const postPage: PostPage = {
+  backLabel: 'Back to home',
+  publishedLabel: 'Posted',
+  updatedLabel: 'Updated',
+}
 
 export const contact: Contact = {
   headline: 'Need design and code in the same head? Let\'s talk.',

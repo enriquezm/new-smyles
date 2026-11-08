@@ -1,7 +1,8 @@
+import { readdir } from 'node:fs/promises'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/fonts', 'motion-v/nuxt'],
+  modules: ['@nuxt/eslint', '@nuxt/fonts', 'motion-v/nuxt', '@nuxt/content'],
 
   components: [{ path: '~/components', pathPrefix: false }],
   devtools: { enabled: true },
@@ -14,6 +15,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  content: {
+    // Node 22.5+ ships node:sqlite, so the build needs no native sqlite package.
+    experimental: { sqliteConnector: 'native' },
+  },
 
   runtimeConfig: {
     // Server-only, set with NUXT_GITHUB_TOKEN in .env or the host's env vars.
@@ -38,6 +44,16 @@ export default defineNuxtConfig({
   typescript: {
     strict: true,
     typeCheck: false,
+  },
+
+  hooks: {
+    // Post links only render inside the open "Currently working on" card, so the
+    // prerender crawler can't find them. Add every content/posts/*.md explicitly.
+    async 'prerender:routes'(ctx) {
+      for (const file of await readdir('content/posts')) {
+        if (file.endsWith('.md')) ctx.routes.add(`/posts/${file.slice(0, -3)}`)
+      }
+    },
   },
 
   eslint: {

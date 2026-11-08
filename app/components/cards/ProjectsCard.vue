@@ -66,12 +66,15 @@ const latest = computed(() => projects.value.slice(0, 2))
             <p class="font-mono text-meta text-ink-4">
               {{ project.tags.join(' · ') }}
             </p>
-            <a
-              :href="project.href"
+            <NuxtLink
+              :to="project.href"
               class="inline-flex min-h-11 items-center gap-1.5 self-start text-sm font-medium text-ink underline underline-offset-[3px]"
             >
-              View on GitHub<IconArrowUpRight />
-            </a>
+              {{ project.linkLabel }}<IconArrowUpRight v-if="project.href.startsWith('http')" /><IconChevronRight
+                v-else
+                :size="13"
+              />
+            </NuxtLink>
           </CardTile>
         </li>
       </ul>
