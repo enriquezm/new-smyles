@@ -30,7 +30,7 @@ All styling is inline in the markup. All list content (roles, projects, repos, s
 | `ink-4` | `#63635E` | Meta / mono labels |
 | `ink-5` | `#6E6E68` | Tertiary mono (numbers) |
 | `ink-muted-lg` | `#85857F` | Large gray headline text only |
-| `accent` | `#F2541B` | Avatar, pin, chart fills, primary CTA on dark. Alternatives: `#2B59FF`, `#12A150` |
+| `accent` | `#F0479E` (dark theme: `#F25AA8`) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink`. Alternatives: `#2B59FF`, `#12A150` |
 | `accent-soft` | accent at 20% alpha | Map halo, chart areas |
 | `success` | `#2F9E44` | "Available for work" dot |
 | Contact card (dark) | bg `#1A1A18`, tiles `#252522`, pill `#2C2C29`, border `#3D3D39`, text `#F4F4F0`, muted `#B4B4AE` | |
