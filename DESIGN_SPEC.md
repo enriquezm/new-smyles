@@ -22,6 +22,8 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `accent` | `#F0479E` (dark theme: `#F25AA8`) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink`. Alternatives: `#2B59FF`, `#12A150` |
 | `accent-soft` | accent at 20% alpha | Map halo, chart areas |
 | `success` | `#2F9E44` | "Available for work" dot |
+| `info-bg` / `info-fg` | `#E3E9F5` / `#24406E` (dark: `#1E2A3D` / `#A9C4F0`; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring") |
+| `success-bg` / `success-fg` | `#E4F5C4` / `#3A5A0A` (dark: `#26331A` / `#C5EB7F`; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
 | Contact card (dark) | bg `#1A1A18`, tiles `#252522`, pill `#2C2C29`, border `#3D3D39`, text `#F4F4F0`, muted `#B4B4AE` | |
 
 All text pairs meet WCAG AA contrast. Keep it that way.
@@ -83,5 +85,5 @@ Column spans are listed as mobile / tablet / desktop / wide.
 
 The content is a mix of real and **placeholder sample** text. Keep it all in one typed content file (`app/data/site.ts`) so it can be edited without touching components.
 
-- **Real**: name; Slickdeals roles and dates (Frontend Engineer 2019–2024, Senior Full Stack Engineer 2024–now); UNLV Web Specialist 2017–2019; B.A. Computer & Information Sciences, University of Hawaiʻi at Mānoa, 2015; freeCodeCamp Full Stack certification; Las Vegas; Vue / TypeScript; the Job Search CLI and Dream Collector projects.
+- **Real**: name; Slickdeals roles and dates (Frontend Engineer 2019–2024, Senior Full Stack Engineer 2024–now); UNLV Web Specialist 2017–2019; B.A. Computer & Information Sciences, University of Hawaiʻi at Mānoa, 2015; freeCodeCamp Full Stack certification; Las Vegas; Vue / TypeScript; the Site Text Bot and Dungeon Map Builder projects.
 - **Placeholder (replace before launch)**: role impact lines, the featured case study and its metrics, GitHub numbers, heatmap and repos, extra toolkit items, the remote-work line, the email and social handles, the intro audio, the avatar photo.
