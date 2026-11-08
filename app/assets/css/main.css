@@ -58,6 +58,8 @@
   --color-info-fg: #24406E;
   --color-success-bg: #E4F5C4;
   --color-success-fg: #3A5A0A;
+  --color-idea-bg: #E4D0FF;
+  --color-idea-fg: #6D28D9;
 
   /* Contact card (dark) */
   --color-contact-bg: #1A1A18;
@@ -244,6 +246,8 @@
   --color-info-fg: #A9C4F0;
   --color-success-bg: #26331A;
   --color-success-fg: #C5EB7F;
+  --color-idea-bg: #34195C;
+  --color-idea-fg: #C9A2FF;
 
   --color-contact-bg: #0A0A09;
   --color-contact-tile: #181816;
@@ -296,6 +300,8 @@
   --color-info-fg: #000000;
   --color-success-bg: #CCFF99;
   --color-success-fg: #000000;
+  --color-idea-bg: #E0C0FF;
+  --color-idea-fg: #000000;
 
   /* The dark card becomes an MS-DOS Prompt window. */
   --color-contact-bg: #000000;

@@ -55,7 +55,7 @@ const formatDate = (iso: string) => format.format(new Date(iso))
       </ul>
     </header>
 
-    <p class="rounded-tile bg-info-bg px-4 py-3 text-sm leading-normal text-info-fg">
+    <p class="rounded-tile bg-idea-bg px-4 py-3 text-sm leading-normal text-idea-fg">
       {{ meta.note }}
     </p>
 

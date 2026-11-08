@@ -161,7 +161,7 @@ export interface Github {
 /** The parts of the GitHub card that /github.json fills in from the API. */
 export type GithubLive = Pick<Github, 'contributions' | 'weeks' | 'stats' | 'repos'>
 
-export type ProjectStatusTone = 'accent' | 'info' | 'neutral' | 'success'
+export type ProjectStatusTone = 'accent' | 'idea' | 'info' | 'neutral' | 'success'
 
 export interface Project {
   name: string
@@ -541,11 +541,18 @@ export const projects: Project[] = [
 /** Link text for projects in the open "Currently working on" card. */
 export const projectLinkLabel = 'View on GitHub'
 
+/** Rows shown in the collapsed "Currently working on" card. */
+export const projectsCollapsedLimit = 3
+
+/** Note under the collapsed card's rows when some items are hidden. */
+export const projectsMoreNote = (count: number) =>
+  `+${count} more. Open the card to see ${count === 1 ? 'it' : 'them all'}.`
+
 export const postTypes: Record<PostType, PostTypeMeta> = {
   concept: {
     label: 'Concept',
     status: 'Concept',
-    statusTone: 'info',
+    statusTone: 'idea',
     linkLabel: 'Read the concept',
     note: 'This is a concept: an idea I\'m still playing with. Nothing is built yet, so all of it may change.',
   },

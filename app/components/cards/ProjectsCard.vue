@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { cards } from '~/data/site'
+import { cards, projectsCollapsedLimit, projectsMoreNote } from '~/data/site'
 import type { CardId } from '~/data/site'
 
 defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
 
 const projects = await useProjects()
-// The collapsed card fits two rows with summaries; the open card lists every project.
-const latest = computed(() => projects.value.slice(0, 2))
+// The collapsed card shows the newest few, one line each; the open card lists everything.
+const latest = computed(() => projects.value.slice(0, projectsCollapsedLimit))
+const hiddenCount = computed(() => projects.value.length - latest.value.length)
 </script>
 
 <template>
@@ -24,24 +25,30 @@ const latest = computed(() => projects.value.slice(0, 2))
     </template>
 
     <template #collapsed>
-      <ul class="mt-auto flex flex-col">
-        <li
-          v-for="project in latest"
-          :key="project.name"
-          class="flex items-center justify-between gap-3 border-t border-rule py-3"
-        >
-          <div class="flex min-w-0 items-baseline gap-3">
-            <span class="font-mono text-meta text-ink-5">{{ project.num }}</span>
-            <div class="flex min-w-0 flex-col gap-0.5">
-              <span class="truncate text-base font-medium">{{ project.name }}</span>
-              <span class="text-sm leading-snug text-ink-3">{{ project.summary }}</span>
+      <div class="mt-auto flex flex-col">
+        <ul class="flex flex-col">
+          <li
+            v-for="project in latest"
+            :key="project.name"
+            class="flex items-center justify-between gap-3 border-t border-rule py-2 sm:py-2.5"
+          >
+            <div class="flex min-w-0 items-baseline gap-3">
+              <span class="font-mono text-meta text-ink-5">{{ project.num }}</span>
+              <span class="flex-none text-base font-medium">{{ project.name }}</span>
+              <span class="hidden truncate text-sm text-ink-3 sm:inline">{{ project.summary }}</span>
             </div>
-          </div>
-          <StatusChip :tone="project.statusTone">
-            {{ project.status }}
-          </StatusChip>
-        </li>
-      </ul>
+            <StatusChip :tone="project.statusTone">
+              {{ project.status }}
+            </StatusChip>
+          </li>
+        </ul>
+        <p
+          v-if="hiddenCount > 0"
+          class="border-t border-rule pt-2.5 font-mono text-meta text-ink-4"
+        >
+          {{ projectsMoreNote(hiddenCount) }}
+        </p>
+      </div>
     </template>
 
     <template #expanded>

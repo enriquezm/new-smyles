@@ -24,6 +24,7 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `success` | `#2F9E44` | "Available for work" dot |
 | `info-bg` / `info-fg` | `#E3E9F5` / `#24406E` (dark: `#1E2A3D` / `#A9C4F0`; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring") |
 | `success-bg` / `success-fg` | `#E4F5C4` / `#3A5A0A` (dark: `#26331A` / `#C5EB7F`; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
+| `idea-bg` / `idea-fg` | `#E4D0FF` / `#6D28D9` (dark: `#34195C` / `#C9A2FF`; retro: `#E0C0FF` / `#000000`) | Purple status chip ("Concept") and the concept note on posts |
 | Contact card (dark) | bg `#1A1A18`, tiles `#252522`, pill `#2C2C29`, border `#3D3D39`, text `#F4F4F0`, muted `#B4B4AE` | |
 
 All text pairs meet WCAG AA contrast. Keep it that way.
@@ -71,7 +72,7 @@ Column spans are listed as mobile / tablet / desktop / wide.
 | 4 | Location | 1/1/1/1 | Stylized street-grid SVG, accent pin, label card "Las Vegas" plus live PT time | Same, with an availability / time-zone sentence |
 | 5 | GitHub | 1/1/1/1 | "1,284 contributions in the last year" plus a heatmap of recent weeks (10/26/19/20) | Full 52-week heatmap (scrolls sideways), 3 stats, pinned repos |
 | 6 | How I work | 2/2/2/2 | Selected step (number, title, description) plus a **step tab bar** | All 4 steps as tiles |
-| 7 | Currently working on | 2/2/2/4 | 2 most recently pushed: number, name, one-line summary, status chip | Tiles with description, tags, "View on GitHub" |
+| 7 | Currently working on | 2/2/2/4 | Up to 3 newest items (projects and posts): number, name, one-line summary on the same line (hidden on mobile), status chip; a mono "+N more" note when more exist | Tiles with description, tags, "View on GitHub" |
 | 8 | Contact (dark) | 2/2/2/2 | Headline plus Email (accent), LinkedIn, GitHub, Résumé buttons | Adds "Open to" chips and contact details |
 
 ## Interaction
