@@ -4,7 +4,11 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/fonts', 'motion-v/nuxt', '@nuxt/content'],
 
-  components: [{ path: '~/components', pathPrefix: false }],
+  components: [
+    // Prose overrides for markdown posts; @nuxt/content needs them registered globally.
+    { path: '~/components/content', global: true, pathPrefix: false },
+    { path: '~/components', pathPrefix: false },
+  ],
   devtools: { enabled: true },
 
   app: {

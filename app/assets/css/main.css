@@ -86,6 +86,11 @@
   --color-lang-javascript: #F1E05A;
   --color-lang-php: #4F5D95;
 
+  /* Hex swatches in posts (ProseCode): fixed black/white text in every theme, and an edge that follows ink */
+  --color-swatch-on-light: #000000;
+  --color-swatch-on-dark: #FFFFFF;
+  --color-swatch-edge: color-mix(in srgb, var(--color-ink) 18%, transparent);
+
   /* Radius */
   --radius-mini: 6px;
   --radius-chip: 8px;
@@ -200,6 +205,31 @@
 
       & code { background: none; padding: 0; }
     }
+
+    /* Tables scroll sideways on narrow screens instead of widening the page. */
+    & table {
+      display: block;
+      max-width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    & th, & td {
+      border-bottom: 1px solid var(--color-rule);
+      padding: 8px 16px 8px 0;
+      text-align: left;
+      vertical-align: top;
+      white-space: nowrap;
+    }
+
+    & th {
+      color: var(--color-ink);
+      font-weight: 500;
+    }
+
+    & td:last-child { white-space: normal; }
 
     & hr {
       margin: 2em 0;

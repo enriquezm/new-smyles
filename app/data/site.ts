@@ -191,7 +191,7 @@ export type ProjectActivity = Record<string, string>
  * type sets its badge, its status chip in the "Currently working on" card and
  * the note shown above the body. Add a key here to add a type.
  */
-export type PostType = 'concept'
+export type PostType = 'concept' | 'notes'
 
 export interface PostTypeMeta {
   /** Badge above the post title, e.g. "Concept". */
@@ -558,6 +558,13 @@ export const postTypes: Record<PostType, PostTypeMeta> = {
     statusTone: 'idea',
     linkLabel: 'Read the concept',
     note: 'This is a concept: an idea I\'m still playing with. Nothing is built yet, so all of it may change.',
+  },
+  notes: {
+    label: 'Build notes',
+    status: 'In progress',
+    statusTone: 'accent',
+    linkLabel: 'Read the notes',
+    note: 'These are notes on something I\'m actively building. It\'s live on this site, so details will keep changing.',
   },
 }
 
