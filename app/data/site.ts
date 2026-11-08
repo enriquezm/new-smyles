@@ -160,14 +160,22 @@ export type GithubLive = Pick<Github, 'contributions' | 'weeks' | 'stats' | 'rep
 export type ProjectStatusTone = 'accent' | 'info' | 'neutral'
 
 export interface Project {
-  num: string
   name: string
+  /**
+   * GitHub `owner/name`. Projects with a repo are listed by their latest commit
+   * on the default branch (newest first, fetched at build time); the rest
+   * follow in the order written here.
+   */
+  repo?: string
   status: string
   statusTone: ProjectStatusTone
   description: string
   tags: string[]
   href: string
 }
+
+/** /projects.json: repo (`owner/name`) → ISO date of its latest default-branch commit. */
+export type ProjectActivity = Record<string, string>
 
 export interface ContactLink extends Link {
   kind: 'email' | 'linkedin' | 'github' | 'resume'
@@ -492,7 +500,6 @@ export const github: Github = {
 
 export const projects: Project[] = [
   {
-    num: '01',
     name: 'Job Search CLI',
     status: 'In progress',
     statusTone: 'accent',
@@ -501,7 +508,6 @@ export const projects: Project[] = [
     href: '#', // PLACEHOLDER
   },
   {
-    num: '02',
     name: 'Figma → code MCP server',
     status: 'Exploring',
     statusTone: 'info',
@@ -510,7 +516,6 @@ export const projects: Project[] = [
     href: '#', // PLACEHOLDER
   },
   {
-    num: '03',
     name: 'Dream Collector',
     status: 'Concept',
     statusTone: 'neutral',
@@ -519,8 +524,8 @@ export const projects: Project[] = [
     href: '#', // PLACEHOLDER
   },
   {
-    num: '04',
     name: 'Site Text Bot',
+    repo: 'enriquezm/site-text-bot',
     status: 'In progress',
     statusTone: 'accent',
     description: 'Text a change to a phone number and Claude Code edits this site, texts back a preview link, and deploys when you reply "ship it".',

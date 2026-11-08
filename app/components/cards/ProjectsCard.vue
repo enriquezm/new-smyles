@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { cards, projects } from '~/data/site'
+import { cards } from '~/data/site'
 import type { CardId } from '~/data/site'
 
 defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
+
+const projects = await useProjects()
 </script>
 
 <template>
@@ -23,7 +25,7 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
       <ul class="mt-auto flex flex-col">
         <li
           v-for="project in projects"
-          :key="project.num"
+          :key="project.name"
           class="flex items-center justify-between gap-3 border-t border-rule py-3"
         >
           <div class="flex min-w-0 items-center gap-3">
@@ -41,7 +43,7 @@ const emit = defineEmits<{ toggle: [id: CardId] }>()
       <ul class="grid grid-cols-1 gap-3 pt-1 sm:grid-cols-2 lg:grid-cols-4">
         <li
           v-for="project in projects"
-          :key="project.num"
+          :key="project.name"
         >
           <CardTile class="h-full gap-2.5">
             <div class="flex items-center justify-between gap-2.5">

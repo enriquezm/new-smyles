@@ -17,7 +17,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     // Server-only, set with NUXT_GITHUB_TOKEN in .env or the host's env vars.
-    // Used when building /github.json and never sent to the browser.
+    // Used when building /github.json and /projects.json and never sent to the browser.
     githubToken: '',
   },
   compatibilityDate: '2026-10-01',
@@ -25,8 +25,9 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       // Plain-text "ask an AI about me" prompt, built from app/data/site.ts,
-      // and the GitHub card's data, fetched from the GitHub API at build time.
-      routes: ['/about-myles.txt', '/github.json'],
+      // the GitHub card's data and the projects' latest commit dates, fetched
+      // from the GitHub API at build time.
+      routes: ['/about-myles.txt', '/github.json', '/projects.json'],
     },
   },
 
