@@ -32,10 +32,14 @@ const hiddenCount = computed(() => projects.value.length - latest.value.length)
             :key="project.name"
             class="flex items-center justify-between gap-3 border-t border-rule py-2 sm:py-2.5"
           >
-            <div class="flex min-w-0 items-baseline gap-3">
-              <span class="font-mono text-meta text-ink-5">{{ project.num }}</span>
-              <span class="flex-none text-base font-medium">{{ project.name }}</span>
-              <span class="hidden truncate text-sm text-ink-3 sm:inline">{{ project.summary }}</span>
+            <!-- The summary gives up its space first (basis 0); a long name then truncates before the chip. -->
+            <div class="flex min-w-0 flex-1 items-baseline gap-3">
+              <span class="flex-none font-mono text-meta text-ink-5">{{ project.num }}</span>
+              <span
+                class="min-w-0 truncate text-base font-medium"
+                :title="project.name"
+              >{{ project.name }}</span>
+              <span class="hidden min-w-0 flex-1 basis-0 truncate text-sm text-ink-3 sm:inline">{{ project.summary }}</span>
             </div>
             <StatusChip :tone="project.statusTone">
               {{ project.status }}

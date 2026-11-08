@@ -1,6 +1,6 @@
 ---
 type: notes
-title: The design system behind this site
+title: My design system
 description: Every token this site runs on, how three themes share them, and the rules that keep it all accessible.
 date: 2026-11-08
 tags: [Design system, Tailwind CSS, Theming, Accessibility]
