@@ -19,12 +19,13 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `ink-4` | `#63635E` | Meta / mono labels |
 | `ink-5` | `#6E6E68` | Tertiary mono (numbers) |
 | `ink-muted-lg` | `#85857F` | Large gray headline text only |
-| `accent` | `#F0479E` (dark theme: `#F25AA8`) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink`. Alternatives: `#2B59FF`, `#12A150` |
+| `accent` | `#8C7DFF` (both light and dark) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink` |
+| `accent-text` | `#8373FF` (dark: `#8C7DFF`; retro: `#000080`) | Accent as text on the page background (the name in the hero headline). Light value is nudged darker to clear 3:1 for large text |
 | `accent-soft` | accent at 20% alpha | Map halo, chart areas |
 | `success` | `#2F9E44` | "Available for work" dot |
-| `info-bg` / `info-fg` | `#E3E9F5` / `#24406E` (dark: `#1E2A3D` / `#A9C4F0`; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring") |
-| `success-bg` / `success-fg` | `#E4F5C4` / `#3A5A0A` (dark: `#26331A` / `#C5EB7F`; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
-| `idea-bg` / `idea-fg` | `#E4D0FF` / `#6D28D9` (dark: `#34195C` / `#C9A2FF`; retro: `#E0C0FF` / `#000000`) | Purple status chip ("Concept") and the concept note on posts |
+| `info-bg` / `info-fg` | `#8C7DFF` / `#1A1A18` (dark: same; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring", periwinkle) |
+| `success-bg` / `success-fg` | `#CFFF5E` / `#1A1A18` (dark: same; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
+| `idea-bg` / `idea-fg` | `#B87EED` / `#1A1A18` (dark: same; retro: `#E0C0FF` / `#000000`) | Purple status chip ("Concept") and the concept note on posts |
 | Contact card (dark) | bg `#1A1A18`, tiles `#252522`, pill `#2C2C29`, border `#3D3D39`, text `#F4F4F0`, muted `#B4B4AE` | |
 
 All text pairs meet WCAG AA contrast. Keep it that way.

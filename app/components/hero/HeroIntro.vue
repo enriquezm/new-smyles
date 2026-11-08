@@ -1,7 +1,16 @@
 <script setup lang="ts">
 import { aiPrompt, hero } from '~/data/site'
 
-const [headlineBefore = '', headlineAfter = ''] = hero.headline.split(hero.headlineLink.label)
+type HeadlinePart = { text: string, kind: 'plain' | 'highlight' | 'link' }
+
+// Split the headline around the highlighted phrase and the linked word, in order.
+const headlineParts: HeadlinePart[] = hero.headline
+  .split(new RegExp(`(${[hero.headlineHighlight, hero.headlineLink.label].map(s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')})`))
+  .filter(Boolean)
+  .map(text => ({
+    text,
+    kind: text === hero.headlineHighlight ? 'highlight' : text === hero.headlineLink.label ? 'link' : 'plain',
+  }))
 </script>
 
 <template>
@@ -26,10 +35,19 @@ const [headlineBefore = '', headlineAfter = ''] = hero.headline.split(hero.headl
     </div>
 
     <h1 class="text-[30px] leading-headline font-medium tracking-headline text-balance sm:text-[44px] lg:max-w-headline lg:text-[56px] 2xl:max-w-none 2xl:text-[44px]">
-      {{ headlineBefore }}<a
-        :href="hero.headlineLink.href"
-        class="underline decoration-1 underline-offset-[0.12em] transition-colors hover:decoration-accent"
-      >{{ hero.headlineLink.label }}</a>{{ headlineAfter }}
+      <template
+        v-for="(part, i) in headlineParts"
+        :key="i"
+      >
+        <a
+          v-if="part.kind === 'link'"
+          :href="hero.headlineLink.href"
+          class="underline decoration-1 underline-offset-[0.12em] transition-colors hover:decoration-accent"
+        >{{ part.text }}</a><span
+          v-else-if="part.kind === 'highlight'"
+          class="text-accent-text"
+        >{{ part.text }}</span><span v-else>{{ part.text }}</span>
+      </template>
     </h1>
 
     <p class="max-w-intro text-base leading-normal text-ink-3 sm:text-lg lg:text-xl 2xl:text-lg">
