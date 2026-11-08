@@ -36,3 +36,4 @@ You are building my personal website from a finished design. Read `DESIGN_SPEC.m
 - No new dependencies beyond the stack above without asking me.
 - Keep components small. Content lives in `app/data/site.ts`, never hard-coded in components.
 - Commit after each numbered step with a clear message.
+- UI changes go through a branch and pull request, never straight to `main`. Before committing one, run `npm run test:ui` (generates the site, then runs the Playwright layout checks in `tests/ui/` at all four breakpoints and three themes). When a change adds a new layout risk, add a check for it.
