@@ -518,6 +518,15 @@ export const projects: Project[] = [
     tags: ['Luau', 'Roblox Studio'],
     href: '#', // PLACEHOLDER
   },
+  {
+    num: '04',
+    name: 'Site Text Bot',
+    status: 'In progress',
+    statusTone: 'accent',
+    description: 'Text a change to a phone number and Claude Code edits this site, texts back a preview link, and deploys when you reply "ship it".',
+    tags: ['TypeScript', 'Claude Agent SDK', 'Twilio'],
+    href: 'https://github.com/enriquezm/site-text-bot',
+  },
 ]
 
 export const contact: Contact = {
