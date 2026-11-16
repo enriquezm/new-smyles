@@ -7,7 +7,7 @@ import type { Page } from '@playwright/test'
 // changes don't need new baselines. Screenshots are attached to the HTML report
 // for a human look.
 
-const themes = ['light', 'dark', 'retro'] as const
+const themes = ['light', 'dark', 'retro', 'pop'] as const
 type Theme = typeof themes[number]
 
 const posts = readdirSync('content/posts')

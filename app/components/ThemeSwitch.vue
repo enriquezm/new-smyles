@@ -2,13 +2,14 @@
 import type { Component } from 'vue'
 import { themes } from '~/data/site'
 import type { ThemeId } from '~/data/site'
+import IconSparkle from '~/components/icons/IconSparkle.vue'
 import IconMoon from '~/components/icons/IconMoon.vue'
 import IconSun from '~/components/icons/IconSun.vue'
 import IconWindow from '~/components/icons/IconWindow.vue'
 
 const { theme, setTheme } = useTheme()
 
-const icons: Record<ThemeId, Component> = { light: IconSun, dark: IconMoon, retro: IconWindow }
+const icons: Record<ThemeId, Component> = { light: IconSun, dark: IconMoon, retro: IconWindow, pop: IconSparkle }
 
 const current = computed(() => themes.find(t => t.id === theme.value) ?? themes[0]!)
 const next = computed(() => themes[(themes.indexOf(current.value) + 1) % themes.length]!)
