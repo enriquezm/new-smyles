@@ -47,8 +47,20 @@ function inRing(lon: number, lat: number, ring: Ring) {
   return inside
 }
 
+/** Each outline's lon/lat bounding box, so most rings are ruled out with four comparisons. */
+const boxes = land.map((ring) => {
+  const lons = ring.map(([lon]) => lon)
+  const lats = ring.map(([, lat]) => lat)
+  return { ring, minLon: Math.min(...lons), maxLon: Math.max(...lons), minLat: Math.min(...lats), maxLat: Math.max(...lats) }
+})
+
 function isLand(lon: number, lat: number) {
-  return lat < -66 || land.some(ring => inRing(lon, lat, ring))
+  if (lat < -66) return true
+  for (const b of boxes) {
+    if (lon < b.minLon || lon > b.maxLon || lat < b.minLat || lat > b.maxLat) continue
+    if (inRing(lon, lat, b.ring)) return true
+  }
+  return false
 }
 
 const DEG = Math.PI / 180
@@ -90,10 +102,17 @@ export function buildGlobeGeometry(detail = 14) {
   const centre = new Vector3()
 
   // Lift land a little, with a stable jitter per shared vertex for the low-poly relief.
+  // Each corner is shared by up to six faces, so work out each position once.
+  const radii = new Map<string, number>()
   for (let i = 0; i < position.count; i++) {
     v.fromBufferAttribute(position, i)
-    const { lat, lon } = vectorToLatLon(v)
-    const r = isLand(lon, lat) ? 1.018 + hash(v) * 0.03 : 1 + hash(v) * 0.006
+    const key = `${v.x.toFixed(4)},${v.y.toFixed(4)},${v.z.toFixed(4)}`
+    let r = radii.get(key)
+    if (r === undefined) {
+      const { lat, lon } = vectorToLatLon(v)
+      r = isLand(lon, lat) ? 1.018 + hash(v) * 0.03 : 1 + hash(v) * 0.006
+      radii.set(key, r)
+    }
     v.normalize().multiplyScalar(r)
     position.setXYZ(i, v.x, v.y, v.z)
   }
