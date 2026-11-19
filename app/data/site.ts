@@ -359,6 +359,21 @@ export const hero: Hero = {
   status: 'Available for work',
 }
 
+export interface SkylineCopy {
+  /** Screen-reader name for the draggable 3D view. */
+  label: string
+  /** Shown under the skyline until someone rotates it. */
+  hint: string
+  reset: string
+}
+
+/** The GitHub card's draggable 3D contribution skyline. */
+export const skylineCopy: SkylineCopy = {
+  label: '3D contribution skyline. Drag, or use the arrow keys, to rotate it.',
+  hint: 'Drag to rotate',
+  reset: 'Reset view',
+}
+
 export const cards: Record<CardId, CardMeta> = {
   experience: { label: 'Experience', title: 'Experience' },
   featured: { label: 'Featured work', title: 'Featured work' },
