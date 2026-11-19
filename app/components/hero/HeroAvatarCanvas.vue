@@ -8,6 +8,7 @@ defineProps<{ src: string }>()
 const emit = defineEmits<{ ready: [], failed: [] }>()
 
 const root = useTemplateRef<HTMLElement>('root')
+useCanvasTeardown(root)
 const visible = useElementVisibility(root)
 const motion = usePreferredReducedMotion()
 const { x: mouseX, y: mouseY, sourceType } = useMouse({ type: 'client', touch: false })

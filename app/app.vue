@@ -29,4 +29,5 @@ useHead({
 
 <template>
   <NuxtPage />
+  <CatWorld />
 </template>

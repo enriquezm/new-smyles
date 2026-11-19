@@ -13,6 +13,7 @@ const props = defineProps<{ weeks: ContributionWeek[] }>()
 const emit = defineEmits<{ ready: [] }>()
 
 const root = useTemplateRef<HTMLElement>('root')
+useCanvasTeardown(root)
 const visible = useElementVisibility(root)
 const motion = usePreferredReducedMotion()
 // A full year is too thin to read on a phone; show the last half-year there.

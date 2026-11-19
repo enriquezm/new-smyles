@@ -7,6 +7,7 @@ import { useElementVisibility, usePreferredReducedMotion } from '@vueuse/core'
 defineProps<{ lat: number, lon: number, focused: boolean }>()
 
 const root = useTemplateRef<HTMLElement>('root')
+useCanvasTeardown(root)
 const visible = useElementVisibility(root)
 const motion = usePreferredReducedMotion()
 </script>
