@@ -1,5 +1,6 @@
 import { readdir } from 'node:fs/promises'
 import tailwindcss from '@tailwindcss/vite'
+import tresCompilerOptions from '@tresjs/core/template-compiler-options'
 
 export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/fonts', 'motion-v/nuxt', '@nuxt/content'],
@@ -19,6 +20,11 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  // TresJS renders <TresMesh>, <primitive> etc. itself, so Vue must not resolve them as components.
+  vue: {
+    compilerOptions: tresCompilerOptions.template.compilerOptions,
+  },
 
   content: {
     // Node 22.5+ ships node:sqlite, so the build needs no native sqlite package.

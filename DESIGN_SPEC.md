@@ -21,7 +21,8 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `ink-muted-lg` | `#85857F` | Large gray headline text only |
 | `accent` | `#8C7DFF` (both light and dark) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink` |
 | `accent-text` | `#8373FF` (dark: `#8C7DFF`; retro: `#000080`) | Accent as text on the page background (the name in the hero headline). Light value is nudged darker to clear 3:1 for large text |
-| `accent-soft` | accent at 20% alpha | Map halo, chart areas |
+| `accent-soft` | accent at 20% alpha | Chart areas |
+| `globe-ocean` / `globe-land` | `#C2C2BA` / `#F4F4F0` (dark: `#2A2A27` / `#77776F`; retro: `#008080` / `#C0C0C0`) | Location card globe faces. Read by three.js, so plain hex in a `@theme static` block |
 | `success` | `#2F9E44` | "Available for work" dot |
 | `info-bg` / `info-fg` | `#8C7DFF` / `#1A1A18` (dark: same; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring", periwinkle) |
 | `success-bg` / `success-fg` | `#CFFF5E` / `#1A1A18` (dark: same; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
@@ -70,7 +71,7 @@ Column spans are listed as mobile / tablet / desktop / wide.
 | 1 | Experience | 2/1/1/1 | Vertical timeline of 3 roles (current role's dot in the accent color) | Headline, role tiles (years, title, company, impact line) plus an Education tile, "Download résumé" button |
 | 2 | Featured work | 2/2/2/2 | Dark preview panel with a **UI / Code toggle** (mini deal card mock ↔ Vue snippet), title, meta, 3 metrics | Problem / Approach / Outcome tiles, tech tags, "Read the case study" and "Component docs" buttons |
 | 3 | Toolkit | 2/1/1/1 | "From Figma file to production code." plus 6 chips | 4 groups: Design, Frontend, Backend & data, Tooling |
-| 4 | Location | 1/1/1/1 | Stylized street-grid SVG, accent pin, label card "Las Vegas" plus live PT time | Same, with an availability / time-zone sentence |
+| 4 | Location | 1/1/1/1 | Low-poly WebGL globe (three.js via TresJS, lazy-loaded, client-only) slowly spinning, with an accent pin and pulsing halo on Las Vegas; label card "Las Vegas" plus live PT time. Wide cards push the globe right with a lens shift; narrow cards lift it above the label | Globe turns to face the pin, with an availability / time-zone sentence. Reduced motion: holds still, facing the pin |
 | 5 | GitHub | 1/1/1/1 | "1,284 contributions in the last year" plus a heatmap of recent weeks (10/26/19/20) | Full 52-week heatmap (scrolls sideways), 3 stats, pinned repos |
 | 6 | How I work | 2/2/2/2 | Selected step (number, title, description) plus a **step tab bar** | All 4 steps as tiles |
 | 7 | Currently working on | 2/2/2/4 | Up to 3 newest items (projects and posts): number, name, one-line summary on the same line (hidden on mobile), status chip; a mono "+N more" note when more exist | Tiles with description, tags, "View on GitHub" |

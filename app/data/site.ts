@@ -122,6 +122,8 @@ export interface Location {
   timeZone: string
   timeZoneAbbr: string
   availability: string
+  /** Where the pin sits on the Location card's globe, in degrees (west and south are negative). */
+  coordinates: { lat: number, lon: number }
 }
 
 export interface Repo {
@@ -463,6 +465,7 @@ export const basedIn: Location = {
   timeZoneAbbr: 'PT',
   availability:
     'Nevada, on Pacific Time. Looking for remote roles and comfortable overlapping with teams across US time zones.', // PLACEHOLDER
+  coordinates: { lat: 36.17, lon: -115.14 },
 }
 
 /**

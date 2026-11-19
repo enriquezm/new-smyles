@@ -43,9 +43,6 @@
   --color-timeline: #D5D5D0;
   --color-track: #EFEFEB;
   --color-wave: #BDBDB7;
-  --color-map-grid: #DEDED9;
-  --color-map-road: #D2D2CC;
-  --color-map-road-2: #D8D8D2;
 
   /* Accent tints: GitHub heatmap levels and the "In progress" status chip */
   --color-heat-0: var(--color-rule);
@@ -117,6 +114,15 @@
   --container-headline: 1000px;
   --container-intro: 640px;
   --container-post: 760px;
+}
+
+/*
+ * Location card globe. Read from JS by LocationGlobeScene, never by a class, so
+ * `static` keeps Tailwind from dropping them. Plain hex so three.js can parse them.
+ */
+@theme static {
+  --color-globe-ocean: #C2C2BA;
+  --color-globe-land: #F4F4F0;
 }
 
 @layer base {
@@ -271,9 +277,8 @@
   --color-timeline: #3A3A36;
   --color-track: #232320;
   --color-wave: #4A4A45;
-  --color-map-grid: #252522;
-  --color-map-road: #33332F;
-  --color-map-road-2: #2C2C29;
+  --color-globe-ocean: #2A2A27;
+  --color-globe-land: #77776F;
 
   --color-info-bg: #8C7DFF;
   --color-info-fg: #1A1A18;
@@ -326,9 +331,8 @@
   --color-timeline: #808080;
   --color-track: #C0C0C0;
   --color-wave: #808080;
-  --color-map-grid: #C0C0C0;
-  --color-map-road: #808080;
-  --color-map-road-2: #A0A0A0;
+  --color-globe-ocean: #008080;
+  --color-globe-land: #C0C0C0;
 
   --color-info-bg: #FFFFE1;
   --color-info-fg: #000000;
