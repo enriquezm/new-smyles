@@ -60,7 +60,8 @@ Grid uses `grid-auto-flow: dense`. Mobile overrides: Featured 280, Process 290, 
    - **Intro player**: play/pause, a waveform that fills as it plays (32s), and a countdown.
    - **Status**: green dot and "Available for work".
 3. **Card grid**: 8 cards (below).
-4. **Footer**: mono row: © year and name · Las Vegas, NV · live local time.
+4. **Wandering cat**: a low-poly orange tabby (WebGL, built from primitives; retro: grey tabby) visits every minute or two (first after 15–35s) at a random height on the left or right edge. It walks in about 12px past the edge, stops and looks out for 2–3s, turns through the front and walks off. Click or tap (it is a `<button>`, 150×110, 120×88 on mobile) to pet it: eyes close, the body hums, the tail slows, and "prrr" and accent hearts float up for ~3s, with a polite live-region announcement; then it leaves. Never shown with reduced motion or in a hidden tab. `?cat` in the URL makes it visit straight away and often.
+5. **Footer**: mono row: © year and name · Las Vegas, NV · live local time.
 
 ## Cards
 

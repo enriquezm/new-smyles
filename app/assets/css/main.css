@@ -107,6 +107,14 @@
   --text-label: 11.5px;
   --text-meta: 12px;
 
+  /* The cat's purr: "prrr" and hearts drift up and fade */
+  --animate-purr-float: purr-float 1.5s ease-out forwards;
+  @keyframes purr-float {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.7); }
+    15% { opacity: 1; }
+    100% { opacity: 0; transform: translate(var(--purr-drift, 0px), -56px) scale(1.1); }
+  }
+
   /* Layout widths */
   --container-page: 1376px;
   --container-page-wide: 1840px;
@@ -123,6 +131,14 @@
 @theme static {
   --color-globe-ocean: #C2C2BA;
   --color-globe-land: #F4F4F0;
+
+  /* The wandering low-poly cat (LowPolyCat). Same orange tabby in light and dark. */
+  --color-cat-fur: #E3954F;
+  --color-cat-stripe: #B4652B;
+  --color-cat-light: #F6E6D2;
+  --color-cat-eye: #1A1A18;
+  --color-cat-nose: #E58A9A;
+  --color-cat-shadow: #1A1A18;
 }
 
 @layer base {
@@ -333,6 +349,9 @@
   --color-wave: #808080;
   --color-globe-ocean: #008080;
   --color-globe-land: #C0C0C0;
+  --color-cat-fur: #A0A0A0;
+  --color-cat-stripe: #606060;
+  --color-cat-light: #FFFFFF;
 
   --color-info-bg: #FFFFE1;
   --color-info-fg: #000000;

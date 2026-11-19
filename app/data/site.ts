@@ -367,6 +367,22 @@ export interface SkylineCopy {
   reset: string
 }
 
+export interface CatCopy {
+  /** Accessible name of the cat while it's on screen. */
+  label: string
+  /** Floats up from the cat while it purrs. */
+  purr: string
+  /** Announced to screen readers when it's petted. */
+  purrAnnouncement: string
+}
+
+/** The low-poly cat that wanders past the side of the page now and then. */
+export const catCopy: CatCopy = {
+  label: 'A cat wandering by. Pet the cat',
+  purr: 'prrr',
+  purrAnnouncement: 'The cat closes its eyes and purrs.',
+}
+
 /** The GitHub card's draggable 3D contribution skyline. */
 export const skylineCopy: SkylineCopy = {
   label: '3D contribution skyline. Drag, or use the arrow keys, to rotate it.',

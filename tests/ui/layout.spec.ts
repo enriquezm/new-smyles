@@ -201,3 +201,32 @@ test('github skyline rotates by drag and keyboard, and resets', async ({ page })
   await page.keyboard.press('Escape')
   await expect(page.getByRole('button', { name: /^Expand GitHub/ })).toBeVisible()
 })
+
+test.describe('wandering cat', () => {
+  // The suite runs with reduced motion, which keeps the cat away; let it visit here.
+  test.use({ reducedMotion: 'no-preference' })
+
+  test('walks in, purrs when petted, walks off, and never scrolls the page sideways', async ({ page }) => {
+    await open(page, '/?cat')
+    const cat = page.getByRole('button', { name: /Pet the cat/ })
+    await expect(cat).toBeVisible({ timeout: 5000 })
+    const box = await cat.boundingBox()
+    expect(box?.width ?? 0, 'cat is a 44px target').toBeGreaterThanOrEqual(44)
+    expect(box?.height ?? 0, 'cat is a 44px target').toBeGreaterThanOrEqual(44)
+    expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
+
+    await cat.click()
+    await expect(page.locator('[aria-live="polite"]').filter({ hasText: /purrs/ })).toBeAttached()
+    await expect(page.locator('[data-cat] .animate-purr-float').first()).toBeAttached()
+    await attachScreenshot(page, 'cat-purring')
+
+    await expect(cat).toBeHidden({ timeout: 15000 })
+    expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
+  })
+})
+
+test('the cat stays away with reduced motion', async ({ page }) => {
+  await open(page, '/?cat')
+  await page.waitForTimeout(1500)
+  await expect(page.locator('[data-cat]')).toHaveCount(0)
+})
