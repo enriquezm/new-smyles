@@ -120,3 +120,22 @@ test('a card opens full width, focuses close, and Escape closes it', async ({ pa
   await page.keyboard.press('Escape')
   await expect(page.getByRole('button', { name: `Expand ${title}` })).toBeFocused()
 })
+
+test('location globe renders inside its card and never blocks the expand button', async ({ page }) => {
+  await open(page, '/')
+  const expand = page.getByRole('button', { name: 'Expand Location' })
+  const card = page.locator('article[data-card]').filter({ has: expand })
+  const canvas = card.locator('canvas')
+  await card.scrollIntoViewIfNeeded()
+  await expect(canvas).toBeVisible()
+
+  const [cardBox, canvasBox] = await Promise.all([card.boundingBox(), canvas.boundingBox()])
+  if (!cardBox || !canvasBox) throw new Error('Location card is not laid out')
+  expect(canvasBox.width, 'canvas fits the card').toBeLessThanOrEqual(cardBox.width + 0.5)
+  expect(canvasBox.height, 'canvas fits the card').toBeLessThanOrEqual(cardBox.height + 0.5)
+
+  // A click on the globe itself must reach the card's overlay button.
+  await page.mouse.click(canvasBox.x + canvasBox.width * 0.75, canvasBox.y + canvasBox.height * 0.4)
+  await expect(page.getByRole('button', { name: 'Collapse Location' })).toBeFocused()
+  await attachScreenshot(page, 'location-open')
+})

@@ -24,7 +24,18 @@ const bodyClass = computed(() =>
     @toggle="emit('toggle', $event)"
   >
     <template #background>
-      <LocationMap />
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-0 z-0"
+      >
+        <ClientOnly>
+          <LazyLocationGlobe
+            :lat="basedIn.coordinates.lat"
+            :lon="basedIn.coordinates.lon"
+            :focused="open"
+          />
+        </ClientOnly>
+      </div>
     </template>
 
     <template #label>
