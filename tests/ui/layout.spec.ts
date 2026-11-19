@@ -139,3 +139,17 @@ test('location globe renders inside its card and never blocks the expand button'
   await expect(page.getByRole('button', { name: 'Collapse Location' })).toBeFocused()
   await attachScreenshot(page, 'location-open')
 })
+
+test('hero avatar keeps its accessible photo and the low-poly canvas stays inside the tile', async ({ page }) => {
+  await open(page, '/')
+  const photo = page.locator('section[aria-label="Intro"] img').first()
+  await expect(photo).toHaveAttribute('alt', /.+/)
+  const tile = photo.locator('..')
+  const canvas = tile.locator('canvas')
+  await expect(canvas).toBeVisible()
+
+  const [tileBox, canvasBox] = await Promise.all([tile.boundingBox(), canvas.boundingBox()])
+  if (!tileBox || !canvasBox) throw new Error('Hero avatar is not laid out')
+  expect(Math.abs(canvasBox.width - tileBox.width), 'canvas matches the tile').toBeLessThanOrEqual(1)
+  expect(Math.abs(canvasBox.height - tileBox.height), 'canvas matches the tile').toBeLessThanOrEqual(1)
+})

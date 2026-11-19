@@ -56,7 +56,7 @@ Grid uses `grid-auto-flow: dense`. Mobile overrides: Featured 280, Process 290, 
 ## Page structure
 
 1. **Header**: accent square and name on the left; Work / Toolkit / Résumé links and a dark "Get in touch" pill on the right.
-2. **Hero**: avatar tile (photo placeholder, "ME" monogram), H1 with a gray trailing clause, a one-paragraph intro, then two pills:
+2. **Hero**: avatar tile (the photo rebuilt as a low-poly WebGL relief: flat triangles coloured from the image, assembling over the photo on load and leaning toward the cursor; the plain `<img>` stays underneath as the server-rendered, accessible fallback, and still under reduced motion; "ME" monogram when there is no photo), H1 with a gray trailing clause, a one-paragraph intro, then two pills:
    - **Intro player**: play/pause, a waveform that fills as it plays (32s), and a countdown.
    - **Status**: green dot and "Available for work".
 3. **Card grid**: 8 cards (below).
