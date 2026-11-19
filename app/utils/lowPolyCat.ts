@@ -13,17 +13,21 @@ import {
 } from 'three'
 import type { BufferGeometry } from 'three'
 
+/** Seal-point Siamese: a pale coat with dark "points" on the face, ears, legs and tail. */
 export interface CatPalette {
+  /** Main coat (cream). */
   fur: string
-  stripe: string
-  light: string
+  /** Darker fawn, shaded into the coat a face at a time. */
+  shade: string
+  /** Ears, face mask, legs, paws and tail. */
+  point: string
   eye: string
   nose: string
   shadow: string
 }
 
-/** Which fur tone a part is painted with; `mottled` mixes fur and stripe per face. */
-type Coat = 'fur' | 'stripe' | 'light' | 'mottled'
+/** Which tone a part is painted with; `coat` and `head` blend fur and shade per face. */
+type Coat = 'coat' | 'head' | 'point'
 
 export interface LowPolyCat {
   root: Group
@@ -82,7 +86,7 @@ export function buildLowPolyCat(): LowPolyCat {
   shadow.position.y = 0.005
   root.add(shadow)
 
-  const torso = fur(new IcosahedronGeometry(0.5, 0), 'mottled')
+  const torso = fur(new IcosahedronGeometry(0.5, 0), 'coat')
   torso.scale.set(1.25, 0.6, 0.62)
   torso.position.set(0, 0.6, 0)
   body.add(torso)
@@ -91,15 +95,16 @@ export function buildLowPolyCat(): LowPolyCat {
   const head = new Group()
   head.position.set(0.62, 0.86, 0)
   body.add(head)
-  const skull = fur(new IcosahedronGeometry(0.29, 1), 'mottled')
+  const skull = fur(new IcosahedronGeometry(0.29, 1), 'head')
   skull.scale.set(1, 0.88, 1.05)
   head.add(skull)
-  const muzzle = fur(new IcosahedronGeometry(0.13, 0), 'light')
+  // The face mask.
+  const muzzle = fur(new IcosahedronGeometry(0.13, 0), 'point')
   muzzle.scale.set(0.9, 0.7, 1.2)
   muzzle.position.set(0.21, -0.09, 0)
   head.add(muzzle)
   for (const side of [-1, 1]) {
-    const ear = fur(new ConeGeometry(0.11, 0.24, 4), 'stripe')
+    const ear = fur(new ConeGeometry(0.11, 0.24, 4), 'point')
     ear.position.set(-0.02, 0.27, side * 0.14)
     ear.rotation.set(side * -0.3, 0, -0.1)
     head.add(ear)
@@ -112,19 +117,19 @@ export function buildLowPolyCat(): LowPolyCat {
   eyes.position.set(0.22, 0.05, 0)
   head.add(eyes)
   for (const side of [-1, 1]) {
-    const eye = plain(new SphereGeometry(0.048, 6, 4), eyeMaterial)
+    const eye = plain(new SphereGeometry(0.052, 6, 4), eyeMaterial)
     eye.position.z = side * 0.115
     eyes.add(eye)
   }
 
-  // Legs: a hip joint per leg so they can swing; a pale paw at the end.
+  // Legs: a hip joint per leg so they can swing; points all the way down.
   const legs: Group[] = []
   for (const [x, z] of [[0.36, 0.17], [0.36, -0.17], [-0.36, 0.17], [-0.36, -0.17]] as const) {
     const hip = new Group()
     hip.position.set(x, 0.48, z)
-    const leg = fur(new CylinderGeometry(0.08, 0.06, 0.44, 5), 'fur')
+    const leg = fur(new CylinderGeometry(0.08, 0.06, 0.44, 5), 'point')
     leg.position.y = -0.22
-    const paw = fur(new IcosahedronGeometry(0.075, 0), 'light')
+    const paw = fur(new IcosahedronGeometry(0.075, 0), 'point')
     paw.scale.set(1.3, 0.6, 1)
     paw.position.set(0.03, -0.45, 0)
     hip.add(leg, paw)
@@ -132,14 +137,14 @@ export function buildLowPolyCat(): LowPolyCat {
     legs.push(hip)
   }
 
-  // Tail: a chain of joints with alternating stripes, curling up and back.
+  // Tail: a chain of joints, all point colour, curling up and back.
   const tail: Group[] = []
   let parent: Group = body
   for (let i = 0; i < 5; i++) {
     const joint = new Group()
     if (i === 0) joint.position.set(-0.6, 0.66, 0)
     else joint.position.y = 0.2
-    const segment = fur(new CylinderGeometry(0.045 - i * 0.004, 0.055 - i * 0.004, 0.22, 5), i % 2 ? 'stripe' : 'fur')
+    const segment = fur(new CylinderGeometry(0.045 - i * 0.004, 0.055 - i * 0.004, 0.22, 5), 'point')
     segment.position.y = 0.1
     joint.add(segment)
     parent.add(joint)
@@ -149,14 +154,15 @@ export function buildLowPolyCat(): LowPolyCat {
 
   function paint(palette: CatPalette) {
     const furColor = new Color(palette.fur)
-    const stripe = new Color(palette.stripe)
-    const light = new Color(palette.light)
+    const shade = new Color(palette.shade)
+    const point = new Color(palette.point)
     const c = new Color()
     for (const { geometry, coat, seed } of coats) {
       const color = geometry.getAttribute('color') as BufferAttribute
       for (let f = 0; f < color.count / 3; f++) {
-        if (coat === 'mottled') c.copy(furColor).lerp(stripe, hash(seed + f) > 0.62 ? 0.85 : hash(seed - f) * 0.25)
-        else c.copy(coat === 'stripe' ? stripe : coat === 'light' ? light : furColor)
+        // Siamese coats darken toward the face, so the head takes more shade than the body.
+        if (coat === 'point') c.copy(point)
+        else c.copy(furColor).lerp(shade, hash(seed + f) * (coat === 'head' ? 0.9 : 0.55))
         for (let k = 0; k < 3; k++) color.setXYZ(f * 3 + k, c.r, c.g, c.b)
       }
       color.needsUpdate = true

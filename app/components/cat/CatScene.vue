@@ -20,8 +20,8 @@ function readColors() {
   const token = (name: string) => css.getPropertyValue(`--color-${name}`).trim()
   cat.paint({
     fur: token('cat-fur'),
-    stripe: token('cat-stripe'),
-    light: token('cat-light'),
+    shade: token('cat-shade'),
+    point: token('cat-point'),
     eye: token('cat-eye'),
     nose: token('cat-nose'),
     shadow: token('cat-shadow'),

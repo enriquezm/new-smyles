@@ -132,12 +132,12 @@
   --color-globe-ocean: #C2C2BA;
   --color-globe-land: #F4F4F0;
 
-  /* The wandering low-poly cat (LowPolyCat). Same orange tabby in light and dark. */
-  --color-cat-fur: #E3954F;
-  --color-cat-stripe: #B4652B;
-  --color-cat-light: #F6E6D2;
-  --color-cat-eye: #1A1A18;
-  --color-cat-nose: #E58A9A;
+  /* The wandering low-poly cat (LowPolyCat): a seal-point Siamese in every theme. */
+  --color-cat-fur: #F1E6D4;
+  --color-cat-shade: #D8C2A0;
+  --color-cat-point: #4A3427;
+  --color-cat-eye: #4F9BEA;
+  --color-cat-nose: #2E211A;
   --color-cat-shadow: #1A1A18;
 }
 
@@ -349,9 +349,6 @@
   --color-wave: #808080;
   --color-globe-ocean: #008080;
   --color-globe-land: #C0C0C0;
-  --color-cat-fur: #A0A0A0;
-  --color-cat-stripe: #606060;
-  --color-cat-light: #FFFFFF;
 
   --color-info-bg: #FFFFE1;
   --color-info-fg: #000000;
