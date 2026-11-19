@@ -157,7 +157,7 @@ test('hero avatar keeps its accessible photo and the low-poly canvas stays insid
 test('github skyline fits the open card without sideways scroll', async ({ page }) => {
   await open(page, '/')
   await page.getByRole('button', { name: /^Expand GitHub/ }).click()
-  const skyline = page.getByRole('img', { name: /^Contribution skyline/ })
+  const skyline = page.getByRole('group', { name: /^Contribution skyline/ })
   const canvas = skyline.locator('canvas')
   await expect(canvas).toBeVisible()
 
@@ -167,4 +167,37 @@ test('github skyline fits the open card without sideways scroll', async ({ page 
   expect(Math.abs(canvasBox.height - skylineBox.height), 'canvas fills the skyline box').toBeLessThanOrEqual(1)
   expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
   await attachScreenshot(page, 'github-skyline')
+})
+
+test('github skyline rotates by drag and keyboard, and resets', async ({ page }) => {
+  await open(page, '/')
+  await page.getByRole('button', { name: /^Expand GitHub/ }).click()
+  const view = page.getByRole('img', { name: /^3D contribution skyline/ })
+  await expect(view).toBeVisible()
+  const reset = page.getByRole('button', { name: 'Reset view' })
+  const collapse = page.getByRole('button', { name: /^Collapse GitHub/ })
+
+  // Mouse drag rotates, shows Reset, and doesn't close the card.
+  const box = await view.boundingBox()
+  if (!box) throw new Error('Skyline is not laid out')
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2)
+  await page.mouse.down()
+  await page.mouse.move(box.x + box.width / 2 - 120, box.y + box.height / 2 + 40, { steps: 6 })
+  await page.mouse.up()
+  await expect(reset).toBeVisible()
+  await expect(collapse).toBeVisible()
+  const resetBox = await reset.boundingBox()
+  expect(resetBox?.height ?? 0, 'Reset is a 44px target').toBeGreaterThanOrEqual(44)
+  await reset.click()
+  await expect(reset).toBeHidden()
+
+  // Arrow keys rotate; the first Escape resets the view, the next closes the card.
+  await view.focus()
+  await page.keyboard.press('ArrowLeft')
+  await expect(reset).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(reset).toBeHidden()
+  await expect(collapse).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(page.getByRole('button', { name: /^Expand GitHub/ })).toBeVisible()
 })

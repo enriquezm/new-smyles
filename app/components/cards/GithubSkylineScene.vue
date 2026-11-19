@@ -13,8 +13,15 @@ import {
 import type { ContributionWeek } from '~/data/site'
 
 /** Rendered inside <TresCanvas>: one bar per day, weeks along x, weekdays along z. */
-const props = defineProps<{ weeks: ContributionWeek[], still: boolean, visible: boolean }>()
-const emit = defineEmits<{ ready: [] }>()
+const props = defineProps<{
+  weeks: ContributionWeek[]
+  still: boolean
+  visible: boolean
+  /** Camera angles shared with the drag handlers in GithubSkyline. */
+  orbit: SkylineOrbit
+}>()
+/** `view` reports the angles actually shown each frame, so a drag starts from there. */
+const emit = defineEmits<{ ready: [], view: [angles: OrbitAngles] }>()
 
 const DEG = Math.PI / 180
 const GAP = 0.18
@@ -23,10 +30,6 @@ const STEP = 0.8
 /** Fraction of `accent` mixed into the surface colour per level, matching the 2D heatmap. */
 const MIX = [0, 0.3, 0.55, 0.8, 1] as const
 const RISE = 1.6
-/** Final camera angles: a classic isometric-ish skyline view. */
-const ELEVATION = 26
-const AZIMUTH = -16
-
 const days = props.weeks.length * 7
 const box = new BoxGeometry(1 - GAP, 1, 1 - GAP)
 box.translate(0, 0.5, 0) // grow up from the ground
@@ -72,30 +75,44 @@ const corners = [-1, 1].flatMap(x => [0, 1].flatMap(y => [-1, 1].map(z =>
   new Vector3((x * width) / 2, y * maxHeight, (z * depth) / 2))))
 const right = new Vector3()
 const up = new Vector3()
+const centre = new Vector3(0, maxHeight / 2, 0)
 
-/** Points the camera from the given angles and zooms so the whole skyline fits with a margin. */
-function aim(elevation: number, azimuth: number) {
-  const cam = camera.value
-  if (!(cam instanceof OrthographicCamera)) return
+/** Puts the camera on a sphere around the skyline at the given angles, looking at its centre. */
+function place(cam: OrthographicCamera, elevation: number, azimuth: number) {
   const el = elevation * DEG
   const az = azimuth * DEG
   cam.position.set(Math.sin(az) * Math.cos(el), Math.sin(el), Math.cos(az) * Math.cos(el)).multiplyScalar(60)
   cam.position.y += maxHeight / 2
   cam.lookAt(0, maxHeight / 2, 0)
   cam.updateMatrixWorld()
+}
+
+/** Half the view height that fits the whole skyline, with a margin, from where the camera is now. */
+function fitHalfHeight(cam: OrthographicCamera, aspect: number) {
   right.setFromMatrixColumn(cam.matrixWorld, 0)
   up.setFromMatrixColumn(cam.matrixWorld, 1)
   let halfW = 0
   let halfH = 0
-  const centre = new Vector3(0, maxHeight / 2, 0)
   for (const corner of corners) {
     const v = corner.clone().sub(centre)
     halfW = Math.max(halfW, Math.abs(v.dot(right)))
     halfH = Math.max(halfH, Math.abs(v.dot(up)))
   }
+  return Math.max(halfH, halfW / aspect) * 1.06
+}
+
+/**
+ * Points the camera from the given angles. The zoom is always the one that
+ * frames the default view, so rotating feels like turning a real object
+ * (no zoom pumping); end-on angles simply crop the overhang.
+ */
+function aim(elevation: number, azimuth: number) {
+  const cam = camera.value
+  if (!(cam instanceof OrthographicCamera)) return
   const aspect = sizes.width.value / Math.max(sizes.height.value, 1)
-  const pad = 1.06
-  const h = Math.max(halfH, halfW / aspect) * pad
+  place(cam, SKYLINE_VIEW.elevation, SKYLINE_VIEW.azimuth)
+  const h = fitHalfHeight(cam, aspect)
+  place(cam, elevation, azimuth)
   cam.left = -h * aspect
   cam.right = h * aspect
   cam.top = h
@@ -110,8 +127,9 @@ function damp(from: number, to: number, rate: number, dt: number) {
 }
 
 let t = props.still ? RISE : 0
-let elevation = props.still ? ELEVATION : 89
-let azimuth = props.still ? AZIMUTH : 0
+let elevation = props.still ? SKYLINE_VIEW.elevation : 89
+let azimuth = props.still ? SKYLINE_VIEW.azimuth : 0
+let swayWeight = 1
 let elapsed = 0
 let announced = false
 layout(t / RISE)
@@ -120,18 +138,35 @@ const { onBeforeRender, start, stop } = useLoop()
 onBeforeRender(({ delta }) => {
   const dt = Math.min(delta, 0.1)
   elapsed += dt
-  if (!props.still) {
-    // Start top-down, so it reads as the 2D heatmap, then tilt as the bars rise.
-    if (t < RISE) {
-      t = Math.min(RISE, t + dt)
-      layout(t / RISE)
-    }
-    elevation = damp(elevation, ELEVATION, 2.4, dt)
-    azimuth = damp(azimuth, AZIMUTH, 2.4, dt)
+  if (!props.still && t < RISE) {
+    t = Math.min(RISE, t + dt)
+    layout(t / RISE)
   }
-  // A slow sway once it has settled, so it reads as 3D even when idle.
-  const sway = props.still ? 0 : Math.sin(elapsed * 0.35) * 6 * Math.min(1, elapsed / RISE)
+
+  // Someone is steering: follow them closely. Otherwise settle on the default
+  // view, the nearest full turn of it so a reset never unwinds several spins.
+  const { target } = props.orbit
+  const goal = target ?? {
+    elevation: SKYLINE_VIEW.elevation,
+    azimuth: SKYLINE_VIEW.azimuth + 360 * Math.round((azimuth - SKYLINE_VIEW.azimuth) / 360),
+  }
+  if (props.still) {
+    elevation = goal.elevation
+    azimuth = goal.azimuth
+  }
+  else {
+    // Opens top-down, so it reads as the 2D heatmap, then tilts as the bars rise.
+    const rate = target ? 12 : 2.4
+    elevation = damp(elevation, goal.elevation, rate, dt)
+    azimuth = damp(azimuth, goal.azimuth, rate, dt)
+  }
+
+  // A slow sway while idle, so it reads as 3D; it fades out while steered.
+  swayWeight = damp(swayWeight, target || props.still ? 0 : 1, 3, dt)
+  const sway = Math.sin(elapsed * 0.35) * 6 * Math.min(1, elapsed / RISE) * swayWeight
   aim(elevation, azimuth + sway)
+  emit('view', { azimuth: azimuth + sway, elevation })
+
   if (!announced) {
     announced = true
     emit('ready')

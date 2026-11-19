@@ -55,7 +55,7 @@ const languageDot: Record<string, string> = {
           (and stays if it never is); the canvas then covers it.
         -->
         <div
-          role="img"
+          role="group"
           :aria-label="`Contribution skyline: ${contributions} ${github.contributionsCaption}, one bar per day`"
           class="relative h-[150px] sm:h-[240px] lg:h-[280px]"
         >
@@ -66,10 +66,7 @@ const languageDot: Record<string, string> = {
           >
             <GithubHeatmap :weeks="github.weeks" />
           </div>
-          <div
-            aria-hidden="true"
-            class="pointer-events-none absolute inset-0"
-          >
+          <div class="absolute inset-0">
             <ClientOnly>
               <LazyGithubSkyline
                 :weeks="github.weeks"
