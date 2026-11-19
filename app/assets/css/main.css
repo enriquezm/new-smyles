@@ -132,13 +132,16 @@
   --color-globe-ocean: #C2C2BA;
   --color-globe-land: #F4F4F0;
 
-  /* The wandering low-poly cat (LowPolyCat): a seal-point Siamese in every theme. */
-  --color-cat-fur: #F1E6D4;
-  --color-cat-shade: #D8C2A0;
-  --color-cat-point: #4A3427;
+  /* The wandering low-poly cat (LowPolyCat): all white, blue eyes, in every theme. */
+  --color-cat-fur: #FFFFFF;
   --color-cat-eye: #4F9BEA;
-  --color-cat-nose: #2E211A;
+  --color-cat-nose: #E9A3AE;
   --color-cat-shadow: #1A1A18;
+
+  /* The fish on the floor it fetches (LowPolyFish) */
+  --color-fish-body: #79A6D2;
+  --color-fish-fin: #F0A04B;
+  --color-fish-eye: #1A1A18;
 }
 
 @layer base {

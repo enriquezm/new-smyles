@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useLoop, useTres } from '@tresjs/core'
-import { useMutationObserver } from '@vueuse/core'
 import { PerspectiveCamera } from 'three'
 
 /** Rendered inside <TresCanvas>: the cat, animated in place. CatVisitor moves the canvas. */
@@ -10,33 +9,38 @@ const props = defineProps<{
   facing: 1 | -1
   /** Standing still and looking out at the viewer. */
   looking: boolean
+  /** Crouched, head down, to pick something up off the floor. */
+  reaching: boolean
+  /** Has the fish in its mouth. */
+  carrying: boolean
   purring: boolean
 }>()
 
 const cat = buildLowPolyCat()
+const fish = buildLowPolyFish()
+// Held crosswise in the mouth, turned a little so it reads as a fish from the side.
+fish.root.scale.setScalar(1.05)
+fish.root.rotation.set(0.35, 1.15, -0.15)
+fish.root.visible = props.carrying
+cat.mouth.add(fish.root)
 
-function readColors() {
-  const css = getComputedStyle(document.documentElement)
-  const token = (name: string) => css.getPropertyValue(`--color-${name}`).trim()
+useThemeRepaint(() => {
   cat.paint({
-    fur: token('cat-fur'),
-    shade: token('cat-shade'),
-    point: token('cat-point'),
-    eye: token('cat-eye'),
-    nose: token('cat-nose'),
-    shadow: token('cat-shadow'),
+    fur: readColorToken('cat-fur'),
+    eye: readColorToken('cat-eye'),
+    nose: readColorToken('cat-nose'),
+    shadow: readColorToken('cat-shadow'),
   })
-}
-readColors()
-useMutationObserver(() => document.documentElement, readColors, { attributes: true, attributeFilter: ['data-theme'] })
+  fish.paint({ body: readColorToken('fish-body'), fin: readColorToken('fish-fin'), eye: readColorToken('fish-eye') })
+})
 
 const { camera } = useTres()
 watch(camera, (cam) => {
   if (!(cam instanceof PerspectiveCamera)) return
   // A little above and in front, so the walk reads side-on but the cat still has depth.
-  cam.fov = 30
-  cam.position.set(0, 0.75, 4.2)
-  cam.lookAt(0, 0.5, 0)
+  cam.fov = STAGE_CAMERA.fov
+  cam.position.set(...STAGE_CAMERA.position)
+  cam.lookAt(...STAGE_CAMERA.target)
   cam.updateProjectionMatrix()
 }, { immediate: true })
 
@@ -46,6 +50,7 @@ function damp(from: number, to: number, rate: number, dt: number) {
 
 let stride = 0
 let walkWeight = 0
+let reach = 0
 let time = 0
 let nextBlink = 2
 // Facing left is -π, not π, so turning swings the face toward the camera (+z), not away.
@@ -55,6 +60,7 @@ const { onBeforeRender } = useLoop()
 onBeforeRender(({ delta }) => {
   const dt = Math.min(delta, 0.1)
   time += dt
+  fish.root.visible = props.carrying
 
   // Turn around through the front, so it faces the viewer on the way.
   const yaw = props.facing === 1 ? 0 : -Math.PI
@@ -69,13 +75,18 @@ onBeforeRender(({ delta }) => {
   br!.rotation.z = swing
   fr!.rotation.z = -swing
   bl!.rotation.z = -swing
-  cat.body.position.y = Math.abs(Math.cos(stride)) * 0.035 * walkWeight
+
+  // Reaching: pitch forward and drop the head to the floor.
+  reach = damp(reach, props.reaching ? 1 : 0, 9, dt)
+  cat.body.rotation.z = -0.3 * reach
+  cat.body.position.y = Math.abs(Math.cos(stride)) * 0.035 * walkWeight - 0.07 * reach
 
   // Head: bobs with the walk, turns to look out of the screen when stopped.
   // The head faces +x; toward the camera is -y rotation facing right, +y facing left.
-  const look = props.looking || props.purring ? -props.facing : 0
+  const look = (props.looking || props.purring) && !props.reaching ? -props.facing : 0
   cat.head.rotation.y = damp(cat.head.rotation.y, look * 0.85, 5, dt)
-  cat.head.rotation.z = damp(cat.head.rotation.z, props.purring ? 0.18 : Math.sin(stride * 2) * 0.04, 5, dt)
+  const nod = props.reaching ? -0.75 : props.purring ? 0.18 : Math.sin(stride * 2) * 0.04
+  cat.head.rotation.z = damp(cat.head.rotation.z, nod, props.reaching ? 9 : 5, dt)
 
   // Tail: a lazy S-curve, livelier while walking, slow and content while purring.
   const tailSpeed = props.purring ? 1.2 : 2.2 + walkWeight * 2
@@ -84,7 +95,10 @@ onBeforeRender(({ delta }) => {
     joint.rotation.x = Math.sin(time * tailSpeed * 0.7 - i * 0.6) * 0.15
   })
 
-  // Purr: eyes squeeze shut and the whole body hums.
+  // A carried fish wiggles a little as the cat walks.
+  fish.tail.rotation.y = Math.sin(time * 7) * 0.35 * (0.3 + walkWeight)
+
+  // Purr: eyes squeeze shut and the whole body hums, fish or no fish.
   const blink = time > nextBlink && time < nextBlink + 0.12
   if (time > nextBlink + 0.12) nextBlink = time + 2 + Math.random() * 3
   cat.eyes.scale.y = damp(cat.eyes.scale.y, props.purring ? 0.12 : blink ? 0.1 : 1, 18, dt)
@@ -92,7 +106,10 @@ onBeforeRender(({ delta }) => {
   cat.body.position.y += props.purring ? Math.sin(time * 95) * 0.004 : 0
 })
 
-onBeforeUnmount(() => cat.dispose())
+onBeforeUnmount(() => {
+  cat.dispose()
+  fish.dispose()
+})
 </script>
 
 <template>

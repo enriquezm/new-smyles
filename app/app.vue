@@ -29,5 +29,5 @@ useHead({
 
 <template>
   <NuxtPage />
-  <CatVisitor />
+  <CatWorld />
 </template>

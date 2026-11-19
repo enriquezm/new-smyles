@@ -225,8 +225,34 @@ test.describe('wandering cat', () => {
   })
 })
 
-test('the cat stays away with reduced motion', async ({ page }) => {
+test.describe('cat and fish', () => {
+  test.use({ reducedMotion: 'no-preference' })
+
+  test('clicking the fish brings the cat, which carries it off and still purrs when petted', async ({ page }) => {
+    await open(page, '/?cat')
+    const fish = page.getByRole('button', { name: /fish on the floor/ })
+    await expect(fish).toBeVisible({ timeout: 5000 })
+    const fishBox = await fish.boundingBox()
+    expect(fishBox?.height ?? 0, 'fish is a 44px target').toBeGreaterThanOrEqual(44)
+    await fish.click()
+    await expect(page.locator('[aria-live="polite"]').filter({ hasText: /coming for the fish/ })).toBeAttached()
+
+    // It may first finish a wander; either way it comes for the fish and picks it up.
+    await expect(page.locator('[data-fish]')).toHaveCount(0, { timeout: 20000 })
+    const cat = page.getByRole('button', { name: /Pet the cat/ })
+    await expect(cat).toBeVisible()
+    await cat.click()
+    await expect(page.locator('[data-cat] .animate-purr-float').first()).toBeAttached()
+    await attachScreenshot(page, 'cat-carrying-fish')
+
+    await expect(page.locator('[data-cat]')).toHaveCount(0, { timeout: 20000 })
+    expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
+  })
+})
+
+test('the cat and fish stay away with reduced motion', async ({ page }) => {
   await open(page, '/?cat')
   await page.waitForTimeout(1500)
   await expect(page.locator('[data-cat]')).toHaveCount(0)
+  await expect(page.locator('[data-fish]')).toHaveCount(0)
 })

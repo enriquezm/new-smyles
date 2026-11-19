@@ -60,7 +60,12 @@ Grid uses `grid-auto-flow: dense`. Mobile overrides: Featured 280, Process 290, 
    - **Intro player**: play/pause, a waveform that fills as it plays (32s), and a countdown.
    - **Status**: green dot and "Available for work".
 3. **Card grid**: 8 cards (below).
-4. **Wandering cat**: a low-poly seal-point Siamese (WebGL, built from primitives): cream coat shading darker toward the head, dark brown ears, face mask, legs, paws and tail, blue eyes; the same in every theme visits every minute or two (first after 15–35s) at a random height on the left or right edge. It walks in about 12px past the edge, stops and looks out for 2–3s, turns through the front and walks off. Click or tap (it is a `<button>`, 150×110, 120×88 on mobile) to pet it: eyes close, the body hums, the tail slows, and "prrr" and accent hearts float up for ~3s, with a polite live-region announcement; then it leaves. Never shown with reduced motion or in a hidden tab. `?cat` in the URL makes it visit straight away and often.
+4. **Cat and fish**: a low-poly white cat with blue eyes (WebGL, built from primitives; one white coat in every theme) and a low-poly fish (blue body, orange fins).
+   - **Wander**: every minute or two (first after 15–35s) the cat walks in about 12px from the left or right edge at a random height, stops and looks out for 2–3s, turns through the front and walks off.
+   - **Fish**: lies on its side on the "floor" (18px above the viewport bottom), 40–170px in from a random edge, flicking its tail every few seconds. A 48px-tall button around it ("A fish on the floor. Call the cat").
+   - **Fetch**: clicking the fish always brings the cat: it walks along the floor from the fish's side, dips its head, picks the fish up crosswise in its mouth, turns and carries it off. If the cat is already out wandering, it leaves first and comes straight back. A new fish appears 25–50s later.
+   - **Purr**: clicking the cat (a `<button>`, 150×110, 120×88 on mobile) at any point, fish in mouth or not, closes its eyes, makes it hum, and floats "prrr" and accent hearts up for ~3s, then it carries on.
+   - Polite live-region announcements for petting and fetching. Nothing appears with reduced motion or in a hidden tab. `?cat` in the URL makes everything happen within a second, and often.
 5. **Footer**: mono row: © year and name · Las Vegas, NV · live local time.
 
 ## Cards

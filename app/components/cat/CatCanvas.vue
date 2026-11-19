@@ -3,7 +3,14 @@ import { TresCanvas } from '@tresjs/core'
 import { NoToneMapping } from 'three'
 
 /** The cat's WebGL canvas. Loaded lazily, and only while a visit is happening. */
-defineProps<{ walking: boolean, facing: 1 | -1, looking: boolean, purring: boolean }>()
+defineProps<{
+  walking: boolean
+  facing: 1 | -1
+  looking: boolean
+  reaching: boolean
+  carrying: boolean
+  purring: boolean
+}>()
 </script>
 
 <template>
@@ -21,6 +28,8 @@ defineProps<{ walking: boolean, facing: 1 | -1, looking: boolean, purring: boole
         :walking="walking"
         :facing="facing"
         :looking="looking"
+        :reaching="reaching"
+        :carrying="carrying"
         :purring="purring"
       />
     </TresCanvas>

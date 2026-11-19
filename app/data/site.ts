@@ -374,13 +374,19 @@ export interface CatCopy {
   purr: string
   /** Announced to screen readers when it's petted. */
   purrAnnouncement: string
+  /** Accessible name of the fish on the floor. */
+  fishLabel: string
+  /** Announced when the fish is clicked. */
+  fetchAnnouncement: string
 }
 
-/** The low-poly cat that wanders past the side of the page now and then. */
+/** The low-poly cat that wanders past the side of the page, and the fish it fetches. */
 export const catCopy: CatCopy = {
-  label: 'A cat wandering by. Pet the cat',
+  label: 'A white cat. Pet the cat',
   purr: 'prrr',
   purrAnnouncement: 'The cat closes its eyes and purrs.',
+  fishLabel: 'A fish on the floor. Call the cat',
+  fetchAnnouncement: 'The cat is coming for the fish.',
 }
 
 /** The GitHub card's draggable 3D contribution skyline. */
