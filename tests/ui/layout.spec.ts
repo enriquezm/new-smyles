@@ -153,3 +153,18 @@ test('hero avatar keeps its accessible photo and the low-poly canvas stays insid
   expect(Math.abs(canvasBox.width - tileBox.width), 'canvas matches the tile').toBeLessThanOrEqual(1)
   expect(Math.abs(canvasBox.height - tileBox.height), 'canvas matches the tile').toBeLessThanOrEqual(1)
 })
+
+test('github skyline fits the open card without sideways scroll', async ({ page }) => {
+  await open(page, '/')
+  await page.getByRole('button', { name: /^Expand GitHub/ }).click()
+  const skyline = page.getByRole('img', { name: /^Contribution skyline/ })
+  const canvas = skyline.locator('canvas')
+  await expect(canvas).toBeVisible()
+
+  const [skylineBox, canvasBox] = await Promise.all([skyline.boundingBox(), canvas.boundingBox()])
+  if (!skylineBox || !canvasBox) throw new Error('Skyline is not laid out')
+  expect(Math.abs(canvasBox.width - skylineBox.width), 'canvas fills the skyline box').toBeLessThanOrEqual(1)
+  expect(Math.abs(canvasBox.height - skylineBox.height), 'canvas fills the skyline box').toBeLessThanOrEqual(1)
+  expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
+  await attachScreenshot(page, 'github-skyline')
+})
