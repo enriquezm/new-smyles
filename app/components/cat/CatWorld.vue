@@ -34,11 +34,10 @@ const called = computed(() => hurry.value || visit.value?.kind === 'fetch')
       v-if="fish || visit"
       class="pointer-events-none fixed inset-0 z-40 overflow-hidden [--stage-h:88px] sm:[--stage-h:110px]"
     >
+      <!-- Fades in; no leave transition, because by then it is already in the cat's mouth. -->
       <Transition
         enter-from-class="opacity-0 translate-y-1"
         enter-active-class="transition duration-500"
-        leave-active-class="transition duration-150"
-        leave-to-class="opacity-0"
       >
         <FloorFish
           v-if="fish"

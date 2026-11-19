@@ -11,11 +11,17 @@ defineProps<{
   carrying: boolean
   purring: boolean
 }>()
+
+const root = useTemplateRef<HTMLElement>('root')
+useCanvasTeardown(root)
 </script>
 
 <template>
   <!-- Tres styles its canvas with pointer-events: auto; the button around it takes the clicks. -->
-  <div class="size-full [&_canvas]:pointer-events-none!">
+  <div
+    ref="root"
+    class="size-full [&_canvas]:pointer-events-none!"
+  >
     <TresCanvas
       alpha
       :clear-alpha="0"

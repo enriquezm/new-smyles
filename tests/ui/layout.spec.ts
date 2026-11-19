@@ -230,6 +230,20 @@ test.describe('cat and fish', () => {
 
   test('clicking the fish brings the cat, which carries it off and still purrs when petted', async ({ page }) => {
     await open(page, '/?cat')
+    // Every frame, count canvases whose WebGL context is gone but are still on screen:
+    // Chrome paints those as a white box (the flash this guards against).
+    await page.evaluate(() => {
+      const w = window as Window & { deadCanvasFrames?: number }
+      w.deadCanvasFrames = 0
+      const tick = () => {
+        for (const c of document.querySelectorAll('canvas')) {
+          const gl = c.getContext('webgl2') ?? c.getContext('webgl')
+          if (gl?.isContextLost() && c.checkVisibility({ visibilityProperty: true })) w.deadCanvasFrames! += 1
+        }
+        requestAnimationFrame(tick)
+      }
+      requestAnimationFrame(tick)
+    })
     const fish = page.getByRole('button', { name: /fish on the floor/ })
     await expect(fish).toBeVisible({ timeout: 5000 })
     const fishBox = await fish.boundingBox()
@@ -247,6 +261,10 @@ test.describe('cat and fish', () => {
 
     await expect(page.locator('[data-cat]')).toHaveCount(0, { timeout: 20000 })
     expect(await sidewaysOverflow(page)).toBeLessThanOrEqual(0)
+    expect(
+      await page.evaluate(() => (window as Window & { deadCanvasFrames?: number }).deadCanvasFrames),
+      'no frame shows a torn-down canvas',
+    ).toBe(0)
   })
 })
 
