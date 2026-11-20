@@ -30,22 +30,50 @@ watch(camera, (cam) => {
   cam.updateProjectionMatrix()
 }, { immediate: true })
 
-let time = 0
-let nextFlop = 1.5 + Math.random() * 2
+const FLOP_SECONDS = 0.5
+/** When the current or next flop starts, in performance.now() ms (wall clock, so it keeps time while the loop is stopped). */
+let flopAt = performance.now() + 1500 + Math.random() * 2000
+let flopTimer: ReturnType<typeof setTimeout> | undefined
+let restFrames = 0
 
-const { onBeforeRender } = useLoop()
-onBeforeRender(({ delta }) => {
-  time += Math.min(delta, 0.1)
+const { onBeforeRender, start, stop } = useLoop()
+const { sizes } = useTres()
+
+/** The fish lies still between flops, so only draw while it moves (plus a few frames to land). */
+function wakeAt(at: number) {
+  clearTimeout(flopTimer)
+  flopTimer = setTimeout(() => {
+    restFrames = 0
+    start()
+  }, Math.max(0, at - performance.now()))
+}
+
+onBeforeRender(() => {
   // Every few seconds: a quick tail flick and a little hop.
-  const since = time - nextFlop
-  const flop = since > 0 && since < 0.5 ? Math.sin((since / 0.5) * Math.PI) : 0
-  if (since >= 0.5) nextFlop = time + 2.5 + Math.random() * 3.5
+  const since = (performance.now() - flopAt) / 1000
+  const flop = since > 0 && since < FLOP_SECONDS ? Math.sin((since / FLOP_SECONDS) * Math.PI) : 0
   fish.tail.rotation.y = Math.sin(since * 30) * 0.6 * flop
   fish.root.position.y = 0.08 + flop * 0.07
   fish.root.rotation.x = lying + flop * 0.12
+  if (flop > 0) return
+  // At rest: draw the still pose a couple of times, then sleep until the next flop.
+  if (++restFrames > 2) {
+    if (since >= FLOP_SECONDS) flopAt = performance.now() + 2500 + Math.random() * 3500
+    stop()
+    wakeAt(flopAt)
+  }
 })
 
-onBeforeUnmount(() => fish.dispose())
+// A resize clears the canvas, so redraw the resting fish.
+watch([sizes.width, sizes.height], () => {
+  restFrames = 0
+  start()
+})
+
+onBeforeUnmount(() => {
+  clearTimeout(flopTimer)
+  fish.dispose()
+})
 </script>
 
 <template>

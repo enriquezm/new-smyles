@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useIntersectionObserver } from '@vueuse/core'
 import { basedIn, cards } from '~/data/site'
 import type { CardId } from '~/data/site'
 
@@ -6,6 +7,16 @@ const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
 
 const time = useLocalTime()
+
+// Only load and build the globe once the card is close to the screen; on
+// phones it starts well below the fold, and building it costs a few ms.
+const backdrop = useTemplateRef<HTMLElement>('backdrop')
+const near = ref(false)
+const { stop: stopWatching } = useIntersectionObserver(backdrop, ([entry]) => {
+  if (!entry?.isIntersecting) return
+  near.value = true
+  stopWatching()
+}, { rootMargin: '300px' })
 const bodyClass = computed(() =>
   props.open ? 'min-h-[360px] justify-between gap-4' : 'justify-between gap-4',
 )
@@ -25,10 +36,11 @@ const bodyClass = computed(() =>
   >
     <template #background>
       <div
+        ref="backdrop"
         aria-hidden="true"
         class="pointer-events-none absolute inset-0 z-0"
       >
-        <ClientOnly>
+        <ClientOnly v-if="near">
           <LazyLocationGlobe
             :lat="basedIn.coordinates.lat"
             :lon="basedIn.coordinates.lon"

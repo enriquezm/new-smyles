@@ -25,7 +25,9 @@ const motion = usePreferredReducedMotion()
       antialias
       :tone-mapping="NoToneMapping"
       power-preference="low-power"
+      :fps-limit="30"
     >
+      <!-- A slow spin looks the same at 30fps and costs half as much. -->
       <LocationGlobeScene
         :lat="lat"
         :lon="lon"

@@ -40,6 +40,7 @@ sampleImage(props.src, 96)
     else {
       assembleLowPolyImage(image, 0)
     }
+    wake()
   })
   .catch(() => emit('failed'))
 
@@ -64,21 +65,45 @@ function damp(from: number, to: number, rate: number, dt: number) {
 
 const { onBeforeRender, start, stop } = useLoop()
 
+/**
+ * Most of the time nothing moves: once the intro is done and the tilt has
+ * caught up with the pointer, stop drawing. Pointer moves, resizes and
+ * coming back on screen start it again. (A resize clears the canvas, so it
+ * must redraw then.)
+ */
+const SETTLED_FRAMES = 3
+let settledFor = 0
+function wake() {
+  settledFor = 0
+  if (props.visible) start()
+}
+
 onBeforeRender(({ delta }) => {
-  if (!image || props.still) return
-  const dt = Math.min(delta, 0.1)
-  if (!assembled) {
-    elapsed += dt
-    assembled = assembleLowPolyImage(image, elapsed)
-    // The photo underneath fades out only now, so the page never shows through the gaps.
-    if (assembled) emit('ready')
+  let moving = false
+  if (image && !props.still) {
+    const dt = Math.min(delta, 0.1)
+    if (!assembled) {
+      elapsed += dt
+      assembled = assembleLowPolyImage(image, elapsed)
+      // The photo underneath fades out only now, so the page never shows through the gaps.
+      if (assembled) emit('ready')
+      moving = true
+    }
+    // Lean toward the pointer, like the tile is looking at it.
+    const ty = props.pointer.x * MAX_TILT
+    const tx = props.pointer.y * MAX_TILT
+    tilt.rotation.y = damp(tilt.rotation.y, ty, 5, dt)
+    tilt.rotation.x = damp(tilt.rotation.x, tx, 5, dt)
+    moving ||= Math.abs(tilt.rotation.y - ty) > 1e-4 || Math.abs(tilt.rotation.x - tx) > 1e-4
   }
-  // Lean toward the pointer, like the tile is looking at it.
-  tilt.rotation.y = damp(tilt.rotation.y, props.pointer.x * MAX_TILT, 5, dt)
-  tilt.rotation.x = damp(tilt.rotation.x, props.pointer.y * MAX_TILT, 5, dt)
+  // A few frames after the last change (so the final pose is drawn), stop.
+  settledFor = moving || !image ? 0 : settledFor + 1
+  if (settledFor > SETTLED_FRAMES) stop()
 })
 
-watch(() => props.visible, v => (v ? start() : stop()), { immediate: true })
+watch(() => props.pointer, wake)
+watch([sizes.width, sizes.height], wake)
+watch(() => props.visible, v => (v ? wake() : stop()), { immediate: true })
 
 onBeforeUnmount(() => {
   image?.geometry.dispose()
