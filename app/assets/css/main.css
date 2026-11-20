@@ -496,3 +496,215 @@
     outline-offset: -5px;
   }
 }
+
+/*
+ * Pop: neo-brutalist. Periwinkle grid desktop, chunky black outlines, hard
+ * offset shadows, and cards tinted lime, pink and marigold.
+ */
+:root[data-theme="pop"] {
+  color-scheme: light;
+
+  --font-weight-medium: 600;
+  --tracking-headline: -0.035em;
+  --leading-headline: 0.98;
+
+  --color-bg: #AC9FF8;
+  --color-surface: #FFFFFF;
+  --color-surface-sunken: #FFFFFF;
+  --color-chip: #FFFFFF;
+  --color-border: #111111;
+  --color-border-open: #111111;
+  --color-border-strong: #111111;
+  --color-ink: #111111;
+  --color-ink-2: #1F1F1F;
+  --color-ink-3: #2A2A2A;
+  --color-ink-4: #303030;
+  --color-ink-5: #383838;
+  --color-ink-muted-lg: #404040;
+  --color-accent: #6D4AFF;
+  --color-accent-text: #111111;
+  --color-on-accent: #FFFFFF;
+  --color-success: #1F8A3A;
+
+  --color-surface-map: #F3EFFF;
+  --color-rule: #111111;
+  --color-timeline: #111111;
+  --color-track: #EDE8FF;
+  --color-wave: #6D4AFF;
+  --color-map-grid: #D9D2FF;
+  --color-map-road: #B9ACFF;
+  --color-map-road-2: #C8BEFF;
+
+  --color-heat-0: #FFFFFF;
+
+  --color-info-bg: #C9BFFF;
+  --color-info-fg: #111111;
+  --color-success-bg: #D8F45F;
+  --color-success-fg: #111111;
+  --color-idea-bg: #F6A8E3;
+  --color-idea-fg: #111111;
+
+  --color-contact-bg: #111111;
+  --color-contact-tile: #222222;
+  --color-contact-pill: #111111;
+  --color-contact-border: #FFFFFF;
+  --color-contact-text: #FFFFFF;
+  --color-contact-muted: #D4D4D4;
+  --color-contact-label: #D8F45F;
+  --color-contact-glyph: #FFFFFF;
+  --color-contact-edge: #111111;
+
+  --radius-mini: 2px;
+  --radius-chip: 4px;
+  --radius-tile: 4px;
+  --radius-card: 6px;
+  --radius-pill: 6px;
+
+  --shadow-card: 5px 5px 0 #111111;
+  --shadow-card-hover: 8px 8px 0 #111111;
+  --shadow-float: 3px 3px 0 #111111;
+
+  --pop-line: 3px solid #111111;
+  --pop-grid: rgba(17, 17, 17, 0.08);
+  --pop-lime: #D8F45F;
+  --pop-pink: #F6A8E3;
+  --pop-marigold: #FFD15C;
+}
+
+:root[data-theme="pop"] {
+  & body {
+    background-image:
+      linear-gradient(var(--pop-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--pop-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Cards: thick outline, tinted in a lime / pink / marigold / white cycle. */
+  & [data-card],
+  & article[data-retro="window"] {
+    border: var(--pop-line);
+  }
+
+  & [data-card][data-variant="light"]:nth-of-type(4n + 1) { background-color: var(--pop-lime); }
+  & [data-card][data-variant="light"]:nth-of-type(4n + 2) { background-color: var(--pop-pink); }
+  & [data-card][data-variant="light"]:nth-of-type(4n + 3) { background-color: var(--pop-marigold); }
+
+  /* The label row becomes a window title bar: ○○○ label. */
+  & [data-card-header] {
+    align-items: center;
+    min-height: 52px;
+    margin: calc(0px - var(--card-pad)) calc(0px - var(--card-pad)) 0;
+    padding: 4px 4px 4px 12px;
+    border-bottom: var(--pop-line);
+    background: var(--color-surface);
+  }
+
+  & [data-card][data-variant="dark"] [data-card-header] {
+    border-bottom-color: var(--color-contact-border);
+    background: var(--color-contact-bg);
+  }
+
+  & [data-card-header] h2 {
+    height: auto;
+    padding: 0;
+    background: transparent;
+    font-weight: 600;
+    gap: 8px;
+
+    &::before {
+      content: "";
+      flex: none;
+      width: 34px;
+      height: 10px;
+      background: radial-gradient(circle at 5px 5px, transparent 3px, currentColor 3.5px, currentColor 4.5px, transparent 5px) 0 0 / 12px 10px repeat-x;
+    }
+  }
+
+  & [data-card-control] {
+    margin: 0;
+  }
+
+  & [data-card-header] button[data-card-control] {
+    border: 2px solid currentColor;
+  }
+
+  /* Buttons: outlined slabs that lift on hover and press flat. */
+  & [data-retro="button"] {
+    border: 2px solid var(--color-ink);
+    box-shadow: var(--shadow-float);
+    font-weight: 600;
+    transition: translate 120ms ease-out, box-shadow 120ms ease-out;
+
+    &:hover {
+      translate: -1px -1px;
+      box-shadow: 4px 4px 0 var(--color-ink);
+    }
+
+    &:active {
+      translate: 3px 3px;
+      box-shadow: none;
+    }
+  }
+
+  & [data-card][data-variant="dark"] [data-retro="button"] {
+    border-color: var(--color-contact-border);
+    box-shadow: 3px 3px 0 var(--color-contact-border);
+  }
+
+  & [data-retro="group"] {
+    overflow: hidden;
+    border: 2px solid var(--color-ink);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-float);
+
+    & [data-retro="button"] {
+      border: 0;
+      box-shadow: none;
+      translate: none;
+    }
+  }
+
+  & [data-retro="field"],
+  & [data-retro="panel"] {
+    border: 2px solid var(--color-ink);
+    background: var(--color-surface);
+  }
+
+  & [data-retro="panel"] {
+    box-shadow: var(--shadow-float);
+  }
+
+  & [data-status-chip] {
+    box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  }
+
+  /* Hero: heavy uppercase headline with the name in a lime sticker. */
+  & h1 {
+    font-weight: 800;
+  }
+
+  & [data-hero-headline] {
+    line-height: 1.12;
+    text-transform: uppercase;
+  }
+
+  /* inline-block keeps the sticker's border inside its own line box. */
+  & [data-highlight] {
+    display: inline-block;
+    margin: 0.04em 0.06em 0.08em 0;
+    padding: 0.04em 0.12em 0;
+    line-height: 1;
+    border: var(--pop-line);
+    background: var(--pop-lime);
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  & section[aria-label="Intro"] img {
+    border: var(--pop-line);
+    box-shadow: var(--shadow-card);
+  }
+
+  & footer {
+    border-top: var(--pop-line);
+  }
+}

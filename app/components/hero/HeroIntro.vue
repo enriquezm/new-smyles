@@ -21,7 +21,10 @@ const headlineParts: HeadlinePart[] = hero.headline
   >
     <HeroAvatar />
 
-    <h1 class="text-[30px] leading-headline font-medium tracking-headline text-balance sm:text-[44px] lg:max-w-headline lg:text-[56px] 2xl:max-w-none 2xl:text-[44px]">
+    <h1
+      data-hero-headline
+      class="text-[30px] leading-headline font-medium tracking-headline text-balance sm:text-[44px] lg:max-w-headline lg:text-[56px] 2xl:max-w-none 2xl:text-[44px]"
+    >
       <template
         v-for="(part, i) in headlineParts"
         :key="i"
@@ -32,6 +35,7 @@ const headlineParts: HeadlinePart[] = hero.headline
           class="underline decoration-1 underline-offset-[0.12em] transition-colors hover:decoration-accent"
         >{{ part.text }}</a><span
           v-else-if="part.kind === 'highlight'"
+          data-highlight
           class="text-accent-text"
         >{{ part.text }}</span><span v-else>{{ part.text }}</span>
       </template>

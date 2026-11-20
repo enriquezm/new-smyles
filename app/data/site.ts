@@ -36,7 +36,7 @@ export interface SiteMeta {
   themeColor: string
 }
 
-export type ThemeId = 'light' | 'dark' | 'retro'
+export type ThemeId = 'light' | 'dark' | 'retro' | 'pop'
 
 export interface Theme {
   id: ThemeId
@@ -345,6 +345,7 @@ export const themes: Theme[] = [
   { id: 'light', label: 'Light' },
   { id: 'dark', label: 'Dark' },
   { id: 'retro', label: 'Retro' },
+  { id: 'pop', label: 'Pop' },
 ]
 
 export const hero: Hero = {
@@ -718,7 +719,7 @@ export const siteStats: SiteStats = {
     { value: '1.2 s', label: 'largest paint on slow 4G' },
     { value: '0', label: 'layout shift (CLS)' },
     { value: '203 KB', label: 'page weight, gzipped' },
-    { value: 'AA', label: 'contrast in all 3 themes' },
+    { value: 'AA', label: 'contrast in all 4 themes' },
   ],
   headline: 'Built with the same care I bring to work.',
   builtWith: [
@@ -728,7 +729,7 @@ export const siteStats: SiteStats = {
     },
     {
       title: 'One set of tokens',
-      text: 'Every color, radius and shadow is a Tailwind v4 token. Light, dark and retro just swap the values.',
+      text: 'Every color, radius and shadow is a Tailwind v4 token. Light, dark, retro and pop just swap the values.',
     },
     {
       title: 'Motion with restraint',
