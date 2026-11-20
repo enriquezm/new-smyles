@@ -531,9 +531,8 @@
   --color-timeline: #111111;
   --color-track: #EDE8FF;
   --color-wave: #6D4AFF;
-  --color-map-grid: #D9D2FF;
-  --color-map-road: #B9ACFF;
-  --color-map-road-2: #C8BEFF;
+  --color-globe-ocean: #B9ACFF;
+  --color-globe-land: #FFFFFF;
 
   --color-heat-0: #FFFFFF;
 
@@ -699,7 +698,8 @@
     box-shadow: 4px 4px 0 var(--color-ink);
   }
 
-  & section[aria-label="Intro"] img {
+  /* The wrapper, not the <img>: the photo fades out under the low-poly relief. */
+  & section[aria-label="Intro"] [data-hero-avatar] {
     border: var(--pop-line);
     box-shadow: var(--shadow-card);
   }

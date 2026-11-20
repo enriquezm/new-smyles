@@ -13,6 +13,7 @@ const lowPoly = ref(false)
 <template>
   <div
     v-if="hero.avatarSrc"
+    data-hero-avatar
     class="relative isolate flex-none overflow-hidden"
     :class="sizeClass"
   >

@@ -22,7 +22,7 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `accent` | `#8C7DFF` (both light and dark) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink` |
 | `accent-text` | `#8373FF` (dark: `#8C7DFF`; retro: `#000080`) | Accent as text on the page background (the name in the hero headline). Light value is nudged darker to clear 3:1 for large text |
 | `accent-soft` | accent at 20% alpha | Chart areas |
-| `globe-ocean` / `globe-land` | `#C2C2BA` / `#F4F4F0` (dark: `#2A2A27` / `#77776F`; retro: `#008080` / `#C0C0C0`) | Location card globe faces. Read by three.js, so plain hex in a `@theme static` block |
+| `globe-ocean` / `globe-land` | `#C2C2BA` / `#F4F4F0` (dark: `#2A2A27` / `#77776F`; retro: `#008080` / `#C0C0C0`; pop: `#B9ACFF` / `#FFFFFF`) | Location card globe faces. Read by three.js, so plain hex in a `@theme static` block |
 | `success` | `#2F9E44` | "Available for work" dot |
 | `info-bg` / `info-fg` | `#8C7DFF` / `#1A1A18` (dark: same; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring", periwinkle) |
 | `success-bg` / `success-fg` | `#CFFF5E` / `#1A1A18` (dark: same; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |

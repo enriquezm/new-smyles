@@ -42,12 +42,13 @@ const maxHeight = BASE + STEP * 4
 function readColors() {
   const css = getComputedStyle(document.documentElement)
   const token = (name: string) => new Color(css.getPropertyValue(`--color-${name}`).trim())
-  const rule = token('rule')
+  // Same as the 2D heatmap's empty cells (white in pop, where `rule` is black).
+  const empty = token('heat-0')
   const surface = token('surface')
   const accent = token('accent')
   const c = new Color()
   props.weeks.forEach((week, w) => week.forEach((level, d) => {
-    c.copy(level === 0 ? rule : surface).lerp(accent, MIX[level])
+    c.copy(level === 0 ? empty : surface).lerp(accent, MIX[level])
     bars.setColorAt(w * 7 + d, c)
   }))
   if (bars.instanceColor) bars.instanceColor.needsUpdate = true
