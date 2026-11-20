@@ -22,7 +22,7 @@ Source of truth: the built site. Tokens live in `app/assets/css/main.css` and al
 | `accent` | `#8C7DFF` (both light and dark) | Avatar, pin, chart fills, primary CTA on dark. Text on accent uses `ink` |
 | `accent-text` | `#8373FF` (dark: `#8C7DFF`; retro: `#000080`) | Accent as text on the page background (the name in the hero headline). Light value is nudged darker to clear 3:1 for large text |
 | `accent-soft` | accent at 20% alpha | Chart areas |
-| `globe-ocean` / `globe-land` | `#C2C2BA` / `#F4F4F0` (dark: `#2A2A27` / `#77776F`; retro: `#008080` / `#C0C0C0`) | Location card globe faces. Read by three.js, so plain hex in a `@theme static` block |
+| `globe-ocean` / `globe-land` | `#C2C2BA` / `#F4F4F0` (dark: `#2A2A27` / `#77776F`; retro: `#008080` / `#C0C0C0`; pop: `#B9ACFF` / `#FFFFFF`) | Location card globe faces. Read by three.js, so plain hex in a `@theme static` block |
 | `success` | `#2F9E44` | "Available for work" dot |
 | `info-bg` / `info-fg` | `#8C7DFF` / `#1A1A18` (dark: same; retro: `#FFFFE1` / `#000000`) | Blue status chip ("Exploring", periwinkle) |
 | `success-bg` / `success-fg` | `#CFFF5E` / `#1A1A18` (dark: same; retro: `#CCFF99` / `#000000`) | Lime status chip ("Finished") |
@@ -56,11 +56,17 @@ Grid uses `grid-auto-flow: dense`. Mobile overrides: Featured 280, Process 290, 
 ## Page structure
 
 1. **Header**: accent square and name on the left; Work / Toolkit / Résumé links and a dark "Get in touch" pill on the right.
-2. **Hero**: avatar tile (photo placeholder, "ME" monogram), H1 with a gray trailing clause, a one-paragraph intro, then two pills:
+2. **Hero**: avatar tile (the photo rebuilt as a low-poly WebGL relief: flat triangles coloured from the image, assembling over the photo on load and leaning toward the cursor; the plain `<img>` stays underneath as the server-rendered, accessible fallback, and still under reduced motion; "ME" monogram when there is no photo), H1 with a gray trailing clause, a one-paragraph intro, then two pills:
    - **Intro player**: play/pause, a waveform that fills as it plays (32s), and a countdown.
    - **Status**: green dot and "Available for work".
 3. **Card grid**: 8 cards (below).
-4. **Footer**: mono row: © year and name · Las Vegas, NV · live local time.
+4. **Cat and fish**: a low-poly white cat with blue eyes (WebGL, built from primitives; one white coat in every theme) and a low-poly fish (blue body, orange fins).
+   - **Wander**: every minute or two (first after 15–35s) the cat walks in about 12px from the left or right edge at a random height, stops and looks out for 2–3s, turns through the front and walks off.
+   - **Fish**: lies on its side on the "floor" (18px above the viewport bottom), 40–170px in from a random edge, flicking its tail every few seconds. A 48px-tall button around it ("A fish on the floor. Call the cat").
+   - **Fetch**: clicking the fish always brings the cat: it walks along the floor from the fish's side, dips its head, picks the fish up crosswise in its mouth, turns and carries it off. If the cat is already out wandering, it leaves first and comes straight back. A new fish appears 25–50s later.
+   - **Purr**: clicking the cat (a `<button>`, 150×110, 120×88 on mobile) at any point, fish in mouth or not, closes its eyes, makes it hum, and floats "prrr" and accent hearts up for ~3s, then it carries on.
+   - Polite live-region announcements for petting and fetching. Nothing appears with reduced motion or in a hidden tab. `?cat` in the URL makes everything happen within a second, and often.
+5. **Footer**: mono row: © year and name · Las Vegas, NV · live local time.
 
 ## Cards
 
@@ -72,7 +78,7 @@ Column spans are listed as mobile / tablet / desktop / wide.
 | 2 | Featured work | 2/2/2/2 | Dark preview panel with a **UI / Code toggle** (mini deal card mock ↔ Vue snippet), title, meta, 3 metrics | Problem / Approach / Outcome tiles, tech tags, "Read the case study" and "Component docs" buttons |
 | 3 | Toolkit | 2/1/1/1 | "From Figma file to production code." plus 6 chips | 4 groups: Design, Frontend, Backend & data, Tooling |
 | 4 | Location | 1/1/1/1 | Low-poly WebGL globe (three.js via TresJS, lazy-loaded, client-only) slowly spinning, with an accent pin and pulsing halo on Las Vegas; label card "Las Vegas" plus live PT time. Wide cards push the globe right with a lens shift; narrow cards lift it above the label | Globe turns to face the pin, with an availability / time-zone sentence. Reduced motion: holds still, facing the pin |
-| 5 | GitHub | 1/1/1/1 | "1,284 contributions in the last year" plus a heatmap of recent weeks (10/26/19/20) | Full 52-week heatmap (scrolls sideways), 3 stats, pinned repos |
+| 5 | GitHub | 1/1/1/1 | "1,284 contributions in the last year" plus a heatmap of recent weeks (10/26/19/20) | 3D contribution skyline (WebGL, one bar per day, height and accent mix by level; 52 weeks, last 26 on mobile; height 150/240/280/280). Opens top-down like the heatmap, then tilts and rises; sways gently; still under reduced motion. Drag to rotate (mouse, pen, or a sideways touch swipe; vertical swipes still scroll the page), or focus it and use the arrow keys; zoom stays at the default framing. A mono "Drag to rotate" hint sits bottom-left until it is moved, then a "Reset view" pill (44px) top-right; double-click, Home or Escape also reset (Escape closes the card once the view is back to default). The 2D heatmap shows until it is ready. Then 3 stats, pinned repos |
 | 6 | How I work | 2/2/2/2 | Selected step (number, title, description) plus a **step tab bar** | All 4 steps as tiles |
 | 7 | Currently working on | 2/2/2/4 | Up to 3 newest items (projects and posts): number, name, one-line summary on the same line (hidden on mobile), status chip; a mono "+N more" note when more exist | Tiles with description, tags, "View on GitHub" |
 | 8 | Contact (dark) | 2/2/2/2 | Headline plus Email (accent), LinkedIn, GitHub, Résumé buttons | Adds "Open to" chips and contact details |

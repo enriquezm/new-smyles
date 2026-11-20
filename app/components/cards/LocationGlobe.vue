@@ -7,6 +7,7 @@ import { useElementVisibility, usePreferredReducedMotion } from '@vueuse/core'
 defineProps<{ lat: number, lon: number, focused: boolean }>()
 
 const root = useTemplateRef<HTMLElement>('root')
+useCanvasTeardown(root)
 const visible = useElementVisibility(root)
 const motion = usePreferredReducedMotion()
 </script>
@@ -24,7 +25,9 @@ const motion = usePreferredReducedMotion()
       antialias
       :tone-mapping="NoToneMapping"
       power-preference="low-power"
+      :fps-limit="30"
     >
+      <!-- A slow spin looks the same at 30fps and costs half as much. -->
       <LocationGlobeScene
         :lat="lat"
         :lon="lon"

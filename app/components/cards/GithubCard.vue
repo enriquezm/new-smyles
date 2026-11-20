@@ -2,11 +2,14 @@
 import { cards } from '~/data/site'
 import type { CardId } from '~/data/site'
 
-defineProps<{ open: boolean }>()
+const props = defineProps<{ open: boolean }>()
 const emit = defineEmits<{ toggle: [id: CardId] }>()
 
 const github = await useGithub()
 const contributions = computed(() => github.value.contributions.toLocaleString('en-US'))
+const skylineReady = ref(false)
+// The skyline unmounts with the expanded view; show the 2D heatmap again until it remounts.
+watch(() => props.open, () => (skylineReady.value = false))
 const languageDot: Record<string, string> = {
   Vue: 'bg-lang-vue',
   TypeScript: 'bg-lang-typescript',
@@ -47,13 +50,30 @@ const languageDot: Record<string, string> = {
 
     <template #expanded>
       <div class="flex flex-col gap-5">
+        <!--
+          3D skyline of the full year. The 2D heatmap shows until WebGL is ready
+          (and stays if it never is); the canvas then covers it.
+        -->
         <div
-          tabindex="0"
-          role="region"
-          aria-label="Contribution heatmap (scrolls sideways)"
-          class="overflow-x-auto pb-1"
+          role="group"
+          :aria-label="`Contribution skyline: ${contributions} ${github.contributionsCaption}, one bar per day`"
+          class="relative h-[150px] sm:h-[240px] lg:h-[280px]"
         >
-          <GithubHeatmap :weeks="github.weeks" />
+          <div
+            aria-hidden="true"
+            class="flex h-full items-center justify-center overflow-hidden transition-opacity duration-300"
+            :class="skylineReady ? 'opacity-0' : 'opacity-100'"
+          >
+            <GithubHeatmap :weeks="github.weeks" />
+          </div>
+          <div class="absolute inset-0">
+            <ClientOnly>
+              <LazyGithubSkyline
+                :weeks="github.weeks"
+                @ready="skylineReady = true"
+              />
+            </ClientOnly>
+          </div>
         </div>
 
         <dl class="grid grid-cols-1 gap-3 sm:grid-cols-3">

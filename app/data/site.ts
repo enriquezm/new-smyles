@@ -360,6 +360,43 @@ export const hero: Hero = {
   status: 'Available for work',
 }
 
+export interface SkylineCopy {
+  /** Screen-reader name for the draggable 3D view. */
+  label: string
+  /** Shown under the skyline until someone rotates it. */
+  hint: string
+  reset: string
+}
+
+export interface CatCopy {
+  /** Accessible name of the cat while it's on screen. */
+  label: string
+  /** Floats up from the cat while it purrs. */
+  purr: string
+  /** Announced to screen readers when it's petted. */
+  purrAnnouncement: string
+  /** Accessible name of the fish on the floor. */
+  fishLabel: string
+  /** Announced when the fish is clicked. */
+  fetchAnnouncement: string
+}
+
+/** The low-poly cat that wanders past the side of the page, and the fish it fetches. */
+export const catCopy: CatCopy = {
+  label: 'A white cat. Pet the cat',
+  purr: 'prrr',
+  purrAnnouncement: 'The cat closes its eyes and purrs.',
+  fishLabel: 'A fish on the floor. Call the cat',
+  fetchAnnouncement: 'The cat is coming for the fish.',
+}
+
+/** The GitHub card's draggable 3D contribution skyline. */
+export const skylineCopy: SkylineCopy = {
+  label: '3D contribution skyline. Drag, or use the arrow keys, to rotate it.',
+  hint: 'Drag to rotate',
+  reset: 'Reset view',
+}
+
 export const cards: Record<CardId, CardMeta> = {
   experience: { label: 'Experience', title: 'Experience' },
   featured: { label: 'Featured work', title: 'Featured work' },
